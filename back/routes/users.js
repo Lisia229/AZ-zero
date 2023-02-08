@@ -1,0 +1,21 @@
+import { Router } from 'express'
+import content from '../middleware/content.js'
+import * as auth from '../middleware/auth.js'
+import admin from '../middleware/admin.js'
+import upload from '../middleware/upload.js'
+import { register, login, logout, extend, getUser, editUser, getAllUser, adminEditUser } from '../controllers/users.js'
+
+const router = Router()
+
+router.post('/', content('application/json'), register)
+router.post('/login', content('application/json'), auth.login, login)
+router.delete('/logout', auth.jwt, logout)
+router.patch('/extend', auth.jwt, extend)
+router.patch('/edit', content('multipart/form-data'), auth.jwt, upload, editUser)
+router.patch('/edituser', content('multipart/form-data'), auth.jwt, admin, upload, adminEditUser)
+router.get('/me', auth.jwt, getUser)
+router.get('/all', auth.jwt, getAllUser)
+// router.post('/cart', content('application/json'), auth.jwt, editCart)
+// router.get('/cart', auth.jwt, getCart)
+
+export default router
