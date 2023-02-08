@@ -42,7 +42,7 @@ const router = createRouter({
         {
           path: 'content',
           name: 'content',
-          component: () => import('@/views/front/ContentView.vue'),
+          component: () => import('@/views/front/ContectView.vue'),
           meta: {
             title: 'AZ.HOME | 聯絡',
             login: false,
@@ -196,8 +196,8 @@ const router = createRouter({
           }
         },
         {
-          path: 'content',
-          name: 'admin-content',
+          path: 'contect',
+          name: 'admin-contect',
           component: () => import('@/views/admin/ContentView.vue'),
           meta: {
             title: 'AZ.HOME | 聯絡管理',

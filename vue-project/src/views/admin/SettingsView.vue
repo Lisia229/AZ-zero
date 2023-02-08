@@ -1,7 +1,7 @@
 <template>
-  <div id="settings-front">
-    <div class="grid mb-8md:mb-12">
-      <div id="card" class="flex flex-col justify-center items-center p-8 text-center">
+  <div id="settings-front" class="flex justify-center">
+    <div class="w-3/4 flex bg-gray-50 rounded-lg justify-start shadow">
+      <div id="card" class="w-1/2 flex flex-col justify-center items-center p-8 text-center">
         <form id="editform" @submit.prevent="submit" v-if="form.editing">
           <div class="w-full flex justify-center items-center">
             <!-- 大頭貼 -->
@@ -105,6 +105,7 @@
           </svg>
         </button>
       </div>
+      <img class="w-1/2 rounded-r-lg" src="../../assets/image/b07.jpg" />
     </div>
   </div>
 </template>

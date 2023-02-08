@@ -144,6 +144,11 @@ const contectForm = async () => {
       title: '成功',
       text: '表單已送出'
     })
+
+    form.email = ''
+    form.subject = ''
+    form.message = ''
+    
   } catch (error) {
     console.log(error)
     Swal.fire({
