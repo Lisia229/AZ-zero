@@ -7,7 +7,7 @@
         </div>
         <div class="w-full col-span-7">
           <div class="w-full max-w-sm p-4 rounded-xl sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700 mx-auto">
-            <form @submit.prevent="registerHandler" class="space-y-4 md:space-y-6" @click="validatorError">
+            <form @submit.prevent="registerHandler" class="space-y-4 md:space-y-6">
               <h1 class="text-xl font-bold leading-tight tracking-normal text-gray-900 md:text-2xl dark:text-white">Create and account</h1>
               <div>
                 <label for="email" class="flex mb-2 text-sm font-medium text-gray-900 dark:text-white">
@@ -30,7 +30,7 @@
                   class="appearance-none bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="name@google.com"
                   required=""
-                  @change="error.email.error = false" />
+                  @click="error.email.error = false" />
                 <p v-if="error.email.error" class="mt-2 text-xs text-red-600 dark:text-red-400">
                   <span class="font-medium">Email is invalid</span>
                 </p>
@@ -60,7 +60,7 @@
                   class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="account ID"
                   required=""
-                  @change="error.account.error = false" />
+                  @click="error.account.error = false" />
                 <p v-if="error.account.error" class="mt-2 text-xs text-red-600 dark:text-red-400">
                   <span class="font-medium">Oh, snapp!</span>
                   &nbsp; required field. At least 3 words.
@@ -91,7 +91,7 @@
                   placeholder="••••••••"
                   class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   required=""
-                  @change="error.password.error = false" />
+                  @click="error.password.error = false" />
                 <p v-if="error.password.error" class="mt-2 text-xs text-red-600 dark:text-red-400">
                   <span class="font-medium">Oh, snapp!</span>
                   &nbsp; required field. At least 4 words.
@@ -122,7 +122,7 @@
                   placeholder="••••••••"
                   class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   required=""
-                  @change="error.passwordConfirm.error = false" />
+                  @click="error.passwordConfirm.error = false" />
                 <p v-if="error.passwordConfirm.error" class="mt-2 text-xs text-red-600 dark:text-red-400">
                   <span class="font-medium">password is not the same</span>
                 </p>
@@ -163,8 +163,10 @@
 <script setup>
 import AOS from 'aos'
 import 'aos/dist/aos.css'
+
 import { reactive } from 'vue'
 import { api } from '@/plugins/axios'
+
 import Swal from 'sweetalert2'
 import { useRouter } from 'vue-router'
 import validator from 'validator'

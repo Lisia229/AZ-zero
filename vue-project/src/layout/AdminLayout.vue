@@ -24,12 +24,8 @@
         <div class="flex items-center">
           <div class="flex items-center ml-3">
             <div>
-              <button
-                type="button"
-                class="flex text-smrounded-full focus:ring-4 focus:ring-gray-300"
-                aria-expanded="false"
-                data-dropdown-toggle="dropdown-user">
-                <img class="w-8 h-8 rounded-full" :src="image"/>
+              <button type="button" class="flex text-smrounded-full focus:ring-4 focus:ring-gray-300" aria-expanded="false" data-dropdown-toggle="dropdown-user">
+                <img class="w-8 h-8 rounded-full" :src="image" />
                 <span class="top-2 right-3 absolute w-3.5 h-3.5 bg-green-400 border-2 border-white dark:border-gray-800 rounded-full"></span>
               </button>
             </div>
@@ -286,6 +282,48 @@
               </g>
             </svg>
             <span class="flex-1 ml-3 whitespace-nowrap">favorite</span>
+          </a>
+        </li>
+
+        <li v-if="isAdmin">
+          <a
+            href="/admin/contect"
+            class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+            <svg
+              class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+              fill="currentColor"
+              stroke="none"
+              stroke-width="1.5"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M8.625 9.75a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375m-13.5 3.01c0 1.6 1.123 2.994 2.707 3.227 1.087.16 2.185.283 3.293.369V21l4.184-4.183a1.14 1.14 0 01.778-.332 48.294 48.294 0 005.83-.498c1.585-.233 2.708-1.626 2.708-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z"></path>
+            </svg>
+            <span class="flex-1 ml-3 whitespace-nowrap">Content</span>
+          </a>
+        </li>
+
+        <li>
+          <a
+            href="/admin/usersettings"
+            class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg hover:bg-gray-100">
+            <svg
+              class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900"
+              fill="currentColor"
+              stroke="currentColor"
+              stroke-width="1.5"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-9.75 0h9.75"></path>
+            </svg>
+            <span class="flex-1 ml-3 whitespace-nowrap">Settings</span>
           </a>
         </li>
       </ul>

@@ -194,6 +194,16 @@ const router = createRouter({
             login: false,
             admin: true
           }
+        },
+        {
+          path: 'content',
+          name: 'admin-content',
+          component: () => import('@/views/admin/ContentView.vue'),
+          meta: {
+            title: 'AZ.HOME | 聯絡管理',
+            login: false,
+            admin: true
+          }
         }
       ]
     },

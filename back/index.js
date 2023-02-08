@@ -6,6 +6,8 @@ import userRoute from './routes/users.js'
 import exhibitionsRoute from './routes/exhibitions.js'
 import rentalsRoute from './routes/rentals.js'
 import storeRoute from './routes/stories.js'
+import contectRoute from './routes/contect.js'
+
 import './passport/passport.js'
 
 mongoose.connect(process.env.DB_URL)
@@ -42,6 +44,7 @@ app.use('/users', userRoute)
 app.use('/exhibitions', exhibitionsRoute)
 app.use('/stories', storeRoute)
 app.use('/rentals', rentalsRoute)
+app.use('/contect', contectRoute)
 
 app.all('*', (req, res) => {
   res.status(404).json({ success: false, message: '找不到' })
