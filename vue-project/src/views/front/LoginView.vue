@@ -1,9 +1,9 @@
 <template>
-  <div class="w-full h-full container flex flex-wrap items-center justify-between mx-auto">
-    <div id="login" class="relative -z-1">
+  <div class="w-full h-full flex flex-wrap items-center justify-between mx-auto relative">
+    <div id="login" class="relative" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="1000">
       <div class="row">
         <div class="col">
-          <div data-aos="fade-up" data-aos-duration="1500" data-aos-delay="1500" id="loginBG" class="w-full max-w-sm p-4 bg-whiteF rounded-lg sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700 mx-auto">
+          <div id="loginBG" class="w-full max-w-sm p-4 bg-whiteF rounded-lg sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700 mx-auto">
             <form class="space-y-6" action="#" @submit.prevent="login">
               <h1 class="text-xl font-bold leading-tight tracking-wide md:text-2xl text-white">Sign in to our website</h1>
               <div>
@@ -28,7 +28,7 @@
                   type="text"
                   name="account"
                   id="account"
-                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-pink-500 focus:border-pink-500 block w-full p-2.5"
                   placeholder="xxxx"
                   required />
               </div>
@@ -55,26 +55,21 @@
                   name="password"
                   id="password"
                   placeholder="••••••••"
-                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-pink-500 focus:border-pink-500 block w-full p-2.5"
                   required />
               </div>
               <div class="flex items-start">
                 <div class="flex items-start">
                   <div class="flex items-center h-5">
-                    <input
-                      id="remember"
-                      type="checkbox"
-                      value=""
-                      class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-pink-300"
-                      required />
+                    <input id="remember" type="checkbox" value="" class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-pink-300" required />
                   </div>
                   <label for="remember" class="ml-2 text-sm font-medium text-pinkP">Remember me</label>
                 </div>
-                <a href="#" class="ml-auto text-sm text-pinkP hover:underline dark:text-blue-500">Lost Password?</a>
+                <a href="#" class="ml-auto text-sm text-pinkP hover:underline dark:text-pink-500">Lost Password?</a>
               </div>
               <button
                 type="submit"
-                class="w-full text-white bg-pinkP hover:bg-pink-300 hover:text-black  focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+                class="w-full text-white bg-pinkP hover:bg-pink-300 hover:text-black focus:ring-4 focus:outline-none focus:ring-pink-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
                 Login to your account
               </button>
               <div class="text-sm font-medium text-gray-300 dark:text-gray-300">
@@ -85,8 +80,21 @@
           </div>
         </div>
       </div>
-      <!-- <img src="../../assets/logo/02.png" data-aos="fade-right" data-aos-duration="1500" data-aos-delay="1500" class="hidden lg:block absolute -left-5 top-7" /> -->
     </div>
+
+    <!-- -fish -->
+    <div data-aos-duration="1500" data-aos-delay="1500" data-aos="zoom-out-left" class="absolute top-36 left-1/2 -z-10">
+      <FishCard></FishCard>
+    </div>
+    <div class="w-full h-full absolute bg-pink-100 -z-40"></div>
+
+    <div data-aos="fade-right" data-aos-duration="1500" data-aos-delay="2500" class="hidden w-16 h-16 md:block absolute top-14 left-14">
+        <a href="/">
+          <svg fill="none" stroke="#fff" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3"></path>
+          </svg>
+        </a>
+      </div>
   </div>
 </template>
 
@@ -95,6 +103,7 @@ import AOS from 'aos'
 import 'aos/dist/aos.css'
 import { reactive } from 'vue'
 import { useUserStore } from '@/stores/users'
+import FishCard from '../../components/FishCard.vue'
 AOS.init()
 const user = useUserStore()
 

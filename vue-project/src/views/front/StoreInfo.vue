@@ -1,29 +1,27 @@
 <template>
-  <div id="storeinfo">
-    <section>
-      <div class="px-4 flex-column justify-center items-center">
-        <div class="text-center">
-          <p class="text-2xl pb-4 lg:text-4xl lg:pt-3 lg:pb-8">
-            {{ storeinfo.name }}
-          </p>
+  <div id="storeinfo" class="lg:flex ms:flex-col overflow-x-hidden">
+    <div id="leftimg" class="w-full lg:w-1/2 h-full">
+      <swiperinfoVue data-aos="fade-down" data-aos-easing="linear" data-aos-duration="1000" data-aos-delay="1000" :images="storeinfo.images"></swiperinfoVue>
+    </div>
+    <div id="rightinfo" class=" w-full lg:w-1/2 h-full overflow-y-auto">
+      <div data-aos="fade-down" data-aos-easing="linear" data-aos-duration="1000" data-aos-delay="1000" class="lg:px-16 px-8 py-8 h-full whitespace-pre-wrap lg:text-xl">
+        {{ storeinfo.description }}
+      </div>
+      <div class="lg:px-16 lg:py-16 px-8 py-8 whitespace-pre-wrap sm:text-sm lg:text-xl bg-gray-900 text-gray-50 h-full">
+        <div class="pb-4">營業時間：{{ storeinfo.dateValue }}</div>
+        <div class="pb-4">地點：{{ storeinfo.place }}</div>
+        <div class="pb-4">
+          粉絲專頁：
+          <br />
+          <a :href="storeinfo.url">{{ storeinfo.url }}</a>
         </div>
-        <div>
-          <img class="w-full lg:w-2/3 mx-auto rounded-lg" :src="storeinfo.image" />
-        </div>
-        <hr class="h-px my-8 bg-gray-500 border-0 dark:bg-gray-700" />
-        <div class="lg:flex lg:text-left text-center lg:justify-center lg:items-start">
-          <div class="lg:px-16 lg:w-2/3 whitespace-pre-wrap lg:text-xl">{{ storeinfo.description }}</div>
-          <div class="lg:px-8 lg:w-1/3 flex-col">
-            <div class="text-xl pb-4">營業時間：{{ storeinfo.dateValue }}</div>
-            <div class="text-xl pb-4">地點：{{ storeinfo.place }}</div>
-            <div class="text-xl pb-4">粉絲專頁： <br>
-              <a :href="storeinfo.url">{{ storeinfo.url }}</a></div>
-            <div class="text-xl pb-4 whitespace-pre-wrap">特色： <br>
-              {{ storeinfo.special }}</div>
-          </div>
+        <div class="pb-4 whitespace-pre-wrap">
+          特色：
+          <br />
+          {{ storeinfo.special }}
         </div>
       </div>
-    </section>
+    </div>
   </div>
 </template>
 <script setup>
@@ -31,16 +29,20 @@ import { reactive } from 'vue'
 import { api } from '@/plugins/axios'
 import Swal from 'sweetalert2'
 import { useRoute } from 'vue-router'
-
+import swiperinfoVue from '../../components/swiperinfo.vue'
+import AOS from 'aos'
+import 'aos/dist/aos.css'
+AOS.init()
 const route = useRoute()
 
 const storeinfo = reactive({
   name: '',
   image: '',
+  images: [],
   description: '',
   dateValue: '',
-  special:'',
-  url:'',
+  special: '',
+  url: '',
   place: '',
   price: ''
 })
@@ -52,6 +54,7 @@ const storeinfo = reactive({
     storeinfo.image = data.result.image
     storeinfo.description = data.result.description
     storeinfo.dateValue = data.result.dateValue
+    storeinfo.images = data.result.images
     storeinfo.url = data.result.url
     storeinfo.place = data.result.place
     storeinfo.special = data.result.special

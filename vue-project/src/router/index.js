@@ -20,26 +20,6 @@ const router = createRouter({
           }
         },
         {
-          path: 'register',
-          name: 'register',
-          component: () => import('@/views/front/RegisterView.vue'),
-          meta: {
-            title: 'AZ.HOME | 註冊',
-            login: false,
-            admin: false
-          }
-        },
-        {
-          path: 'login',
-          name: 'login',
-          component: () => import('@/views/front/LoginView.vue'),
-          meta: {
-            title: 'AZ.HOME | 登入',
-            login: false,
-            admin: false
-          }
-        },
-        {
           path: 'content',
           name: 'content',
           component: () => import('@/views/front/ContectView.vue'),
@@ -206,6 +186,26 @@ const router = createRouter({
           }
         }
       ]
+    },
+    {
+      path: '/register',
+      name: 'register',
+      component: () => import('@/views/front/RegisterView.vue'),
+      meta: {
+        title: 'AZ.HOME | 註冊',
+        login: false,
+        admin: false
+      }
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: () => import('@/views/front/LoginView.vue'),
+      meta: {
+        title: 'AZ.HOME | 登入',
+        login: false,
+        admin: false
+      }
     },
     {
       path: '/404',

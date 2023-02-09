@@ -21,16 +21,6 @@
         </div>
       </div>
     </section>
-    <!-- <section>
-      <div class="px-8 py-16 mt-4 relative">
-        <h1 class="text-2xl lg:text-6xl">EXHIBITION</h1>
-        <p>其他活動</p>
-        <button
-          class="hidden lg:block absolute right-6 top-32 hover:text-white border border-gray-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-gray-600 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-800">
-          SEE ALL
-        </button>
-      </div>
-    </section> -->
   </div>
 </template>
 <script setup>

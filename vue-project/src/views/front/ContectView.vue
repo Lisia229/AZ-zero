@@ -26,7 +26,7 @@
     </div>
   </div>
   <section v-if="isLogin" id="content">
-    <div class="py-8 lg:py-16 px-4 mx-auto max-w-screen-md">
+    <div class="py-8 px-4 mx-auto max-w-screen-md">
       <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-center text-black">Contact Us</h2>
       <p class="mb-8 lg:mb-16 font-light text-center text-black sm:text-xl">
         Got a promble ? Want to send feedback to us ? Need details about our rental information ? Let us know.

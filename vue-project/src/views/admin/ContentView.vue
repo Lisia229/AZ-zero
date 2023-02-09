@@ -105,11 +105,13 @@
               <div class="flex">
                 <div class="flex items-center mb-4">
                   <input
-                    id="default-checkbox"
+                    v-model="checked"
+                    :true-value="已回覆"
+                    :false-value="尚未回覆"
+                    id="checkbox"
                     type="checkbox"
-                    value=""
-                    class="w-4 h-4 text-pink-600 bg-gray-100 border-gray-300 rounded focus:ring-pink-500 " />
-                  <label for="default-checkbox" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">已回覆</label>
+                    class="w-4 h-4 text-pink-600 bg-gray-100 border-gray-300 rounded focus:ring-pink-500" />
+                  <label for="checkbox" class="ml-2 text-sm font-medium text-gray-900">{{ checked }}</label>
                 </div>
               </div>
             </td>

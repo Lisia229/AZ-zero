@@ -69,17 +69,22 @@ export const editStories = async (req, res) => {
   try {
     const mainImage = req?.files?.image ? req?.files?.image[0].path : req.body.image
     const imagePath = []
-    if (req?.files.images) {
+    if (req.files.images) {
       req.files.images.forEach(item => {
         imagePath.push(item.path)
       })
-    } else if (req.body.images) {
-      if (typeof req.body.images === 'string') {
-        imagePath.push(req.body.images)
-      } else {
-        imagePath.push(...req.body.images)
-      }
     }
+    if (typeof req.body.images === 'string') {
+      imagePath.push(req.body.images)
+    }
+    if (typeof req.body.images === 'object') {
+      req.body.images.forEach(item => {
+        if (item !== '' && item !== undefined && item !== null) {
+          imagePath.push(item)
+        }
+      })
+    }
+
     const result = await stories.findByIdAndUpdate(
       req.params.id,
       {

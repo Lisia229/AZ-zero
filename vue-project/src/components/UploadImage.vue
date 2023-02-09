@@ -97,12 +97,14 @@ const imageValidatorHandler = uploadFile => {
   return false
 }
 
-
 watch(file, value => {
   emit('update:modelValue', value)
 })
 
 watch(props, value => {
+  if (value.modelValue !== previewUrl.value) {
+    previewUrl.value = value.modelValue
+  }
   if (value.modelValue !== file.value) {
     file.value = value.modelValue
   }

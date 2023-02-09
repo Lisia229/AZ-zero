@@ -9,7 +9,8 @@ module.exports = {
       whiteW:'#FDFBF5',
       // FDFBF5
       blueB: '#4484A5',
-      pinkP: '#F196A7'
+      pinkP: '#F196A7',
+      lightblue:'#515a6e',
     },
     extend: {}
   },

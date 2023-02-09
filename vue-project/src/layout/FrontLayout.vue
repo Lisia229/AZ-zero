@@ -1,6 +1,6 @@
 <template>
   <!-- -navbar -->
-  <nav id="navbar" data-aos="fade-down" data-aos-duration="1500" class="bg-whiteF border-b z-10 shadow w-full fixed border-gray-500 px-2 sm:px-4 py-2.5 dark:bg-gray-900">
+  <nav id="navbar" class="bg-whiteF border-b z-10 shadow w-full fixed border-gray-500 px-2 sm:px-4 py-2.5 dark:bg-gray-900">
     <div class="container flex flex-wrap items-center justify-between mx-auto">
       <a href="/" class="flex items-center">
         <img src="../assets/logo/zero.1.gif" class="h-6 mr-3 sm:h-9" alt="Flowbite Logo" />
@@ -141,8 +141,8 @@
   </nav>
   <router-view></router-view>
   <!-- -footer -->
-  <footer class="p-4 bg-whiteF sm:p-6 dark:bg-gray-900">
-    <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
+  <footer class="p-4 bg-whiteF sm:p-6">
+    <!-- <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
     <div class="md:flex md:justify-between">
       <div class="mb-6 md:mb-0">
         <a href="/" class="flex items-center">
@@ -184,8 +184,8 @@
           </ul>
         </div>
       </div>
-    </div>
-    <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
+    </div> -->
+    <!-- <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" /> -->
     <div class="sm:flex sm:items-center sm:justify-between">
       <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">
         © 2023

@@ -2,15 +2,14 @@
   <div id="admin-rental">
     <button
       type="button"
-      class="text-white bg-blueB hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
-      data-modal-target="addrentals"
-      data-modal-toggle="addrentals">
+      class="text-white bg-blueB hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 focus:outline-none"
+      @click="addBtn(form)">
       新增場地資訊
     </button>
 
-    <div id="addrentals" tabindex="-1" aria-hidden="true" class="fixed z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full">
-      <div id="rentalsform" class="relative h-full bg-white rounded-xl md:h-auto">
-        <div class="relative">
+    <div id="addrentals" class="bg-white z-50 hidden rounded-xl border-2 border-black absolute">
+      <div id="rentalsform" class="relative rounded-xl">
+        <div class="relative bg-white rounded-xl shadow">
           <button
             type="button"
             @click="cancel(form)"
@@ -81,7 +80,7 @@
                     id="suggest"
                     rows="3"
                     placeholder="suggest"
-                    class="block p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-vtd-secondary-300focus:ring-primary-500 focus:border-primary-500 "></textarea>
+                    class="block p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-vtd-secondary-300focus:ring-primary-500 focus:border-primary-500"></textarea>
                 </div>
                 <!-- -equipment -->
                 <div class="sm:col-span-2">
@@ -135,7 +134,7 @@
                 <div class="col-span-2">
                   <label for="img" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">upload images</label>
                   <div class="flex items-center justify-center w-full">
-                    <div class="flex items-center justify-center pt-5 pb-6">
+                    <div class="grid grid-cols-3 items-center justify-center pt-5 pb-6">
                       <div v-for="(img, index) in form.images" :key="index">
                         <UploadImage v-model="form.images[index].image" :id="`img-${index}`" />
                       </div>
@@ -233,6 +232,10 @@ const rentals = reactive([])
 
 let modal = null
 
+const addBtn = () => {
+  modal.show()
+}
+
 onMounted(() => {
   modal = new Modal(document.getElementById('addrentals'))
 })
@@ -269,8 +272,12 @@ const editBtn = data => {
   form.price = data.price
   form.description = data.description
   form.image = data.image
-  form.images = data.images
-  form.suggest = data.suggest
+  ;(form.images = data.images.map(item => {
+    return {
+      image: item
+    }
+  })),
+    (form.suggest = data.suggest)
   form.size = data.size
   form.equipment = data.equipment
   form.number = data.number
@@ -306,7 +313,6 @@ const submit = async () => {
   fd.append('price', form.price)
   fd.append('description', form.description)
   fd.append('image', form.image)
-  fd.append('images', form.images)
   fd.append('attention', form.attention)
   fd.append('suggest', form.suggest)
   fd.append('size', form.size)

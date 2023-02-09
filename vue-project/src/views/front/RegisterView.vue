@@ -1,9 +1,14 @@
 <template>
   <div class="container flex flex-wrap items-center justify-between mx-auto">
     <div id="register" class="relative">
-      <div id="registerform" class="w-3/4 flex mx-auto md:grid md:grid-cols-12 rounded-xl shadow bg-whiteW justify-center items-start" data-aos="fade-left" data-aos-duration="1500" data-aos-delay="1500">
+      <div
+        id="registerform"
+        class="w-3/4 flex mx-auto md:grid md:grid-cols-12 rounded-xl shadow bg-whiteW justify-center items-start"
+        data-aos="fade-left"
+        data-aos-duration="1500"
+        data-aos-delay="1500">
         <div class="hidden w-full md:block md:col-span-5">
-          <img id="registerimg" class=" rounded-l-xl" src="../../assets/image/b01.jpg">
+          <img id="registerimg" class="rounded-l-xl" src="../../assets/image/b01.jpg" />
         </div>
         <div class="w-full col-span-7">
           <div class="w-full max-w-sm p-4 rounded-xl sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700 mx-auto">
@@ -157,6 +162,13 @@
           </div>
         </div>
       </div>
+      <div data-aos="fade-right" data-aos-duration="1500" data-aos-delay="2500" class="hidden w-16 h-16 md:block absolute top-9 left-0">
+        <a href="/">
+          <svg fill="none" stroke="#4484A5" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3"></path>
+          </svg>
+        </a>
+      </div>
     </div>
   </div>
 </template>
@@ -170,7 +182,7 @@ import { api } from '@/plugins/axios'
 import Swal from 'sweetalert2'
 import { useRouter } from 'vue-router'
 import validator from 'validator'
-AOS.init();
+AOS.init()
 
 const router = useRouter()
 

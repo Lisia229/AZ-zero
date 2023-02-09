@@ -2,20 +2,14 @@
   <div id="admin-stories">
     <button
       type="button"
-      class="text-white bg-blueB hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
-      data-modal-target="addstories"
-      data-modal-toggle="addstories">
+      class="text-white bg-blueB hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 focus:outline-none"
+      @click="addBtn(form)">
       新增合作店家
     </button>
 
-    <div
-      id="addstories"
-      tabindex="-1"
-      aria-hidden="true"
-      data-modal-backdrop="static"
-      class="fixed z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full">
-      <div id="storeform" class="relative h-full md:h-auto overflow-y-auto">
-        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+    <div id="addstories" class="bg-white z-50 hidden rounded-xl border-2 border-black absolute">
+      <div id="storeform" class="relative rounded-xl">
+        <div class="relative bg-white rounded-xl shadow">
           <button
             type="button"
             @click="cancel(form)"
@@ -27,7 +21,6 @@
                 d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
                 clip-rule="evenodd"></path>
             </svg>
-            <span class="sr-only">Close modal</span>
           </button>
           <div class="px-6 py-4 lg:px-8">
             <h2 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Add a new Store</h2>
@@ -128,7 +121,7 @@
                 <div class="col-span-2">
                   <label for="img" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">upload images</label>
                   <div class="flex items-center justify-center w-full">
-                    <div class="flex items-center justify-center pt-5 pb-6">
+                    <div class="grid grid-cols-3 items-center justify-center pt-5 pb-6">
                       <div v-for="(img, index) in form.images" :key="index">
                         <UploadImage v-model="form.images[index].image" :id="`img-${index}`" />
                       </div>
@@ -136,7 +129,7 @@
                   </div>
                   <div class="flex items-center justify-center">
                     <button
-                      v-if="!form.images.length || form.images.length < 3"
+                      v-if="!form.images.length || form.images.length < 9"
                       type="button"
                       @click="
                         form.images.push({
@@ -155,7 +148,6 @@
                     </button>
                   </div>
                 </div>
-
               </div>
               <div class="flex justify-center align-middle">
                 <div class="col">
@@ -213,7 +205,6 @@
         </div>
       </div>
     </div>
-    
   </div>
 </template>
 
@@ -233,8 +224,8 @@ onMounted(() => {
 })
 
 const images = computed(() => {
-  if (!editProduct.value.images) return []
-  return editProduct.value.images.map(item => {
+  if (!stories.images) return []
+  return stories.images.map(item => {
     return {
       image: item
     }
@@ -249,16 +240,19 @@ const form = reactive({
   dateValue: '',
   description: '',
   introduction: '',
-  image: undefined,
+  image: '',
   images: [],
   url: '',
   special: '',
   valid: false
 })
 
+const addBtn = () => {
+  modal.show()
+}
+
 // !編輯商品
 const editBtn = data => {
-  console.log(data)
   form._id = data._id
   form.name = data.name
   form.introduction = data.introduction
@@ -266,8 +260,12 @@ const editBtn = data => {
   form.dateValue = data.dateValue
   form.description = data.description
   form.image = data.image
-  form.images = data.images
-  form.url = data.url
+  ;(form.images = data.images.map(item => {
+    return {
+      image: item
+    }
+  })),
+    (form.url = data.url)
   form.special = data.special
   form.valid = data.valid
   modal.show()
@@ -299,7 +297,6 @@ const submit = async () => {
   fd.append('place', form.place)
   fd.append('description', form.description)
   fd.append('image', form.image)
-  fd.append('images', form.images)
   fd.append('introduction', form.introduction)
   fd.append('special', form.special)
 
