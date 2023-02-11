@@ -2,19 +2,13 @@
   <div id="admin-exhibition">
     <button
       type="button"
-      class="text-white bg-blueB hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
-      data-modal-target="addExhibition"
-      data-modal-toggle="addExhibition">
+      class="text-white bg-blueB hover:bg-white hover:text-blueB hover:border-[1px] hover:border-blueB focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 focus:outline-none"
+      @click="addBtn(form)">
       新增展覽
     </button>
 
-    <section
-      id="addExhibition"
-      tabindex="-1"
-      aria-hidden="true"
-      data-modal-backdrop="static"
-      class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full">
-      <div class="relative w-full h-full max-w-md md:h-auto pt-96">
+    <section id="addExhibition" class="bg-white z-50 hidden rounded-xl border-2 border-black absolute">
+      <div id="exhibitionform" class="relative rounded-xl">
         <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
           <button
             type="button"
@@ -72,7 +66,7 @@
                     class="bg-white border border-vtd-secondary-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                     placeholder="$2999" />
                 </div>
-                
+
                 <div>
                   <label for="category" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Category</label>
                   <Input
@@ -87,7 +81,7 @@
 
                 <div class="sm:col-span-2">
                   <label for="place" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Date</label>
-                  <vue-tailwind-datepicker data-form-type="range" placeholder="YYYY-MM-DD ~ YYYY-MM-DD"  v-model="form.dateValue" />
+                  <vue-tailwind-datepicker data-form-type="range" placeholder="YYYY-MM-DD ~ YYYY-MM-DD" v-model="form.dateValue" />
                 </div>
 
                 <!-- <div class="w-full">
@@ -135,13 +129,13 @@
                     type="button"
                     data-modal-hide="addExhibition"
                     @click="cancel(form)"
-                    class="inline-flex border shadow bg-red-800 text-white items-center mx-3 px-7 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">
+                    class="inline-flex border-[1px] border-pinkP shadow bg-pinkP text-white items-center mx-3 px-7 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 hover:bg-white hover:text-pinkP hover:border-[1px] hover:border-pinkP">
                     cancel
                   </button>
                   <button
                     type="submit"
                     data-modal-hide="addExhibition"
-                    class="inline-flex border shadow bg-green-800 text-white items-center mx-3 px-7 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">
+                    class="inline-flex shadow bg-blueB text-white items-center mx-3 px-7 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 border-[1px] border-blueB hover:bg-white hover:text-blueB hover:border-[1px] hover:border-blueB">
                     Submit
                   </button>
                 </div>
@@ -208,6 +202,10 @@ let modal = null
 onMounted(() => {
   modal = new Modal(document.getElementById('addExhibition'))
 })
+
+const addBtn = () => {
+  modal.show()
+}
 
 // 抓取表單物件
 const form = reactive({

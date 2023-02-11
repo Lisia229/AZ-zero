@@ -1,17 +1,17 @@
 <template>
   <div class="gap-8 justify-center items-center py-8 px-4 mx-auto max-w-screen-xl xl:gap-16 md:grid md:grid-cols-2 sm:py-16 lg:px-6">
-    <img class="w-full dark:hidden" :src="image" alt="image" />
     <div class="mt-4 md:mt-0">
       <h2 class="mb-4 text-4xl tracking-normal font-extrabold text-gray-900 dark:text-white">{{ name }}</h2>
-      <p class="mb-6 text-xl text-gray-500">
-        {{ special }}
+      <p class="mb-6 font-light text-gray-500 md:text-lg dark:text-gray-400">
+        {{ description }}
       </p>
       <button
         type="button"
-        class="hover:text-white border border-gray-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-gray-600 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-800">
+        class="hover:text-blueB hover:bg-white hover:border-[1px] hover:border-blueB text-white bg-blueB focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
         see more
       </button>
     </div>
+    <img class="w-full dark:hidden" :src="image" alt="image" />
   </div>
 </template>
 
@@ -29,17 +29,9 @@ defineProps({
     type: String,
     default: ''
   },
-  dateValue: {
-    type: String,
-    default: ''
-  },
   price: {
     type: Number,
     default: 0
-  },
-  place: {
-    type: String,
-    default: ''
   },
   description: {
     type: String,
@@ -49,11 +41,27 @@ defineProps({
     type: String,
     default: ''
   },
-  sell: {
-    type: Boolean,
-    default: false
+  images: {
+    type: [String],
+    default: ''
   },
-  special: {
+  size: {
+    type: String,
+    default: ''
+  },
+  suggest: {
+    type: String,
+    default: ''
+  },
+  equipment: {
+    type: String,
+    default: ''
+  },
+  number: {
+    type: String,
+    default: ''
+  },
+  attention: {
     type: String,
     default: ''
   }

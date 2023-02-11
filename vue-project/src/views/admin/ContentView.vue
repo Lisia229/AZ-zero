@@ -20,7 +20,6 @@
             placeholder="Search for items" />
         </div>
       </div>
-
       <table class="w-full text-sm text-left text-gray-500">
         <thead class="text-xl text-white uppercase bg-black">
           <tr>

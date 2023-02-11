@@ -36,12 +36,12 @@
       </div>
     </section>
     <hr class="h-px my-4 lg:flex lg:bg-gray-500 lg:border-0 dark:bg-gray-700" />
-    <section id="section03" class="bg-whiteF dark:bg-gray-900">
-      <div class="grid max-w-screen-xl px-4 py-4 mx-auto md:grid-cols-6 lg:gap-8 xl:gap-0 lg:py-8 lg:grid-cols-2">
+    <section id="section03" class="bg-whiteF dark:bg-gray-900 w-full">
+      <div class="w-full grid max-w-screen-xl px-4 py-4 mx-auto md:grid-cols-6 lg:gap-8 xl:gap-0 lg:py-8 lg:grid-cols-2">
         <!-- -exhibition show -->
         <div class="md:flex md:col-span-12 items-center mx-auto lg:mt-0 lg:col-span-12 lg:grid">
           <div class="md:grid md:grid-cols-2 lg:grid-cols-3 items-center justify-center align-middle max-w-screen-xl px-4 py-4 mx-auto lg:gap-8 xl:gap-0 lg:py-4">
-            <div id="Pagenavigationexample" class="border-b-2 border-black mb-2 mx-2" v-for="(exhibition_big, index) in filterData" :key="exhibition_big._id">
+            <div id="Pagenavigationexample" class="border-b-[1px] border-gray-300 py-5 mx-2" v-for="(exhibition_big, index) in filterData" :key="exhibition_big._id">
               <ExhibitionCard @click="info(exhibition_big._id)" v-bind="exhibition_big"></ExhibitionCard>
             </div>
           </div>
@@ -66,8 +66,8 @@
           </li>
           <li v-for="page in totalPage" @click="currentPage = page">
             <p
-              :class="{ 'text-white bg-black': currentPage === page }"
-              class="z-10 px-3 py-2 leading-tight hover:bg-black hover:text-white dark:border-gray-700 dark:bg-gray-700 dark:text-white">
+              :class="{ 'text-white bg-pinkP': currentPage === page }"
+              class="z-10 px-3 py-2 leading-tight hover:bg-pinkP hover:text-white dark:border-gray-700 dark:bg-gray-700 dark:text-white">
               {{ page }}
             </p>
           </li>

@@ -167,7 +167,6 @@ export const editUser = async (req, res) => {
 
     req.user.account = req.body.account
     req.user.email = req.body.email
-    req.user.role = req.body.role
 
     await req.user.save()
 

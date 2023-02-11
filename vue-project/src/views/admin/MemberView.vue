@@ -44,7 +44,8 @@
           <button
             @click="cancel(form)"
             type="button"
-            class="inline-flex items-center px-3 py-2 mx-2 my-2 text-sm font-medium text-center text-white bg-blueB rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+            class="inline-flex items-center px-3 mx-2 py-2 my-2 text-sm font-medium text-center text-white bg-pinkP rounded-lg 
+            hover:bg-white hover:text-pinkP hover:border-[1px] hover:border-pinkP hover:bg-whitehover:bg-pink-400 focus:ring-4 focus:outline-none focus:ring-pink-300">
             取消
             <svg
               class="w-4 h-4 ml-2 -mr-1"
@@ -71,7 +72,7 @@
           </button>
           <button
             type="submit"
-            class="inline-flex items-center px-3 mx-2 py-2 my-2 text-sm font-medium text-center text-white bg-red-800 rounded-lg hover:bg-red-400 focus:ring-4 focus:outline-none focus:ring-red-300">
+            class="inline-flex items-center px-3 mx-2 py-2 my-2 text-sm font-medium text-center text-white bg-blueB rounded-lg hover:text-blueB hover:border-[1px] hover:border-blueB hover:bg-white focus:ring-4 focus:outline-none focus:ring-blue-300">
             儲存
             <svg class="w-4 h-4 ml-2 -mr-1" fill="currentColor" width="20px" height="20px" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
               <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -102,7 +103,7 @@
             <button
               @click="editBtn(member)"
               type="button"
-              class="inline-flex items-center px-3 py-2 my-2 text-sm font-medium text-center text-white bg-black rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-blue-300">
+              class="inline-flex items-center px-3 py-2 my-2 text-sm font-medium text-center text-white bg-blueB rounded-lg hover:bg-white hover:text-blueB hover:border-[1px] hover:border-blueB focus:ring-4 focus:outline-none focus:ring-blue-300">
               編輯
               <svg class="w-4 h-4 ml-2 -mr-1" fill="currentColor" width="20px" height="20px" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
                 <g id="SVGRepo_bgCarrier" stroke-width="0"></g>

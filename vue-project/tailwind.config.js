@@ -11,6 +11,7 @@ module.exports = {
       blueB: '#4484A5',
       pinkP: '#F196A7',
       lightblue:'#515a6e',
+      lightpink:'#f9f2ec',
     },
     extend: {}
   },

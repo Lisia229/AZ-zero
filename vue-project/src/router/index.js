@@ -90,6 +90,16 @@ const router = createRouter({
           }
         },
         {
+          path: 'rental/:id',
+          name: 'rentalID',
+          component: () => import('@/views/front/RentalMore.vue'),
+          meta: {
+            title: 'AZ.HOME | 場地介紹',
+            login: false,
+            admin: false
+          }
+        },
+        {
           path: 'rentalinfo',
           name: 'rentalinfo',
           component: () => import('@/views/front/RentalInfo.vue'),

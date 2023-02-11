@@ -142,6 +142,13 @@
                   </div>
                   <div class="flex items-center justify-center">
                     <button
+                      v-if="form.images.length >= 1"
+                      type="button"
+                      @click="form.images.pop()"
+                      class="inline-flex border shadow border-pinkP text-pinkP items-center mx-3 px-7 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center rounded-lg focus:ring-4 focus:ring-pink-200 hover:bg-pinkP hover:text-white ">
+                      DELETE
+                    </button>
+                    <button
                       v-if="!form.images.length || form.images.length < 9"
                       type="button"
                       @click="
@@ -149,16 +156,10 @@
                           image: ''
                         })
                       "
-                      class="inline-flex border shadow border-black text-black items-center mx-3 px-7 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">
+                      class="inline-flex border shadow border-blueB text-blueB items-center mx-3 px-7 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center hover:bg-blueB hover:text-white rounded-lg focus:ring-4 focus:ring-blue-200 ">
                       ADD
                     </button>
-                    <button
-                      v-if="form.images.length >= 1"
-                      type="button"
-                      @click="form.images.pop()"
-                      class="inline-flex border shadow border-red-800 text-red-800 items-center mx-3 px-7 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">
-                      DELETE
-                    </button>
+
                   </div>
                 </div>
               </div>
@@ -168,13 +169,13 @@
                     type="button"
                     data-modal-hide="addrentals"
                     @click="cancel(form)"
-                    class="inline-flex border shadow bg-red-800 text-white items-center mx-3 px-7 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">
+                    class="inline-flex border shadow hover:bg-white hover:text-pinkP hover:border-[1px] hover:border-pinkP bg-pinkP text-white items-center mx-3 px-7 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">
                     cancel
                   </button>
                   <button
                     type="submit"
                     data-modal-hide="addrentals"
-                    class="inline-flex border shadow bg-green-800 text-white items-center mx-3 px-7 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">
+                    class="inline-flex border shadow hover:text-blueB hover:border-[1px] hover:border-blueB hover:bg-white bg-blueB text-white items-center mx-3 px-7 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">
                     Submit
                   </button>
                 </div>
@@ -204,7 +205,7 @@
             </p>
             <button
               type="button"
-              class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blueB rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blueB hover:bg-white hover:text-blueB hover:border-[1px] hover:border-blueB rounded-lg focus:ring-4 focus:outline-none focus:ring-blue-300"
               @click="editBtn(rental)">
               編輯
               <svg aria-hidden="true" class="w-4 h-4 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">

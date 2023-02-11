@@ -25,20 +25,25 @@
       </div>
     </div>
   </div>
-  <section v-if="isLogin" id="content">
-    <div class="py-8 px-4 mx-auto max-w-screen-md">
+  <section v-if="isLogin" id="content" class="flex flex-wrap w-full h-full">
+    <div id="iframe" class="w-full lg:w-1/2 h-full">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d115670.5729041518!2d121.38928261640626!3d25.04406980000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3442a96523e0246d%3A0xf1c9276707165c71!2z6I-v5bGxMTkxNOaWh-WMluWJteaEj-eUoualreWckuWNgA!5e0!3m2!1szh-TW!2stw!4v1676015049220!5m2!1szh-TW!2stw"
+        frameborder="0"
+        style="border: 0"
+        allowfullscreen=""></iframe>
+      <!-- 嵌入 Google map -->
+    </div>
+    <div class="w-full lg:w-1/2 lg:py-16 lg:px-16 py-8 px-4 mx-auto max-w-screen-md">
       <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-center text-black">Contact Us</h2>
-      <p class="mb-8 lg:mb-16 font-light text-center text-black sm:text-xl">
-        Got a promble ? Want to send feedback to us ? Need details about our rental information ? Let us know.
-      </p>
       <form @submit.prevent="contectForm" class="space-y-8">
         <div>
-          <label for="email" class="block mb-2 text-sm font-medium text-gray-900">Your email</label>
+          <label for="email" class="block mb-2 text-xl font-medium text-gray-900">Your email</label>
           <input
             v-model="form.email"
             type="email"
             id="email"
-            class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5"
+            class="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-lightpink sm:text-md focus:ring-pink-500 focus:border-pink-500"
             placeholder="name@flowbite.com"
             required
             @click="error.email.error = false" />
@@ -48,12 +53,12 @@
         </div>
 
         <div>
-          <label for="subject" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Subject</label>
+          <label for="subject" class="block mb-2 text-xl font-medium text-gray-900 dark:text-gray-300">Subject</label>
           <input
             v-model="form.subject"
             type="text"
             id="subject"
-            class="block p-3 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 shadow-sm focus:ring-primary-500 focus:border-primary-500"
+            class="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-lightpink sm:text-md focus:ring-pink-500 focus:border-pink-500"
             placeholder="Let us know how we can help you"
             required
             @click="error.subject.error = false" />
@@ -62,23 +67,25 @@
           </p>
         </div>
         <div class="sm:col-span-2">
-          <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">Your message</label>
+          <label for="message" class="block mb-2 text-xl font-medium text-gray-900 dark:text-gray-400">Your message</label>
           <textarea
             v-model="form.message"
             id="message"
             @click="error.message.error = false"
             rows="6"
-            class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg shadow-sm border border-gray-300 focus:ring-primary-500 focus:border-primary-500"
+            class="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-lightpink sm:text-md focus:ring-pink-500 focus:border-pink-500"
             placeholder="Leave a comment..."></textarea>
           <p v-if="error.message.error" class="mt-2 text-xs text-red-600 dark:text-red-400">
             <span class="font-medium">內容必填</span>
           </p>
         </div>
-        <button
-          type="submit"
-          class="py-3 px-5 text-sm font-medium text-center text-white rounded-lg bg-black sm:w-fit hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300">
-          Send message
-        </button>
+        <div class="flex justify-center">
+          <button
+            type="submit"
+            class="py-3 px-5 text-sm font-medium text-center text-white rounded-lg bg-pinkP border-[1px] border-pinkP hover:text-pinkP hover:bg-white sm:w-fit hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300">
+            submit
+          </button>
+        </div>
       </form>
     </div>
   </section>
@@ -148,7 +155,6 @@ const contectForm = async () => {
     form.email = ''
     form.subject = ''
     form.message = ''
-    
   } catch (error) {
     console.log(error)
     Swal.fire({

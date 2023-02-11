@@ -62,8 +62,8 @@
           <p class="max-w-2xl mb-6 text-black lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400">近期活動</p>
           <a
             href="/exhibition"
-            class="inline-flex items-center justify-center px-5 py-3 mr-3 text-base font-medium text-center text-white bg-black rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900">
-            SEE ALL exhibition
+            class="inline-flex items-center justify-center px-5 py-3 mr-3 text-base font-medium text-center text-white bg-pinkP rounded-lg bg-primary-700 hover:text-pinkP hover:bg-white hover:border-[1px] hover:border-pinkP focus:ring-4 focus:ring-primary-300">
+            MORE
             <svg class="w-5 h-5 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
               <path
                 fill-rule="evenodd"
@@ -104,8 +104,8 @@
     <hr class="h-px my-4 bg-gray-500 border-0 dark:bg-gray-700" />
     <section id="section05" class="flex-row justify-center md:flex md:justify-end">
       <div class="px-4 py-5 lg:self-start self-center w-1/4">
-        <h1 class="text-2xl lg:text-4xl">Stores stationed</h1>
-        <p class="text-sm lg:text-xl">進駐店家</p>
+        <h1 class="max-w-2xl mb-4 text-3xl tracking-tight leading-none md:text-4xl xl:text-5xl dark:text-white">Stores stationed</h1>
+        <p class="max-w-2xl mb-6 text-black lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400">進駐店家</p>
       </div>
       <div v-for="storie in stories" :key="storie._id">
         <StoreCard v-bind="storie" @click="store(storie._id)"></StoreCard>

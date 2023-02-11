@@ -1,5 +1,5 @@
 <template>
-  <div id="exhibitionInfo">
+  <!-- <div id="exhibitionInfo">
     <section>
       <div class="px-4 flex-column justify-center items-center">
         <div class="text-center">
@@ -21,6 +21,27 @@
         </div>
       </div>
     </section>
+  </div> -->
+  <div id="exhibitionInfo" class="lg:flex ms:flex-col overflow-x-hidden">
+    <div id="leftimg" class="w-full lg:w-1/2 h-full">
+      <img class="object-cover h-full w-full" data-aos="fade-down" data-aos-easing="linear" data-aos-duration="1000" data-aos-delay="1000" :src="exhibitioninfo.image" />
+    </div>
+    <div id="rightinfo" class="w-full lg:w-1/2 h-full overflow-y-auto">
+      <div
+        data-aos="fade-down"
+        data-aos-easing="linear"
+        data-aos-duration="1000"
+        data-aos-delay="1000"
+        class="lg:px-16 flex overflow-y-auto justify-center items-center px-8 py-8 h-full whitespace-pre-wrap lg:text-xl">
+        {{ exhibitioninfo.description }}
+      </div>
+      <div class="lg:px-16 lg:py-16 px-8 py-8 whitespace-pre-wrap sm:text-sm lg:text-xl bg-gray-800 text-gray-50 h-full">
+        <div class="pb-4">名稱：{{ exhibitioninfo.name }}</div>
+        <div class="pb-4">日期：{{ exhibitioninfo.dateValue }}</div>
+        <div class="pb-4">地點：{{ exhibitioninfo.place }}</div>
+        <div class="pb-4">門票：NT${{ exhibitioninfo.price }}</div>
+      </div>
+    </div>
   </div>
 </template>
 <script setup>
@@ -28,7 +49,7 @@ import { reactive } from 'vue'
 import { api } from '@/plugins/axios'
 import Swal from 'sweetalert2'
 import { useRoute } from 'vue-router'
-import ExhibitionSmallCard from '../../components/SmallCard.vue'
+import swiperinfoVue from '../../components/swiperinfo.vue'
 
 const route = useRoute()
 
