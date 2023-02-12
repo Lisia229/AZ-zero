@@ -1,12 +1,36 @@
 <template>
   <div id="admin-exhibition">
-    <button
-      type="button"
-      class="text-white bg-blueB hover:bg-white hover:text-blueB hover:border-[1px] hover:border-blueB focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 focus:outline-none"
-      @click="addBtn(form)">
-      新增展覽
-    </button>
-
+    <div class="flex">
+      <div class="px-4 py-4">
+        <button
+          type="button"
+          class="text-white bg-blueB hover:bg-white hover:text-blueB hover:border-[1px] hover:border-blueB focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 focus:outline-none"
+          @click="addBtn(form)">
+          新增展覽
+        </button>
+      </div>
+      <!-- !search -->
+      <div class="px-4 py-4">
+        <label for="table-search" class="sr-only">Search</label>
+        <div class="relative mt-1">
+          <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+            <svg class="w-5 h-5 text-gray-500" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+              <path
+                fill-rule="evenodd"
+                d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                clip-rule="evenodd"></path>
+            </svg>
+          </div>
+          <input
+            type="text"
+            id="table-search"
+            v-model="searchValue"
+            @change="currentPage = 1"
+            class="block p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-100 focus:ring-pink-300 focus:border-pink-500"
+            placeholder="Search" />
+        </div>
+      </div>
+    </div>
     <section id="addExhibition" class="bg-white z-50 hidden rounded-xl border-2 border-black absolute">
       <div id="exhibitionform" class="relative rounded-xl">
         <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
@@ -149,7 +173,7 @@
     <div id="exhibition-list" class="grid mb-8 rounded-lg shadow-sm dark:border-gray-700 md:mb-12 md:grid-cols-3">
       <div
         id="card"
-        v-for="(exhibition, idx) in exhibitions"
+        v-for="(exhibition, index) in showPageData"
         :key="exhibition._id"
         class="flex flex-col items-center justify-center p-8 text-center bg-whiteF rounded-t-lg md:rounded-t-none md:rounded-tl-lg dark:bg-gray-800 dark:border-gray-700">
         <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
@@ -179,12 +203,51 @@
         </div>
       </div>
     </div>
+
+    <nav class="grid items-center justify-center px-4 py-4 mx-auto" aria-label="Pagenavigationexample">
+      <ul class="mx-auto inline-flex items-center -space-x-px">
+        <li>
+          <a
+            href="#"
+            aria-current="page"
+            class="block px-3 py-2 ml-0 leading-tight text-gray-500 rounded-l-lg dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+            <span class="sr-only">Previous</span>
+            <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+              <path
+                fill-rule="evenodd"
+                d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+                clip-rule="evenodd"></path>
+            </svg>
+          </a>
+        </li>
+        <li v-for="page in totalPage" @click="currentPage = page">
+          <p
+            :class="{ 'text-white bg-pinkP': currentPage === page }"
+            class="z-10 px-3 py-2 leading-tight hover:bg-pinkP hover:text-white dark:border-gray-700 dark:bg-gray-700 dark:text-white">
+            {{ page }}
+          </p>
+        </li>
+        <li>
+          <a
+            href="#"
+            class="block px-3 py-2 leading-tight text-gray-500 rounded-r-lg dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+            <span class="sr-only">Next</span>
+            <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+              <path
+                fill-rule="evenodd"
+                d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                clip-rule="evenodd"></path>
+            </svg>
+          </a>
+        </li>
+      </ul>
+    </nav>
   </div>
 </template>
 
 <script setup>
 import { apiAuth } from '@/plugins/axios'
-import { reactive, onMounted } from 'vue'
+import { reactive, computed, ref, onMounted } from 'vue'
 import Swal from 'sweetalert2'
 import UploadImage from '../../components/UploadImage.vue'
 import Input from '../../components/TheInput.vue'
@@ -196,6 +259,43 @@ const categories = ['期間限定店', '市集活動', '論壇演講', '展演�
 const place = ['玻璃貨櫃屋(2層樓)', 'AZ劇場', '展覽會館', '其他']
 
 const exhibitions = reactive([])
+
+// -搜尋
+const searchValue = ref('')
+
+// -分頁
+const limit = 6
+// -ref要加value
+const totalPage = ref(1)
+const currentPage = ref(1)
+
+// -篩選
+const filterMain = ref('全部')
+
+const filterData = computed(() => {
+  const isSearch = searchValue.value !== ''
+  if (isSearch) {
+    filterMain.value === '全部'
+  }
+
+  const exhibitionsList = exhibitions.filter(item => {
+    if (isSearch) {
+      return item.name.includes(searchValue.value)
+    } else {
+      if (filterMain.value === '全部') return item
+      return item.category === filterMain.value
+    }
+  })
+  totalPage.value = Math.ceil(exhibitionsList.length / limit)
+  return exhibitionsList
+})
+
+const showPageData = computed(() => {
+  const startIndex = (currentPage.value - 1) * limit
+  const endIndex = currentPage.value * limit
+
+  return filterData.value.slice(startIndex, endIndex)
+})
 
 let modal = null
 

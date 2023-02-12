@@ -5,7 +5,8 @@ export const createContect = async (req, res) => {
     const result = await contect.create({
       email: req.body.email,
       subject: req.body.subject,
-      message: req.body.message
+      message: req.body.message,
+      checked: req.body.checked
     })
     res.status(200).json({ success: true, message: '', result })
   } catch (error) {

@@ -116,7 +116,6 @@ const filterData = computed(() => {
   const endIndex = currentPage.value * limit
   const exhibitionList = exhibition_bigs.filter(item => {
     if (filterMain.value === '全部') return item
-    console.log(item)
     return item.category === filterMain.value
   })
   // -讓他變正整數 Math.ceil

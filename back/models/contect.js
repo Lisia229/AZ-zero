@@ -21,6 +21,9 @@ const schema = new Schema(
     message: {
       type: String,
       required: [true, '缺少說明']
+    },
+    checked: {
+      type: String
     }
   },
   { versionKey: false }

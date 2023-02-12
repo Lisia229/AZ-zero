@@ -1,5 +1,29 @@
 <template>
   <div id="admin-member" class="relative">
+    <div id="search" class="py-4">
+      <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only ">Search</label>
+      <div class="relative">
+        <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+          <svg
+            aria-hidden="true"
+            class="w-5 h-5 text-gray-500 dark:text-gray-400"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+          </svg>
+        </div>
+        <input
+          type="search"
+          id="default-search"
+          v-model="searchValue"
+          @change="currentPage = 1"
+          class="block p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-lightpink focus:ring-pink-300 focus:border-pink-500"
+          placeholder="Search" />
+      </div>
+    </div>
+
     <div v-if="form.editing" class="bg-white rounded-lg border-2 border-black absolute w-1/2 top-1/4 left-1/4">
       <form id="editform" @submit.prevent="submit">
         <div class="flex-col px-8 py-8 items-center justify-center">
@@ -44,8 +68,7 @@
           <button
             @click="cancel(form)"
             type="button"
-            class="inline-flex items-center px-3 mx-2 py-2 my-2 text-sm font-medium text-center text-white bg-pinkP rounded-lg 
-            hover:bg-white hover:text-pinkP hover:border-[1px] hover:border-pinkP hover:bg-whitehover:bg-pink-400 focus:ring-4 focus:outline-none focus:ring-pink-300">
+            class="inline-flex items-center px-3 mx-2 py-2 my-2 text-sm font-medium text-center text-white bg-pinkP rounded-lg hover:bg-white hover:text-pinkP hover:border-[1px] hover:border-pinkP hover:bg-whitehover:bg-pink-400 focus:ring-4 focus:outline-none focus:ring-pink-300">
             取消
             <svg
               class="w-4 h-4 ml-2 -mr-1"
@@ -94,7 +117,7 @@
           <td class="px-6 py-3">管理員權限</td>
           <td class="px-6 py-3">編輯</td>
         </tr>
-        <tr v-for="(member, idx) in members" :key="member._id" class="bg-gray-100 text-black">
+        <tr v-for="(member, index) in showPageData" :key="member._id" class="bg-gray-100 text-black">
           <td class="px-6 py-3"><img class="rounded-full w-20 h-20" :src="member.image" /></td>
           <td class="px-6 py-3">{{ member.account }}</td>
           <td class="px-6 py-3">{{ member.email }}</td>
@@ -119,19 +142,93 @@
         </tr>
       </table>
     </div>
+    <nav class="grid items-center justify-center px-4 py-4 mx-auto" aria-label="Pagenavigationexample">
+      <ul class="mx-auto inline-flex items-center -space-x-px">
+        <li>
+          <a
+            href="#"
+            aria-current="page"
+            class="block px-3 py-2 ml-0 leading-tight text-gray-500 rounded-l-lg dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+            <span class="sr-only">Previous</span>
+            <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+              <path
+                fill-rule="evenodd"
+                d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+                clip-rule="evenodd"></path>
+            </svg>
+          </a>
+        </li>
+        <li v-for="page in totalPage" @click="currentPage = page">
+          <p
+            :class="{ 'text-white bg-pinkP': currentPage === page }"
+            class="z-10 px-3 py-2 leading-tight hover:bg-pinkP hover:text-white dark:border-gray-700 dark:bg-gray-700 dark:text-white">
+            {{ page }}
+          </p>
+        </li>
+        <li>
+          <a
+            href="#"
+            class="block px-3 py-2 leading-tight text-gray-500 rounded-r-lg dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+            <span class="sr-only">Next</span>
+            <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+              <path
+                fill-rule="evenodd"
+                d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                clip-rule="evenodd"></path>
+            </svg>
+          </a>
+        </li>
+      </ul>
+    </nav>
   </div>
 </template>
 <script setup>
 import { apiAuth } from '@/plugins/axios'
 import { storeToRefs } from 'pinia'
 import { useUserStore } from '@/stores/users'
-import { reactive } from 'vue'
+import { reactive, computed, ref } from 'vue'
 import Swal from 'sweetalert2'
 import ImageInput from '../../components/UploadImage.vue'
 
 const user = useUserStore()
 
 const members = reactive([])
+
+// -分頁
+const limit = 5
+// -ref要加value
+const totalPage = ref(1)
+const currentPage = ref(1)
+
+// -搜尋
+const searchValue = ref('')
+
+// -篩選
+const filterMain = ref('全部')
+const filterData = computed(() => {
+  const isSearch = searchValue.value !== ''
+  if (isSearch) {
+    filterMain.value === '全部'
+  }
+
+  const membersList = members.filter(item => {
+    if (isSearch) {
+      return item.account.includes(searchValue.value)
+    } else {
+      if (filterMain.value === '全部') return item
+      return item.category === filterMain.value
+    }
+  })
+  totalPage.value = Math.ceil(membersList.length / limit)
+  return membersList
+})
+
+const showPageData = computed(() => {
+  const startIndex = (currentPage.value - 1) * limit
+  const endIndex = currentPage.value * limit
+
+  return filterData.value.slice(startIndex, endIndex)
+})
 
 const { account, email, role, image } = storeToRefs(user)
 

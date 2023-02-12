@@ -16,8 +16,10 @@
           <input
             type="text"
             id="table-search"
+            v-model="searchValue"
+            @change="currentPage = 1"
             class="block p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-100 focus:ring-pink-300 focus:border-pink-500"
-            placeholder="Search for items" />
+            placeholder="Search" />
         </div>
       </div>
       <table class="w-full text-sm text-left text-gray-500">
@@ -55,38 +57,16 @@
                   data-popper-placement="top"
                   style="position: absolute; inset: auto auto 0px 0px; margin: 0px; transform: translate3d(522.5px, 3847.5px, 0px)">
                   <ul class="p-3 space-y-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownRadioButton">
-                    <li>
+                    <li v-for="(buttonCategorie, index) in buttonCategories">
                       <div class="flex items-center p-2 rounded hover:bg-gray-100">
                         <input
                           id="filter-radio-example-1"
                           type="radio"
-                          value=""
+                          :class="{ 'text-white bg-black': filterMain === buttonCategorie }"
+                          @click="filterMain = buttonCategorie"
                           name="filter-radio"
                           class="w-4 h-4 text-pink-600 bg-gray-100 border-gray-300 focus:ring-pink-500" />
-                        <label for="filter-radio-example-1" class="w-full ml-2 text-sm font-medium text-gray-900 rounded">全部</label>
-                      </div>
-                    </li>
-                    <li>
-                      <div class="flex items-center p-2 rounded hover:bg-gray-100">
-                        <input
-                          checked=""
-                          id="filter-radio-example-2"
-                          type="radio"
-                          value=""
-                          name="filter-radio"
-                          class="w-4 h-4 text-pink-600 bg-gray-100 border-gray-300 focus:ring-pink-500" />
-                        <label for="filter-radio-example-2" class="w-full ml-2 text-sm font-medium text-gray-900 rounded">已回覆</label>
-                      </div>
-                    </li>
-                    <li>
-                      <div class="flex items-center p-2 rounded hover:bg-gray-100">
-                        <input
-                          id="filter-radio-example-3"
-                          type="radio"
-                          value=""
-                          name="filter-radio"
-                          class="w-4 h-4 text-pink-600 bg-gray-100 border-gray-300 focus:ring-pink-500" />
-                        <label for="filter-radio-example-3" class="w-full ml-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">未回覆</label>
+                        <label for="filter-radio-example-1" class="w-full ml-2 text-sm font-medium text-gray-900 rounded">{{ buttonCategorie }}</label>
                       </div>
                     </li>
                   </ul>
@@ -96,36 +76,114 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(contect, idx) in contects" :key="contect._id" class="bg-gray-100 border-b">
+          <tr v-for="(contect, index) in showPageData" :key="contect._id" class="bg-gray-100 border-b">
             <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">{{ contect.email }}</th>
             <td class="px-6 text-gray-700 py-4">{{ contect.subject }}</td>
             <td class="px-6 text-gray-700 py-4 whitespace-pre">{{ contect.message }}</td>
             <td class="px-6 py-4">
               <div class="flex">
                 <div class="flex items-center mb-4">
-                  <input
-                    v-model="checked"
-                    :true-value="已回覆"
-                    :false-value="尚未回覆"
-                    id="checkbox"
-                    type="checkbox"
-                    class="w-4 h-4 text-pink-600 bg-gray-100 border-gray-300 rounded focus:ring-pink-500" />
-                  <label for="checkbox" class="ml-2 text-sm font-medium text-gray-900">{{ checked }}</label>
+                  <ul>
+                    <li>
+                      <input class="w-4 h-4 text-pink-600 bg-gray-100 border-gray-300 rounded focus:ring-pink-500" type="checkbox" id="checkbox" />
+                      <label for="checkbox">{{ contect.checked }}</label>
+                    </li>
+                  </ul>
                 </div>
               </div>
             </td>
           </tr>
         </tbody>
       </table>
+      <nav class="grid items-center justify-center px-4 py-4 mx-auto" aria-label="Pagenavigationexample">
+        <ul class="mx-auto inline-flex items-center -space-x-px">
+          <li>
+            <a
+              href="#"
+              aria-current="page"
+              class="block px-3 py-2 ml-0 leading-tight text-gray-500 rounded-l-lg dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+              <span class="sr-only">Previous</span>
+              <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  fill-rule="evenodd"
+                  d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+                  clip-rule="evenodd"></path>
+              </svg>
+            </a>
+          </li>
+          <li v-for="page in totalPage" @click="currentPage = page">
+            <p
+              :class="{ 'text-white bg-pinkP': currentPage === page }"
+              class="z-10 px-3 py-2 leading-tight hover:bg-pinkP hover:text-white dark:border-gray-700 dark:bg-gray-700 dark:text-white">
+              {{ page }}
+            </p>
+          </li>
+          <li>
+            <a
+              href="#"
+              class="block px-3 py-2 leading-tight text-gray-500 rounded-r-lg dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+              <span class="sr-only">Next</span>
+              <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  fill-rule="evenodd"
+                  d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                  clip-rule="evenodd"></path>
+              </svg>
+            </a>
+          </li>
+        </ul>
+      </nav>
     </div>
   </div>
 </template>
 <script setup>
 import { apiAuth } from '@/plugins/axios'
-import { reactive } from 'vue'
+import { reactive, computed, ref } from 'vue'
 import Swal from 'sweetalert2'
 
 const contects = reactive([])
+
+// !ref 不會深層監聽
+// !reactive 會深層監聽， reactive 只接受 Object 跟 Array
+
+// -搜尋
+const searchValue = ref('')
+
+// -分頁
+const limit = 5
+// -ref要加value
+const totalPage = ref(1)
+const currentPage = ref(1)
+
+// -篩選
+const filterMain = ref('全部')
+
+const buttonCategories = ['全部', '已回覆', '未回覆']
+
+const filterData = computed(() => {
+  const isSearch = searchValue.value !== ''
+  if (isSearch) {
+    filterMain.value === '全部'
+  }
+
+  const contectsList = contects.filter(item => {
+    if (isSearch) {
+      return item.subject.includes(searchValue.value)
+    } else {
+      if (filterMain.value === '全部') return item
+      return item.category === filterMain.value
+    }
+  })
+  totalPage.value = Math.ceil(contectsList.length / limit)
+  return contectsList
+})
+
+const showPageData = computed(() => {
+  const startIndex = (currentPage.value - 1) * limit
+  const endIndex = currentPage.value * limit
+
+  return filterData.value.slice(startIndex, endIndex)
+})
 
 ;(async () => {
   try {
