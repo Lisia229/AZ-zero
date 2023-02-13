@@ -7,6 +7,7 @@ import exhibitionsRoute from './routes/exhibitions.js'
 import rentalsRoute from './routes/rentals.js'
 import storeRoute from './routes/stories.js'
 import contectRoute from './routes/contect.js'
+import productsRoute from './routes/products.js'
 
 import './passport/passport.js'
 
@@ -45,6 +46,7 @@ app.use('/exhibitions', exhibitionsRoute)
 app.use('/stories', storeRoute)
 app.use('/rentals', rentalsRoute)
 app.use('/contect', contectRoute)
+app.use('/products', productsRoute)
 
 app.all('*', (req, res) => {
   res.status(404).json({ success: false, message: '找不到' })

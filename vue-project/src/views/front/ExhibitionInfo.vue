@@ -37,7 +37,8 @@
       </div>
       <div class="lg:px-16 lg:py-16 px-8 py-8 whitespace-pre-wrap sm:text-sm lg:text-xl bg-gray-800 text-gray-50 h-full">
         <div class="pb-4">名稱：{{ exhibitioninfo.name }}</div>
-        <div class="pb-4">日期：{{ exhibitioninfo.dateValue }}</div>
+        <div class="pb-4">日期：{{ new Date(exhibitioninfo.dateStart).toLocaleDateString() }} ~ {{ new Date(exhibitioninfo.dateEnd).toLocaleDateString()  }}</div>
+        <div class="pb-4">時間：{{ exhibitioninfo.time }}</div>
         <div class="pb-4">地點：{{ exhibitioninfo.place }}</div>
         <div class="pb-4">門票：NT${{ exhibitioninfo.price }}</div>
       </div>
@@ -57,7 +58,9 @@ const exhibitioninfo = reactive({
   name: '',
   image: '',
   description: '',
-  dateValue: '',
+  dateStart: '',
+  dateEnd: '',
+  time:'',
   place: '',
   price: ''
 })
@@ -67,8 +70,10 @@ const exhibitioninfo = reactive({
     const { data } = await api.get('/exhibitions/' + route.params.id)
     exhibitioninfo.name = data.result.name
     exhibitioninfo.image = data.result.image
+    exhibitioninfo.time = data.result.time
     exhibitioninfo.description = data.result.description
-    exhibitioninfo.dateValue = data.result.dateValue
+    exhibitioninfo.dateStart = data.result.dateStart
+    exhibitioninfo.dateEnd = data.result.dateEnd
     exhibitioninfo.place = data.result.place
     exhibitioninfo.price = data.result.price
   } catch (error) {

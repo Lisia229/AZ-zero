@@ -31,145 +31,204 @@
         </div>
       </div>
     </div>
-    <section id="addExhibition" class="bg-white z-50 hidden rounded-xl border-2 border-black absolute">
-      <div id="exhibitionform" class="relative rounded-xl">
-        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-          <button
-            type="button"
-            @click="cancel(form)"
-            class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white"
-            data-modal-hide="addExhibition">
-            <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-              <path
-                fill-rule="evenodd"
-                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                clip-rule="evenodd"></path>
-            </svg>
-            <span class="sr-only">Close modal</span>
-          </button>
-          <div class="px-6 py-6 lg:px-8">
-            <h2 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Add a new Exhibition</h2>
+    <div class="row-auto items-center justify-between align-middle flex max-w-screen-xl px-4 py-4 mx-auto lg:gap-8 xl:gap-0 lg:py-4 lg:cols-12">
+      <div class="col" v-for="(buttonCategorie, index) in buttonCategories">
+        <button
+          type="button"
+          :class="{ 'text-white bg-black': filterMain === buttonCategorie }"
+          @click="filterMain = buttonCategorie"
+          class="hover:text-white border border-gray-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-gray-600 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-800">
+          {{ buttonCategorie }}
+        </button>
+      </div>
+    </div>
 
-            <form @submit.prevent="submit" class="space-y-6">
-              <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
-                <div class="sm:col-span-2">
-                  <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Exhibition Name</label>
-                  <input
-                    v-model="form.name"
-                    type="text"
-                    name="name"
-                    id="name"
-                    class="bg-white border border-vtd-secondary-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                    placeholder="Type Exhibition name" />
-                </div>
-                <div class="w-full">
-                  <label for="place" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">place</label>
-                  <Input
-                    v-model="form.place"
-                    :select="place"
-                    title="choose place"
-                    class="bg-white border border-vtd-secondary-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                    placeholder="place" />
-                </div>
-                <div class="w-full">
-                  <label for="place" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">sell(TRUE / FALSE)</label>
-                  <input
-                    v-model="form.sell"
-                    type="text"
-                    name="place"
-                    id="place"
-                    class="bg-white border border-vtd-secondary-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" />
-                </div>
-                <div class="w-full">
-                  <label for="price" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Price</label>
-                  <input
-                    v-model="form.price"
-                    type="number"
-                    name="price"
-                    id="price"
-                    class="bg-white border border-vtd-secondary-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                    placeholder="$2999" />
-                </div>
+    <!-- -新增 -->
+      <section id="addExhibition" class="bg-white z-50 hidden rounded-xl border-2 border-black fixed">
+        <div id="exhibitionform" class="relative rounded-xl">
+          <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+            <button
+              type="button"
+              @click="cancel(form)"
+              class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white"
+              data-modal-hide="addExhibition">
+              <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  fill-rule="evenodd"
+                  d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                  clip-rule="evenodd"></path>
+              </svg>
+              <span class="sr-only">Close modal</span>
+            </button>
+            <div class="px-6 py-6 lg:px-8">
+              <h2 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Add a new Exhibition</h2>
 
-                <div>
-                  <label for="category" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Category</label>
-                  <Input
-                    v-model="form.category"
-                    :select="categories"
-                    title="choose category"
-                    class="bg-white border border-vtd-secondary-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                    placeholder="categories" />
-                </div>
+              <form @submit.prevent="submit" class="space-y-6">
+                <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
+                  <div class="sm:col-span-2">
+                    <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Exhibition Name</label>
+                    <input
+                      v-model="form.name"
+                      type="text"
+                      name="name"
+                      id="name"
+                      class="bg-white border border-vtd-secondary-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                      placeholder="Type Exhibition name" />
+                  </div>
+                  <div class="w-full">
+                    <label for="place" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">place</label>
+                    <Input
+                      v-model="form.place"
+                      :select="place"
+                      title="choose place"
+                      class="bg-white border border-vtd-secondary-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                      placeholder="place" />
+                  </div>
+                  <div class="w-full">
+                    <label for="place" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">sell(TRUE / FALSE)</label>
+                    <input
+                      v-model="form.sell"
+                      type="text"
+                      name="place"
+                      id="place"
+                      class="bg-white border border-vtd-secondary-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" />
+                  </div>
+                  <div class="w-full">
+                    <label for="price" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Price</label>
+                    <input
+                      v-model="form.price"
+                      type="number"
+                      name="price"
+                      id="price"
+                      class="bg-white border border-vtd-secondary-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+                      placeholder="$2999" />
+                  </div>
 
-                <!-- -date -->
+                  <div>
+                    <label for="category" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Category</label>
+                    <Input
+                      v-model="form.category"
+                      :select="categories"
+                      title="choose category"
+                      class="bg-white border border-vtd-secondary-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                      placeholder="categories" />
+                  </div>
 
-                <div class="sm:col-span-2">
-                  <label for="place" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Date</label>
-                  <vue-tailwind-datepicker data-form-type="range" placeholder="YYYY-MM-DD ~ YYYY-MM-DD" v-model="form.dateValue" />
-                </div>
+                  <!-- -date -->
 
-                <!-- <div class="w-full">
-                  <label for="place" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">time</label>
-                  <input
-                    v-model="form.time"
-                    type="text"
-                    name="place"
-                    id="place"
-                    placeholder="10:00 - 16:00"
-                    class="bg-white border border-vtd-secondary-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" />
-                </div> -->
-
-                <!-- -Description -->
-                <div class="sm:col-span-2">
-                  <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
-                  <textarea
-                    v-model="form.description"
-                    id="description"
-                    rows="8"
-                    class="block p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-vtd-secondary-300focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                    placeholder="Your description here"></textarea>
-                </div>
-                <div class="sm:col-span-2">
-                  <label for="img" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">upload image</label>
-                  <div class="flex items-center justify-center w-full">
-                    <label
-                      for="dropzone-file"
-                      class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-white dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
-                      <div class="flex flex-col items-center justify-center pt-5 pb-6">
-                        <UploadImage v-model="form.image" id="dropzone-file" />
-                        <p class="mb-2 text-sm text-gray-500 dark:text-gray-400">
-                          <span class="font-semibold">Click to upload</span>
-                          or drag and drop
-                        </p>
-                        <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
+                  <div class="w-full">
+                    <label for="date" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">date</label>
+                    <div date-rangepicker id="dateRangePickerId" class="flex items-center">
+                      <div class="relative">
+                        <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                          <svg
+                            aria-hidden="true"
+                            class="w-5 h-5 text-gray-500 dark:text-gray-400"
+                            fill="currentColor"
+                            viewBox="0 0 20 20"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path
+                              fill-rule="evenodd"
+                              d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+                              clip-rule="evenodd"></path>
+                          </svg>
+                        </div>
+                        <input
+                          ref="dateStartInput"
+                          name="start"
+                          type="text"
+                          class="bg-white border border-gray-800 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5"
+                          placeholder="Select date start" />
                       </div>
-                    </label>
+                      <span class="mx-4 text-gray-500">to</span>
+                      <div class="relative">
+                        <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                          <svg
+                            aria-hidden="true"
+                            class="w-5 h-5 text-gray-500 dark:text-gray-400"
+                            fill="currentColor"
+                            viewBox="0 0 20 20"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path
+                              fill-rule="evenodd"
+                              d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+                              clip-rule="evenodd"></path>
+                          </svg>
+                        </div>
+                        <input
+                          ref="dateEndInput"
+                          name="end"
+                          type="text"
+                          class="bg-white border border-gray-800 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5"
+                          placeholder="Select date end" />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="w-full">
+                    <label for="time" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">time</label>
+                    <input
+                      v-model="form.time"
+                      type="text"
+                      name="place"
+                      id="place"
+                      placeholder="10:00 - 16:00"
+                      class="bg-white border border-vtd-secondary-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" />
+                  </div>
+
+                  <!-- -Description -->
+                  <div class="sm:col-span-2">
+                    <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
+                    <textarea
+                      v-model="form.description"
+                      id="description"
+                      rows="8"
+                      class="block p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-vtd-secondary-300focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                      placeholder="Your description here"></textarea>
+                  </div>
+                  <div class="sm:col-span-2">
+                    <label for="img" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">upload image</label>
+                    <div class="flex items-center justify-center w-full">
+                      <label
+                        for="dropzone-file"
+                        class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-white dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+                        <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                          <UploadImage v-model="form.image" id="dropzone-file" />
+                          <p class="mb-2 text-sm text-gray-500 dark:text-gray-400">
+                            <span class="font-semibold">Click to upload</span>
+                            or drag and drop
+                          </p>
+                          <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
+                        </div>
+                      </label>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div class="flex justify-center align-middle">
-                <div class="col">
-                  <button
-                    type="button"
-                    data-modal-hide="addExhibition"
-                    @click="cancel(form)"
-                    class="inline-flex border-[1px] border-pinkP shadow bg-pinkP text-white items-center mx-3 px-7 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 hover:bg-white hover:text-pinkP hover:border-[1px] hover:border-pinkP">
-                    cancel
-                  </button>
-                  <button
-                    type="submit"
-                    data-modal-hide="addExhibition"
-                    class="inline-flex shadow bg-blueB text-white items-center mx-3 px-7 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 border-[1px] border-blueB hover:bg-white hover:text-blueB hover:border-[1px] hover:border-blueB">
-                    Submit
-                  </button>
+                <div class="flex justify-center align-middle">
+                  <div class="col">
+                    <button
+                      type="button"
+                      data-modal-hide="addExhibition"
+                      @click="cancel(form)"
+                      class="inline-flex border-[1px] border-pinkP shadow bg-pinkP text-white items-center mx-3 px-7 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 hover:bg-white hover:text-pinkP hover:border-[1px] hover:border-pinkP">
+                      cancel
+                    </button>
+                    <button
+                      type="submit"
+                      data-modal-hide="addExhibition"
+                      class="inline-flex shadow bg-blueB text-white items-center mx-3 px-7 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 border-[1px] border-blueB hover:bg-white hover:text-blueB hover:border-[1px] hover:border-blueB">
+                      Submit
+                    </button>
+                  </div>
                 </div>
-              </div>
-            </form>
+              </form>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
+
+    <!-- -列出 -->
     <div id="exhibition-list" class="grid mb-8 rounded-lg shadow-sm dark:border-gray-700 md:mb-12 md:grid-cols-3">
       <div
         id="card"
@@ -185,7 +244,7 @@
               <h5 class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white">{{ exhibition.name }}</h5>
             </a>
             <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
-              {{ exhibition.dateValue }}
+              {{ new Date(exhibition.dateStart).toLocaleDateString() }} ~ {{ new Date(exhibition.dateEnd).toLocaleDateString() }}
             </p>
             <button
               type="button"
@@ -253,8 +312,14 @@ import UploadImage from '../../components/UploadImage.vue'
 import Input from '../../components/TheInput.vue'
 import { Modal } from 'flowbite'
 
-import VueTailwindDatepicker from 'vue-tailwind-datepicker'
-
+import DateRangePicker from 'flowbite-datepicker/DateRangePicker'
+onMounted(() => {
+  const dateRangePickerEl = document.getElementById('dateRangePickerId')
+  new DateRangePicker(dateRangePickerEl, {
+    // options
+  })
+})
+const buttonCategories = ['全部', '期間限定店', '市集活動', '論壇演講', '展演活動', '其他']
 const categories = ['期間限定店', '市集活動', '論壇演講', '展演活動', '其他']
 const place = ['玻璃貨櫃屋(2層樓)', 'AZ劇場', '展覽會館', '其他']
 
@@ -266,28 +331,23 @@ const searchValue = ref('')
 // -分頁
 const limit = 6
 // -ref要加value
-const totalPage = ref(1)
 const currentPage = ref(1)
 
 // -篩選
 const filterMain = ref('全部')
 
-const filterData = computed(() => {
-  const isSearch = searchValue.value !== ''
-  if (isSearch) {
-    filterMain.value === '全部'
-  }
+const dateStartInput = ref(null)
+const dateEndInput = ref(null)
 
-  const exhibitionsList = exhibitions.filter(item => {
-    if (isSearch) {
-      return item.name.includes(searchValue.value)
-    } else {
-      if (filterMain.value === '全部') return item
-      return item.category === filterMain.value
-    }
+const filterData = computed(() => {
+  return exhibitions.filter(item => {
+    const includes = item.name.includes(searchValue.value)
+    return filterMain.value === '全部' ? includes : filterMain.value === item.category
   })
-  totalPage.value = Math.ceil(exhibitionsList.length / limit)
-  return exhibitionsList
+})
+
+const totalPage = computed(() => {
+  return Math.ceil(filterData.value.length / limit)
 })
 
 const showPageData = computed(() => {
@@ -314,7 +374,8 @@ const form = reactive({
   place: '',
   price: 0,
   time: '',
-  dateValue: '',
+  dateStart: '',
+  dateEnd: '',
   description: '',
   image: undefined,
   sell: true,
@@ -324,13 +385,15 @@ const form = reactive({
 
 // !編輯商品
 const editBtn = data => {
+  console.log(dateStartInput)
   console.log(data)
   form._id = data._id
   form.name = data.name
   form.place = data.place
   form.price = data.price
   form.time = data.time
-  form.dateValue = data.dateValue
+  dateStartInput.value.value = data.dateStart
+  dateEndInput.value.value = data.dateEnd
   form.description = data.description
   form.image = data.image
   form.sell = data.sell
@@ -345,7 +408,8 @@ const cancel = () => {
   form.name = ''
   form.place = ''
   form.price = 0
-  form.dateValue = ''
+  dateStartInput.value.value = ''
+  dateEndInput.value.value = ''
   form.description = ''
   form.image = ''
   form.sell = false
@@ -361,7 +425,8 @@ const submit = async () => {
   const fd = new FormData()
   fd.append('name', form.name)
   fd.append('price', form.price)
-  fd.append('dateValue', form.dateValue)
+  fd.append('dateStart', dateStartInput.value.value)
+  fd.append('dateEnd', dateEndInput.value.value)
   fd.append('time', form.time)
   fd.append('place', form.place)
   fd.append('description', form.description)
@@ -400,7 +465,8 @@ const submit = async () => {
   form.name = ''
   form.place = ''
   form.price = 0
-  form.dateValue = ''
+  dateStartInput.value.value = ''
+  dateEndInput.value.value = ''
   form.description = ''
   form.image = ''
   form.sell = false

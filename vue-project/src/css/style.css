@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100;300;400;500;700;900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Bangers&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Bangers&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
+@import 'vue3-timepicker/dist/VueTimepicker.css';
 
 @tailwind base;
 @tailwind components;
@@ -8,12 +10,12 @@
 body {
   /* background: #fdfbf5; */
   /* background: white; */
-  font-family: 'Bangers', 'Noto Sans TC', sans-serif;
+  font-family: 'Open Sans', 'Noto Sans TC', sans-serif;
   position: relative;
 }
 
 #register {
-  font-family: 'Bangers', 'Noto Sans TC', sans-serif;
+  font-family: 'Open Sans', 'Noto Sans TC', sans-serif;
   width: 100%;
   margin: auto;
 }
@@ -75,8 +77,15 @@ body {
   padding-top: 70px;
 }
 
+#productInfo,
+#CartView,
 #content{
   padding-top: 70px;
+}
+
+#productcontent{
+  height: 100vh;
+  overflow: hidden;
 }
 
 #exhibitionInfo,
@@ -141,6 +150,7 @@ body {
   align-items: center;
 }
 
+#admin-products,
 #adminHome,
 #admin-contect,
 #admin-exhibition,
@@ -158,6 +168,7 @@ body {
   padding-top: 75px;
 }
 
+#addproducts,
 #addrentals,
 #addstories {
   width: 90%;
@@ -173,6 +184,7 @@ body {
   transform: translate(-50%);
 }
 
+#productsform,
 #exhibitionform,
 #rentalsform,
 #storeform {

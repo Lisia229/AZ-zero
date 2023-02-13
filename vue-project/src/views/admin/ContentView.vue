@@ -60,13 +60,14 @@
                     <li v-for="(buttonCategorie, index) in buttonCategories">
                       <div class="flex items-center p-2 rounded hover:bg-gray-100">
                         <input
-                          id="filter-radio-example-1"
+                          :id="'filter-radio-example-' + index"
                           type="radio"
                           :class="{ 'text-white bg-black': filterMain === buttonCategorie }"
-                          @click="filterMain = buttonCategorie"
+                          v-model="filterMain"
+                          :value="buttonCategorie"
                           name="filter-radio"
                           class="w-4 h-4 text-pink-600 bg-gray-100 border-gray-300 focus:ring-pink-500" />
-                        <label for="filter-radio-example-1" class="w-full ml-2 text-sm font-medium text-gray-900 rounded">{{ buttonCategorie }}</label>
+                        <label :for="'filter-radio-example-' + index" class="w-full ml-2 text-sm font-medium text-gray-900 rounded">{{ buttonCategorie }}</label>
                       </div>
                     </li>
                   </ul>
@@ -85,8 +86,13 @@
                 <div class="flex items-center mb-4">
                   <ul>
                     <li>
-                      <input class="w-4 h-4 text-pink-600 bg-gray-100 border-gray-300 rounded focus:ring-pink-500" type="checkbox" id="checkbox" />
-                      <label for="checkbox">{{ contect.checked }}</label>
+                      <input
+                        @input="check(contect._id)"
+                        class="w-4 h-4 text-pink-600 bg-gray-100 border-gray-300 rounded focus:ring-pink-500"
+                        type="checkbox"
+                        :id="'checkbox' + index"
+                        :checked="contect.checked" />
+                      <label :for="'checkbox' + index">已回覆</label>
                     </li>
                   </ul>
                 </div>
@@ -152,7 +158,6 @@ const searchValue = ref('')
 // -分頁
 const limit = 5
 // -ref要加value
-const totalPage = ref(1)
 const currentPage = ref(1)
 
 // -篩選
@@ -161,21 +166,14 @@ const filterMain = ref('全部')
 const buttonCategories = ['全部', '已回覆', '未回覆']
 
 const filterData = computed(() => {
-  const isSearch = searchValue.value !== ''
-  if (isSearch) {
-    filterMain.value === '全部'
-  }
-
-  const contectsList = contects.filter(item => {
-    if (isSearch) {
-      return item.subject.includes(searchValue.value)
-    } else {
-      if (filterMain.value === '全部') return item
-      return item.category === filterMain.value
-    }
+  return contects.filter(item => {
+    const includes = item.subject.includes(searchValue.value)
+    return filterMain.value === '全部' ? includes : filterMain.value === '已回覆' ? includes && item.checked : includes && !item.checked
   })
-  totalPage.value = Math.ceil(contectsList.length / limit)
-  return contectsList
+})
+
+const totalPage = computed(() => {
+  return Math.ceil(filterData.value.length / limit)
 })
 
 const showPageData = computed(() => {
@@ -185,6 +183,19 @@ const showPageData = computed(() => {
   return filterData.value.slice(startIndex, endIndex)
 })
 
+const check = async id => {
+  const idx = contects.findIndex(contect => contect._id === id)
+  try {
+    await apiAuth.patch('/contect/' + id, { checked: !contects[idx].checked })
+    contects[idx].checked = !contects[idx].checked
+  } catch (error) {
+    Swal.fire({
+      icon: 'error',
+      title: '失敗',
+      text: error?.response?.data?.message || '發生錯誤'
+    })
+  }
+}
 ;(async () => {
   try {
     const { data } = await apiAuth.get('/contect')

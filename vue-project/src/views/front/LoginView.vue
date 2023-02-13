@@ -65,7 +65,7 @@
                   </div>
                   <label for="remember" class="ml-2 text-sm font-medium text-pinkP">Remember me</label>
                 </div>
-                <a href="#" class="ml-auto text-sm text-pinkP hover:underline dark:text-pink-500">Lost Password?</a>
+                <router-link to="/" class="ml-auto text-sm text-pinkP hover:underline dark:text-pink-500">Lost Password?</router-link>
               </div>
               <button
                 type="submit"
@@ -74,7 +74,7 @@
               </button>
               <div class="text-sm font-medium text-gray-300 dark:text-gray-300">
                 Not registered?
-                <a href="/register" class="text-pinkP hover:underline dark:text-pink-500">Create account</a>
+                <router-link to="/register" class="text-pinkP hover:underline dark:text-pink-500">Create account</router-link>
               </div>
             </form>
           </div>
@@ -89,11 +89,11 @@
     <div class="w-full h-full absolute bg-pink-100 -z-40"></div>
 
     <div data-aos="fade-right" data-aos-duration="1500" data-aos-delay="2500" class="hidden w-16 h-16 md:block absolute top-14 left-14">
-        <a href="/">
+        <router-link to="/">
           <svg fill="none" stroke="#fff" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3"></path>
           </svg>
-        </a>
+        </router-link>
       </div>
   </div>
 </template>

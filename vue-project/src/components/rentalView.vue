@@ -8,7 +8,7 @@
       <button
         type="button"
         class="hover:text-blueB hover:bg-white hover:border-[1px] hover:border-blueB text-white bg-blueB focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
-        see more
+        MORE
       </button>
     </div>
     <img class="w-full dark:hidden" :src="image" alt="image" />

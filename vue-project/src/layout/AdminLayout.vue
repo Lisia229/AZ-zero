@@ -17,9 +17,9 @@
                 d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"></path>
             </svg>
           </button>
-          <a href="/" class="flex ml-2 md:mr-24">
+          <router-link to="/" class="flex ml-2 md:mr-24">
             <span class="self-center text-pinkP text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">AZ.ゼロ</span>
-          </a>
+          </router-link>
         </div>
         <div class="flex items-center">
           <div class="flex items-center ml-3">
@@ -44,12 +44,12 @@
                   </a>
                 </li>
                 <li>
-                  <a
-                    href="/admin/usersettings"
+                  <router-link
+                    to="/admin/usersettings"
                     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
                     role="menuitem">
                     Settings
-                  </a>
+                  </router-link>
                 </li>
                 <li v-if="isAdmin">
                   <a
@@ -91,7 +91,7 @@
     <div class="h-full px-3 pb-4 overflow-y-auto bg-white dark:bg-gray-800">
       <ul class="space-y-2">
         <li v-if="isAdmin">
-          <a href="/admin" class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+          <router-link to="/admin" class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
             <svg
               aria-hidden="true"
               class="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
@@ -102,7 +102,7 @@
               <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path>
             </svg>
             <span class="ml-3">Dashboard</span>
-          </a>
+          </router-link>
         </li>
 
         <li v-if="isAdmin">
@@ -132,32 +132,32 @@
           </button>
           <ul id="dropdown-pages" class="hidden py-2 space-y-2">
             <li>
-              <a
-                href="/admin/admin-exhibition"
+              <router-link
+                to="/admin/admin-exhibition"
                 class="flex items-center p-2 pl-11 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
                 Exhibition
-              </a>
+              </router-link>
             </li>
             <li>
-              <a
-                href="/admin/stores"
+              <router-link
+                to="/admin/stores"
                 class="flex items-center p-2 pl-11 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
                 Stories
-              </a>
+              </router-link>
             </li>
             <li>
-              <a
-                href="/admin/products"
+              <router-link
+                to="/admin/products"
                 class="flex items-center p-2 pl-11 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
                 Merchandise
-              </a>
+              </router-link>
             </li>
             <li>
-              <a
-                href="/admin/rental"
+              <router-link
+                to="/admin/rental"
                 class="flex items-center p-2 pl-11 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
                 Rental
-              </a>
+              </router-link>
             </li>
           </ul>
         </li>
@@ -249,7 +249,9 @@
         </li>
 
         <li v-if="isAdmin">
-          <a href="/admin/members" class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+          <router-link
+            to="/admin/members"
+            class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
             <svg
               aria-hidden="true"
               class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
@@ -259,7 +261,7 @@
               <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path>
             </svg>
             <span class="flex-1 ml-3 whitespace-nowrap">Users</span>
-          </a>
+          </router-link>
         </li>
 
         <li v-if="!isAdmin">
@@ -286,7 +288,9 @@
         </li>
 
         <li v-if="isAdmin">
-          <a href="/admin/contect" class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+          <router-link
+            to="/admin/contect"
+            class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
             <svg
               class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
               fill="currentColor"
@@ -301,11 +305,11 @@
                 d="M8.625 9.75a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375m-13.5 3.01c0 1.6 1.123 2.994 2.707 3.227 1.087.16 2.185.283 3.293.369V21l4.184-4.183a1.14 1.14 0 01.778-.332 48.294 48.294 0 005.83-.498c1.585-.233 2.708-1.626 2.708-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z"></path>
             </svg>
             <span class="flex-1 ml-3 whitespace-nowrap">Contect</span>
-          </a>
+          </router-link>
         </li>
 
         <li>
-          <a href="/admin/usersettings" class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg hover:bg-gray-100">
+          <router-link to="/admin/usersettings" class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg hover:bg-gray-100">
             <svg
               class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900"
               fill="currentColor"
@@ -320,22 +324,29 @@
                 d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-9.75 0h9.75"></path>
             </svg>
             <span class="flex-1 ml-3 whitespace-nowrap">Settings</span>
-          </a>
+          </router-link>
         </li>
       </ul>
     </div>
     <div class="hidden absolute bottom-0 left-0 justify-center p-4 space-x-4 w-full lg:flex bg-white dark:bg-gray-800 z-20">
       <ul class="space-y-2">
-        <li class=" border-black border-[1px] rounded-xl">
-          <a href="/" class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg hover:bg-gray-900 hover:text-white ">
-            <svg fill="none" class="w-6 h-6transition duration-75" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <li class="border-black border-[1px] rounded-xl">
+          <router-link to="/" class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg hover:bg-gray-900 hover:text-white">
+            <svg
+              fill="none"
+              class="w-6 h-6transition duration-75"
+              stroke="currentColor"
+              stroke-width="1.5"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true">
               <path
                 stroke-linecap="round"
                 stroke-linejoin="round"
                 d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"></path>
             </svg>
             <span class="ml-2">HOME</span>
-          </a>
+          </router-link>
         </li>
       </ul>
     </div>

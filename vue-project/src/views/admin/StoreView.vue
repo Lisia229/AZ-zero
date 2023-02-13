@@ -7,7 +7,7 @@
       新增合作店家
     </button>
 
-    <div id="addstories" class="bg-white z-50 hidden rounded-xl border-2 border-black absolute">
+    <div id="addstories" class="bg-white z-50 hidden rounded-xl border-2 border-black fixed">
       <div id="storeform" class="relative rounded-xl">
         <div class="relative bg-white rounded-xl shadow">
           <button

@@ -24,7 +24,7 @@
       </div>
     </div>
 
-    <div v-if="form.editing" class="bg-white rounded-lg border-2 border-black absolute w-1/2 top-1/4 left-1/4">
+    <div v-if="form.editing" class="bg-white rounded-lg border-2 border-black fixed w-1/2 top-1/4 left-1/4">
       <form id="editform" @submit.prevent="submit">
         <div class="flex-col px-8 py-8 items-center justify-center">
           <div class="w-full flex justify-center items-center">

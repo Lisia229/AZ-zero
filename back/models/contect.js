@@ -23,7 +23,8 @@ const schema = new Schema(
       required: [true, '缺少說明']
     },
     checked: {
-      type: String
+      type: Boolean,
+      default: false
     }
   },
   { versionKey: false }

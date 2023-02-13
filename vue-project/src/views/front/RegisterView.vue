@@ -156,7 +156,7 @@
               </button>
               <p class="text-sm font-light text-gray-500 dark:text-gray-400">
                 Already have an account?
-                <a href="/login" class="text-blue-700 hover:underline dark:text-blue-500">Login here</a>
+                <router-link to="/login" class="text-blue-700 hover:underline dark:text-blue-500">Login here</router-link>
               </p>
             </form>
           </div>

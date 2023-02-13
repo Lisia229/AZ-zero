@@ -7,7 +7,7 @@
       新增場地資訊
     </button>
 
-    <div id="addrentals" class="bg-white z-50 hidden rounded-xl border-2 border-black absolute">
+    <div id="addrentals" class="bg-white z-50 hidden rounded-xl border-2 border-black fixed">
       <div id="rentalsform" class="relative rounded-xl">
         <div class="relative bg-white rounded-xl shadow">
           <button

@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import FrontLayout from '../layout/FrontLayout.vue'
 import FrontHomeView from '../views/front/HomeView.vue'
 import NotFoundView from '@/views/NotFoundView.vue'
+import { useUserStore } from '@/stores/users'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -24,7 +25,7 @@ const router = createRouter({
           name: 'content',
           component: () => import('@/views/front/ContectView.vue'),
           meta: {
-            title: 'AZ.HOME | 聯絡',
+            title: 'AZ | 聯絡',
             login: false,
             admin: false
           }
@@ -34,7 +35,7 @@ const router = createRouter({
           name: 'exhibition',
           component: () => import('@/views/front/ExhibitionView.vue'),
           meta: {
-            title: 'AZ.HOME | 展覽介紹',
+            title: 'AZ | 展覽介紹',
             login: false,
             admin: false
           }
@@ -44,7 +45,7 @@ const router = createRouter({
           name: 'exhibitionId',
           component: () => import('@/views/front/ExhibitionInfo.vue'),
           meta: {
-            title: 'AZ.HOME | 展覽資訊',
+            title: 'AZ | 展覽資訊',
             login: false,
             admin: false
           }
@@ -54,7 +55,7 @@ const router = createRouter({
           name: 'store',
           component: () => import('@/views/front/StoreView.vue'),
           meta: {
-            title: 'AZ.HOME | 店家資訊',
+            title: 'AZ | 店家資訊',
             login: false,
             admin: false
           }
@@ -64,7 +65,7 @@ const router = createRouter({
           name: 'storeId',
           component: () => import('@/views/front/StoreInfo.vue'),
           meta: {
-            title: 'AZ.HOME | 展覽資訊',
+            title: 'AZ | 店家資訊',
             login: false,
             admin: false
           }
@@ -74,7 +75,17 @@ const router = createRouter({
           name: 'product',
           component: () => import('@/views/front/ProductView.vue'),
           meta: {
-            title: 'AZ.HOME | 商品資訊',
+            title: 'AZ | 商品',
+            login: false,
+            admin: false
+          }
+        },
+        {
+          path: 'product/:id',
+          name: 'productID',
+          component: () => import('@/views/front/ProductInfo.vue'),
+          meta: {
+            title: 'AZ | 商品資訊',
             login: false,
             admin: false
           }
@@ -84,7 +95,7 @@ const router = createRouter({
           name: 'rental',
           component: () => import('@/views/front/RentalView.vue'),
           meta: {
-            title: 'AZ.HOME | 場地資訊',
+            title: 'AZ | 場地資訊',
             login: false,
             admin: false
           }
@@ -94,7 +105,7 @@ const router = createRouter({
           name: 'rentalID',
           component: () => import('@/views/front/RentalMore.vue'),
           meta: {
-            title: 'AZ.HOME | 場地介紹',
+            title: 'AZ | 場地介紹',
             login: false,
             admin: false
           }
@@ -104,8 +115,18 @@ const router = createRouter({
           name: 'rentalinfo',
           component: () => import('@/views/front/RentalInfo.vue'),
           meta: {
-            title: 'AZ.HOME | 場地租借',
+            title: 'AZ | 場地租借',
             login: false,
+            admin: false
+          }
+        },
+        {
+          path: 'cart',
+          name: 'cart',
+          component: () => import('@/views/front/CartView.vue'),
+          meta: {
+            title: 'AZ | 購物車',
+            login: true,
             admin: false
           }
         }
@@ -130,7 +151,7 @@ const router = createRouter({
           name: 'admin-exhibition',
           component: () => import('@/views/admin/ExhibitionView.vue'),
           meta: {
-            title: '購物網 | 展覽管理',
+            title: 'AZ | 展覽管理',
             login: false,
             admin: true
           }
@@ -140,7 +161,7 @@ const router = createRouter({
           name: 'admin-products',
           component: () => import('@/views/admin/ProductsView.vue'),
           meta: {
-            title: '購物網 | 商品管理',
+            title: 'AZ | 商品管理',
             login: false,
             admin: true
           }
@@ -150,7 +171,7 @@ const router = createRouter({
           name: 'admin-stores',
           component: () => import('@/views/admin/StoreView.vue'),
           meta: {
-            title: '購物網 | 商品管理',
+            title: 'AZ | 商品管理',
             login: false,
             admin: true
           }
@@ -160,7 +181,7 @@ const router = createRouter({
           name: 'admin-usersettings',
           component: () => import('@/views/admin/SettingsView.vue'),
           meta: {
-            title: 'AZ.HOME | 設定',
+            title: 'AZ | 設定',
             login: true,
             admin: true
           }
@@ -170,7 +191,7 @@ const router = createRouter({
           name: 'admin-members',
           component: () => import('@/views/admin/MemberView.vue'),
           meta: {
-            title: 'AZ.HOME | 會員管理',
+            title: 'AZ | 會員管理',
             login: false,
             admin: true
           }
@@ -180,7 +201,7 @@ const router = createRouter({
           name: 'admin-rental',
           component: () => import('@/views/admin/RentalView.vue'),
           meta: {
-            title: 'AZ.HOME | 場地管理',
+            title: 'AZ | 場地管理',
             login: false,
             admin: true
           }
@@ -190,7 +211,7 @@ const router = createRouter({
           name: 'admin-contect',
           component: () => import('@/views/admin/ContentView.vue'),
           meta: {
-            title: 'AZ.HOME | 聯絡管理',
+            title: 'AZ | 聯絡管理',
             login: false,
             admin: true
           }
@@ -202,7 +223,7 @@ const router = createRouter({
       name: 'register',
       component: () => import('@/views/front/RegisterView.vue'),
       meta: {
-        title: 'AZ.HOME | 註冊',
+        title: 'AZ | 註冊',
         login: false,
         admin: false
       }
@@ -212,7 +233,7 @@ const router = createRouter({
       name: 'login',
       component: () => import('@/views/front/LoginView.vue'),
       meta: {
-        title: 'AZ.HOME | 登入',
+        title: 'AZ | 登入',
         login: false,
         admin: false
       }
@@ -222,7 +243,7 @@ const router = createRouter({
       name: '404',
       component: NotFoundView,
       meta: {
-        title: '購物網 | 404',
+        title: 'AZ | 404',
         login: false,
         admin: false
       }
@@ -233,6 +254,21 @@ const router = createRouter({
       redirect: '/404'
     }
   ]
+})
+
+router.afterEach((to, from) => {
+  document.title = to.meta.title
+})
+
+router.beforeEach(async (to, from, next) => {
+  const user = useUserStore()
+  if(user.isLogin && (to.path === '/register' || to.path === '/login')){
+    next('/')
+  } else if (to.meta.login && !user.isLogin){
+    next('/')
+  } else {
+    next()
+  }
 })
 
 export default router

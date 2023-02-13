@@ -3,7 +3,7 @@
       <img class="cursor-pointer rounded-lg mx-auto" :src="image" />
       <div class="p-5 row-auto items-center justify-between align-middle flex max-w-screen-xl px-4 py-4 mx-auto lg:gap-8 xl:gap-0 lg:py-4 lg:cols-12">
         <span class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white">{{ name }}</span>
-        <span class="mb-2 text-xl font-bold text-right tracking-tight text-gray-900 dark:text-white">2023</span>
+        <span class="mb-2 text-xl font-bold text-right tracking-tight text-gray-900 dark:text-white">{{ new Date(dateStart).toLocaleDateString() }} ~ {{ new Date(dateEnd).toLocaleDateString()  }}</span>
       </div>
     </div>
 </template>
@@ -22,8 +22,12 @@ defineProps({
     type: String,
     default: ''
   },
-  dateValue: {
-    type: String,
+  dateStart: {
+    type: Date,
+    default: ''
+  },
+  dateEnd: {
+    type: Date,
     default: ''
   },
   price: {

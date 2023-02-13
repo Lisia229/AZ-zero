@@ -31,7 +31,17 @@ const schema = new Schema(
       type: String,
       required: [true, '缺少圖片']
     },
-    dateValue: {
+    dateStart: {
+      // -展覽時間
+      type: Date,
+      required: [true, '缺少日期']
+    },
+    dateEnd: {
+      // -展覽時間
+      type: Date,
+      required: [true, '缺少日期']
+    },
+    time: {
       // -展覽時間
       type: String,
       required: [true, '缺少日期']

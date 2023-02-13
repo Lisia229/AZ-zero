@@ -1,10 +1,10 @@
 <template>
   <!-- -navbar -->
-  <nav id="navbar" class="bg-whiteF border-b z-10 shadow w-full fixed border-gray-500 px-2 sm:px-4 py-2.5 dark:bg-gray-900">
+  <nav id="navbar" class="bg-whiteF border-b z-40 shadow w-full fixed border-gray-500 px-2 sm:px-4 py-2.5 dark:bg-gray-900">
     <div class="container flex flex-wrap items-center justify-between mx-auto">
-      <a href="/" class="flex items-center">
+      <router-link to="/" class="flex items-center">
         <img src="../assets/logo/zero.1.gif" class="h-6 mr-3 sm:h-9" alt="Flowbite Logo" />
-      </a>
+      </router-link>
       <div class="flex items-center md:order-2">
         <button
           type="button"
@@ -33,11 +33,11 @@
               <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">購物車</a>
             </li>
             <li v-if="isLogin">
-              <a
-                href="/admin/usersettings"
+              <router-link
+                to="/admin/usersettings"
                 class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
                 設定
-              </a>
+              </router-link>
             </li>
             <li v-if="isLogin && isAdmin" to="/admin">
               <a href="/admin" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
@@ -48,10 +48,10 @@
               <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">登出</a>
             </li>
             <li v-if="!isLogin" to="/login">
-              <a href="/login" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">登入</a>
+              <router-link to="/login" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">登入</router-link>
             </li>
             <li v-if="!isLogin" to="/register">
-              <a href="/register" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">註冊</a>
+              <router-link to="/register" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">註冊</router-link>
             </li>
           </ul>
         </div>
@@ -74,32 +74,32 @@
         <ul
           class="flex flex-col p-4 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:text-sm lg:font-normal md:font-medium md:border-0 md:bg-whiteF dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
           <li class="px-3" :class="{ 'border-b-2 border-blueB text-blueB': route.path === '/' }">
-            <a
-              href="/"
+            <router-link
+              to="/"
               class="block py-2 pl-3 pr-4 rounded hover:bg-gray-100 lg:text-md md:hover:bg-transparent md:hover:text-blueB md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">
               首頁
-            </a>
+            </router-link>
           </li>
           <li class="px-3" :class="{ 'border-b-2 border-blueB text-blueB': route.path === '/exhibition' }">
-            <a
-              href="/exhibition"
+            <router-link
+              to="/exhibition"
               class="block lg:text-md py-2 pl-3 pr-4 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blueB md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">
               展覽介紹
-            </a>
+            </router-link>
           </li>
           <li class="px-3" :class="{ 'border-b-2 border-blueB text-blueB': route.path === '/store' }">
-            <a
-              href="/store"
+            <router-link
+              to="/store"
               class="block lg:text-md py-2 pl-3 pr-4 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blueB md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">
               進駐店家
-            </a>
+            </router-link>
           </li>
           <li class="px-3" :class="{ 'border-b-2 border-blueB text-blueB': route.path === '/product' }">
-            <a
-              href="/product"
+            <router-link
+              to="/product"
               class="block lg:text-md py-2 pl-3 pr-4 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blueB md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">
               聯名商品
-            </a>
+            </router-link>
           </li>
           <li class="px-3" :class="{ 'border-b-2 border-blueB text-blueB': route.path === '/rental' }">
             <div
@@ -120,20 +120,20 @@
             <div id="dropdownHover" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
               <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownHoverButton">
                 <li>
-                  <a href="/rental" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">場地介紹</a>
+                  <router-link to="/rental" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">場地介紹</router-link>
                 </li>
                 <li>
-                  <a href="/rentalinfo" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">場地申請</a>
+                  <router-link to="/rentalinfo" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">場地申請</router-link>
                 </li>
               </ul>
             </div>
           </li>
           <li class="px-3" :class="{ 'border-b-2 border-blueB text-blueB': route.path === '/content' }">
-            <a
-              href="/content"
+            <router-link
+              to="/content"
               class="block lg:text-md py-2 pl-3 pr-4 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blueB md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">
               聯絡我們
-            </a>
+            </router-link>
           </li>
         </ul>
       </div>
@@ -283,22 +283,4 @@ onMounted(() => {
   initTooltips()
 })
 
-// gsap.from('#navbar', {
-//   yPercent: -100,
-//   paused: false,
-//   duration: 0.5,
-//   scrollTrigger: {
-//     start: 'top 60',
-//     end: () => '+=' + document.documentElement.scrollHeight, // end 為整份文件高度
-//     onEnter(self) {
-//       self.animation.play()
-//     },
-//     onUpdate(self) {
-//       // self.direction -1 => 偵測到捲動軸往上
-//       // self.direction 1 => 偵測到捲動軸往下
-//       self.direction === -1 ? self.animation.play() : self.animation.reverse()
-//     },
-//     markers: false
-//   }
-// })
 </script>
