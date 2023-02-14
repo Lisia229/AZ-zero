@@ -3,7 +3,7 @@
   <nav id="navbar" class="bg-whiteF border-b z-40 shadow w-full fixed border-gray-500 px-2 sm:px-4 py-2.5 dark:bg-gray-900">
     <div class="container flex flex-wrap items-center justify-between mx-auto">
       <router-link to="/" class="flex items-center">
-        <img src="../assets/logo/zero.1.gif" class="h-6 mr-3 sm:h-9" alt="Flowbite Logo" />
+        <img src="../assets/logo/zero.1.gif" class="mr-3 h-9 lg:h-[60px]" alt="Flowbite Logo" />
       </router-link>
       <div class="flex items-center md:order-2">
         <button
@@ -30,7 +30,7 @@
           </div>
           <ul class="py-2" aria-labelledby="user-menu-button">
             <li v-if="isLogin">
-              <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">購物車</a>
+              <router-link to="/cart" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">購物車</router-link>
             </li>
             <li v-if="isLogin">
               <router-link
@@ -58,7 +58,7 @@
         <button
           data-collapse-toggle="mobile-menu-2"
           type="button"
-          class="inline-flex items-center p-2 ml-1 text-sm text-gray-500 rounded-lg md:hidden hover:bg-blieB focus:outline-none focus:ring-2 focus:ring-blue-200 dark:text-blue-400 dark:hover:bg-blue-700 dark:focus:ring-blue-600"
+          class="inline-flex items-center p-2 ml-1 text-sm text-gray-500 rounded-lg md:hidden hover:bg-blieB focus:outline-none focus:ring-2 focus:ring-blue-200"
           aria-controls="mobile-menu-2"
           aria-expanded="false">
           <span class="sr-only">Open main menu</span>
@@ -72,11 +72,11 @@
       </div>
       <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="mobile-menu-2">
         <ul
-          class="flex flex-col p-4 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:text-sm lg:font-normal md:font-medium md:border-0 md:bg-whiteF dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+          class="flex flex-col p-4 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:text-sm font-medium md:border-0 md:bg-whiteF">
           <li class="px-3" :class="{ 'border-b-2 border-blueB text-blueB': route.path === '/' }">
             <router-link
               to="/"
-              class="block py-2 pl-3 pr-4 rounded hover:bg-gray-100 lg:text-md md:hover:bg-transparent md:hover:text-blueB md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">
+              class="block py-2 pl-3 pr-4 rounded hover:bg-gray-100 lg:text-md md:hover:bg-transparent md:hover:text-blueB md:p-0">
               首頁
             </router-link>
           </li>

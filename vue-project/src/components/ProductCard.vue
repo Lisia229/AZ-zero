@@ -9,7 +9,7 @@
       <div class="p-5 items-center justify-center align-middle flex max-w-screen-xl px-4 text-center py-4 mx-auto lg:gap-8 xl:gap-0 lg:py-4">
         <span class="mb-2 whitespace-nowrap lg:text-xl text-base font-bold tracking-tight text-gray-900">
           <p>{{ name }}</p>
-          <p class="text-red-800"> NT$ {{ price }}</p>
+          <p class="text-red-800"> NT. {{ price }}</p>
         </span>
       </div>
     </div>

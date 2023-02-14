@@ -8,6 +8,7 @@ import rentalsRoute from './routes/rentals.js'
 import storeRoute from './routes/stories.js'
 import contectRoute from './routes/contect.js'
 import productsRoute from './routes/products.js'
+import orderRoute from './routes/orders.js'
 
 import './passport/passport.js'
 
@@ -38,15 +39,22 @@ app.use((_, req, res, next) => {
 })
 
 app.use(express.json())
+
 app.use((_, req, res, next) => {
   res.status(400).json({ success: false, message: '格式錯誤' })
 })
+
 app.use('/users', userRoute)
 app.use('/exhibitions', exhibitionsRoute)
 app.use('/stories', storeRoute)
 app.use('/rentals', rentalsRoute)
 app.use('/contect', contectRoute)
 app.use('/products', productsRoute)
+app.use('/orders', orderRoute)
+
+app.get('/', (req, res) => {
+  res.status(200).json({ success: true, message: '' })
+})
 
 app.all('*', (req, res) => {
   res.status(404).json({ success: false, message: '找不到' })

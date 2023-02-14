@@ -77,15 +77,23 @@ body {
   padding-top: 70px;
 }
 
+#CartView{
+  padding-top: 100px
+}
+
 #productInfo,
 #CartView,
-#content{
+#content {
   padding-top: 70px;
 }
 
-#productcontent{
-  height: 100vh;
-  overflow: hidden;
+#addnumber input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+#addnumber input[type='number'] {
+  -moz-appearance: textfield;
 }
 
 #exhibitionInfo,
@@ -119,10 +127,9 @@ body {
   margin: auto;
 }
 
-
-#iframe iframe{
+#iframe iframe {
   width: 100%;
-  height:100vh;
+  height: 100vh;
 }
 
 #loginBG {

@@ -68,13 +68,15 @@
                   </a>
                 </li>
                 <li>
-                  <a
+                  <button
+                    v-if="isLogin"
+                    type="button"
                     @click="logout"
                     href="#"
                     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
                     role="menuitem">
                     Sign out
-                  </a>
+                  </button>
                 </li>
               </ul>
             </div>
@@ -162,6 +164,7 @@
           </ul>
         </li>
 
+        <!-- -管理員 訂單 -->
         <li v-if="isAdmin">
           <button
             type="button"
@@ -205,6 +208,7 @@
           </ul>
         </li>
 
+        <!-- -會員 訂單 -->
         <li v-if="!isAdmin">
           <button
             type="button"
@@ -232,22 +236,23 @@
           </button>
           <ul id="dropdown-orders2" class="hidden py-2 space-y-2">
             <li>
-              <a
-                href="#"
+              <router-link
+                to="/"
                 class="flex items-center p-2 pl-11 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
                 Rental Order
-              </a>
+              </router-link>
             </li>
             <li>
-              <a
-                href="#"
+              <router-link
+                to="/"
                 class="flex items-center p-2 pl-11 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
                 Product Order
-              </a>
+              </router-link>
             </li>
           </ul>
         </li>
 
+        <!-- -管理員 使用者管理 -->
         <li v-if="isAdmin">
           <router-link
             to="/admin/members"
@@ -263,7 +268,7 @@
             <span class="flex-1 ml-3 whitespace-nowrap">Users</span>
           </router-link>
         </li>
-
+        <!-- -會員 收藏 -->
         <li v-if="!isAdmin">
           <a href="#" class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
             <svg
@@ -286,7 +291,7 @@
             <span class="flex-1 ml-3 whitespace-nowrap">favorite</span>
           </a>
         </li>
-
+        <!-- -管理員 聯絡清單 -->
         <li v-if="isAdmin">
           <router-link
             to="/admin/contect"
@@ -392,5 +397,5 @@ onMounted(() => {
 
 const user = useUserStore()
 const { account, email, image } = storeToRefs(user)
-const { logout } = user
+const { logout, isLogin } = user
 </script>

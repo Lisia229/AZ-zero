@@ -1,7 +1,7 @@
 <template>
-  <div id="productInfo" class="px-4 py-8">
+  <div id="productInfo" class="relative py-8">
     <!-- -navbar -->
-    <nav class="sm:px-4 py-6" aria-label="Breadcrumb">
+    <nav class="px-4 py-4 lg:pb-6 lg:py-10 w-full z-10 bg-white fixed" aria-label="Breadcrumb">
       <ol class="inline-flex items-center space-x-1 md:space-x-3">
         <li class="inline-flex items-center">
           <router-link to="/" class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-pinkP">
@@ -36,12 +36,9 @@
         </li>
       </ol>
     </nav>
-    <div class="flex">
-      <div id="productimg" class="w-full lg:w-1/2 px-4 py-4">
-        <ProductSwiper :images="productinfo.images"></ProductSwiper>
-      </div>
-      <div id="productcontent" class="relative w-full lg:w-1/2 px-4 py-4 flex justify-center items-center">
-        <div class="w-1/3 text-xl lg:text-2xl flex justify-between items-center fixed top-1/4">
+    <div class="px-4 lg:px-0 lg:w-full h-full flex py-16 lg:flex-row-reverse flex-wrap">
+      <div id="productcontent" class="h-full relative w-full lg:w-1/2 py-4 flex justify-center items-start lg:items-center">
+        <div class="w-full lg:w-1/3 text-xl lg:text-2xl flex justify-between lg:items-center lg:fixed lg:top-[8.5%] h-full">
           <div class="flex-wrap flex w-full">
             <div class="w-full flex justify-end pb-4">
               <button type="button">
@@ -53,30 +50,89 @@
                 </svg>
               </button>
             </div>
-            <div class="w-full flex justify-between items-center">
-              <span>{{ productinfo.name }}</span>
-              <span class="text-red-800">NT$ {{ productinfo.price }}</span>
+            <form @submit.prevent="submitCart" class="w-full border-b-[1px] border-gray-300">
+              <div class="sm:w-2/3 lg:w-full flex justify-between items-start lg:items-center">
+                <span class="whitespace-nowrap">{{ productinfo.name }}</span>
+                <span class="text-red-800 whitespace-nowrap">NT. {{ productinfo.price }}</span>
+              </div>
+              <div class="w-full py-4 justify-between items-start lg:items-center">
+                <span class="text-base">{{ productinfo.colors }}</span>
+              </div>
+              <!-- -選數量 -->
+              <div id="addquantity" class="flex w-full pb-4 justify-between items-start lg:items-center relative">
+                <button class="absolute left-3" type="button" @click="quantity--">
+                  <svg
+                    class="w-5 h-5 number-btn"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12h-15"></path>
+                  </svg>
+                </button>
+                <input
+                  v-model="quantity"
+                  type="number"
+                  min="1"
+                  max="10"
+                  readonly="readonly"
+                  class="bg-white py- px-36 text-center border border-[#242424] text-[#242424] text-sm focus:ring-[#242424] focus:border-[#242424] block w-full p-2.5" />
+                <button class="absolute right-3" type="button" @click="quantity++">
+                  <svg
+                    class="w-5 h-5 number-btn"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"></path>
+                  </svg>
+                </button>
+              </div>
+              <!-- -加入購物車 -->
+              <div class="w-full pb-4 justify-between items-start lg:items-center">
+                <button
+                  @click="editCart({ _id, quantity: 1 })"
+                  type="submit"
+                  class="bg-[#323232] w-full h-12 px-4 py-2 text-base text-white border-[1px] border-[#323232] hover:text-[#323232] hover:bg-white">
+                  ADD TO BAG
+                </button>
+              </div>
+            </form>
+            <div class="w-full py-4 justify-between items-start lg:items-center">
+              <div class="w-full pb-4 text-sm whitespace-pre-wrap">{{ productinfo.description }}</div>
             </div>
           </div>
         </div>
       </div>
+      <div id="productimg" class="w-full lg:w-1/2 py-4">
+        <ProductSwiper :images="productinfo.images"></ProductSwiper>
+      </div>
     </div>
   </div>
-
 </template>
 <script setup>
-import { reactive, onMounted } from 'vue'
+import { reactive, ref } from 'vue'
 import { api } from '@/plugins/axios'
 import Swal from 'sweetalert2'
 import { useRoute } from 'vue-router'
 import AOS from 'aos'
 import 'aos/dist/aos.css'
 import ProductSwiper from '../../components/ProductSwipwe.vue'
-
-
+import router from '../../router'
+import validator from 'validator'
+import { useUserStore } from '@/stores/users'
 
 AOS.init()
 const route = useRoute()
+
+const user = useUserStore()
+const { editCart, editLove } = user
+
+const quantity = ref(1)
 
 const productinfo = reactive({
   _id: '',
@@ -90,9 +146,14 @@ const productinfo = reactive({
   category: ''
 })
 
+const submitCart = () => {
+  editCart({ _id: productinfo._id, quantity: quantity.value })
+}
+
 ;(async () => {
   try {
     const { data } = await api.get('/products/' + route.params.id)
+    productinfo._id = data.result._id
     productinfo.name = data.result.name
     productinfo.image = data.result.image
     productinfo.description = data.result.description
@@ -101,12 +162,15 @@ const productinfo = reactive({
     productinfo.sell = data.result.sell
     productinfo.category = data.result.category
     productinfo.price = data.result.price
+
+    document.title = 'AZ |' + productinfo.name
   } catch (error) {
     Swal.fire({
       icon: 'error',
       title: '失敗',
       text: error?.response?.data?.message || '發生錯誤'
     })
+    router.go(-1)
   }
 })()
 </script>
