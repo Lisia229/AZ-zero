@@ -187,6 +187,46 @@ const router = createRouter({
           }
         },
         {
+          path: 'usersOrder',
+          name: 'admin-usersOrder',
+          component: () => import('@/views/admin/OrderUser.vue'),
+          meta: {
+            title: 'AZ | 訂單',
+            login: true,
+            admin: true
+          }
+        },
+        {
+          path: 'Order',
+          name: 'admin-Order',
+          component: () => import('@/views/admin/OrderView.vue'),
+          meta: {
+            title: 'AZ | 訂單',
+            login: true,
+            admin: true
+          }
+        },
+        {
+          path: 'usersRental',
+          name: 'admin-usersRental',
+          component: () => import('@/views/admin/RentalUserOrder.vue'),
+          meta: {
+            title: 'AZ | 場地預約',
+            login: true,
+            admin: true
+          }
+        },
+        {
+          path: 'RentalOrder',
+          name: 'admin-RentalOrder',
+          component: () => import('@/views/admin/RentalOrder.vue'),
+          meta: {
+            title: 'AZ | 場地預約',
+            login: true,
+            admin: true
+          }
+        },
+        {
           path: 'members',
           name: 'admin-members',
           component: () => import('@/views/admin/MemberView.vue'),

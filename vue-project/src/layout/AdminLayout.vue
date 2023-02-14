@@ -192,18 +192,18 @@
           </button>
           <ul id="dropdown-orders" class="hidden py-2 space-y-2">
             <li>
-              <a
-                href="#"
+              <router-link
+                to="/admin/RentalOrder"
                 class="flex items-center p-2 pl-11 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
                 Rental Order
-              </a>
+              </router-link>
             </li>
             <li>
-              <a
-                href="#"
+              <router-link
+                to="/admin/Order"
                 class="flex items-center p-2 pl-11 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
                 Product Order
-              </a>
+              </router-link>
             </li>
           </ul>
         </li>
@@ -237,14 +237,14 @@
           <ul id="dropdown-orders2" class="hidden py-2 space-y-2">
             <li>
               <router-link
-                to="/"
+                to="/admin/usersRental"
                 class="flex items-center p-2 pl-11 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
                 Rental Order
               </router-link>
             </li>
             <li>
               <router-link
-                to="/"
+                to="/admin/usersOrder"
                 class="flex items-center p-2 pl-11 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
                 Product Order
               </router-link>
