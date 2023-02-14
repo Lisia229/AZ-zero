@@ -116,6 +116,10 @@ const schema = new Schema(
       // -活動敘述
       type: String,
       required: [true, '缺少說明']
+    },
+    checked: {
+      type: Boolean,
+      default: false
     }
   },
   { versionKey: false }

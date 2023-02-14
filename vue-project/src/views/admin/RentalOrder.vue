@@ -89,7 +89,7 @@
                 @click="addBtn(form)">
                 看完整資料
               </button>
-              
+
             </td>
             <td class="px-6 py-4">
               <div class="flex">
@@ -97,11 +97,11 @@
                   <ul>
                     <li>
                       <input
-                        @input="check(rentalforms._id)"
+                        @input="check(rentalform._id)"
                         class="w-4 h-4 text-pink-600 bg-gray-100 border-gray-300 rounded focus:ring-pink-500"
                         type="checkbox"
                         :id="'checkbox' + index"
-                        :checked="rentalforms.checked" />
+                        :checked="rentalform.checked" />
                       <label :for="'checkbox' + index">已回覆</label>
                     </li>
                   </ul>
@@ -204,8 +204,8 @@ const showPageData = computed(() => {
 const check = async id => {
   const idx = rentalforms.findIndex(rentalform => rentalform._id === id)
   try {
-    await apiAuth.patch('/rentalforms/' + id, { checked: !rentalform[idx].checked })
-    rentalform[idx].checked = !rentalform[idx].checked
+    await apiAuth.patch('/rentalorders/' + id, { checked: !rentalforms[idx].checked })
+    rentalforms[idx].checked = !rentalforms[idx].checked
   } catch (error) {
     Swal.fire({
       icon: 'error',
