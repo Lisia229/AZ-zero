@@ -60,7 +60,7 @@
         </div>
         <div class="flex-col py-4 px-4 relative justify-center items-center w-full">
           <h1 class="text-center text-2xl py-4 px-4">AZ.ゼロ 場地申請表</h1>
-          <form class="space-y-6 py-4 px-8">
+          <form @submit.prevent="rentalForm" class="space-y-6 py-4 px-8">
             <fieldset v-if="step === 1">
               <div class="flex justify-around items-center text-xl rounded-xl px-4 pb-6">
                 <div class="text-pinkP px-4 py-2 border-b-2 border-pinkP">聯絡資訊</div>
@@ -92,6 +92,7 @@
                 <div class="w-full">
                   <label for="large-input" class="block mb-2 text-base font-medium text-gray-900 dark:text-white">申請人 ：</label>
                   <input
+                    v-model="form.name"
                     type="text"
                     id="large-input"
                     class="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-lightpink sm:text-md focus:ring-pink-500 focus:border-pink-500" />
@@ -99,6 +100,7 @@
                 <div class="w-full">
                   <label for="large-input" class="block mb-2 text-base font-medium text-gray-900 dark:text-white">填表日期（例 2023-01-03)：</label>
                   <input
+                    v-model="form.date"
                     type="text"
                     id="large-input"
                     class="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-lightpink sm:text-md focus:ring-pink-500 focus:border-pink-500" />
@@ -107,6 +109,7 @@
                 <div class="w-full">
                   <label for="large-input" class="block mb-2 text-base font-medium text-gray-900 dark:text-white">申請單位：</label>
                   <input
+                    v-model="form.unit"
                     type="text"
                     id="large-input"
                     class="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-lightpink sm:text-md focus:ring-pink-500 focus:border-pink-500" />
@@ -114,6 +117,7 @@
                 <div class="w-full">
                   <label for="large-input" class="block mb-2 text-base font-medium text-gray-900 dark:text-white">聯絡電話 ：</label>
                   <input
+                    v-model="form.phone"
                     type="text"
                     id="large-input"
                     class="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-lightpink sm:text-md focus:ring-pink-500 focus:border-pink-500" />
@@ -121,13 +125,15 @@
                 <div class="w-full">
                   <label for="large-input" class="block mb-2 text-base font-medium text-gray-900 dark:text-white">聯絡信箱 ：</label>
                   <input
-                    type="text"
+                    v-model="form.email"
+                    type="email"
                     id="large-input"
                     class="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-lightpink sm:text-md focus:ring-pink-500 focus:border-pink-500" />
                 </div>
                 <div class="w-full">
                   <label for="category" class="block mb-2 text-base font-medium text-gray-900 dark:text-white">聯絡地址：</label>
                   <input
+                    v-model="form.adresse"
                     type="text"
                     id="large-input"
                     class="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-lightpink sm:text-md focus:ring-pink-500 focus:border-pink-500" />
@@ -179,72 +185,55 @@
                 <div>活動規劃</div>
               </div>
               <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
+                              <!-- -統一編號 -->
+              <div class="sm:col-span-2">
+                <label for="uniform" class="block mb-2 text-base font-medium text-gray-900 dark:text-white">統一編號 / 立案字號：</label>
+                <input
+                  v-model="form.uniform"
+                  type="text"
+                  id="large-input"
+                  class="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-lightpink sm:text-md focus:ring-pink-500 focus:border-pink-500" />
+              </div>
                 <!-- -單位類別 -->
                 <div class="w-full">
                   <label for="category" class="block mb-2 text-base font-medium text-gray-900 dark:text-white">單位類別：</label>
-                  <select
-                    id="countries"
-                    class="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-lightpink sm:text-md focus:ring-pink-500 focus:border-pink-500">
-                    <option>一般團體</option>
-                    <option>藝文團體</option>
-                  </select>
+                  <Input
+                    v-model="form.category"
+                    :select="categorys"
+                    title="choose place"
+                    class="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-lightpink sm:text-md focus:ring-pink-500 focus:border-pink-500"
+                    placeholder="place" />
                 </div>
-                <!-- -統一編號 -->
-                <div class="w-full">
-                  <label for="category" class="block mb-2 text-base font-medium text-gray-900 dark:text-white">統一編號 / 立案字號：</label>
-                  <input
-                    type="text"
-                    id="large-input"
-                    class="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-lightpink sm:text-md focus:ring-pink-500 focus:border-pink-500" />
-                </div>
+
                 <!-- -申請場地 -->
                 <div class="w-full">
-                  <label for="category" class="block mb-2 text-base font-medium text-gray-900 dark:text-white">申請場地：</label>
-                  <select
-                    id="countries"
-                    class="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-lightpink sm:text-md focus:ring-pink-500 focus:border-pink-500">
-                    <option>AZ劇場</option>
-                    <option>玻璃貨櫃屋（2層樓）</option>
-                    <option>展覽會場</option>
-                  </select>
+                  <label for="rental" class="block mb-2 text-base font-medium text-gray-900 dark:text-white">申請場地：</label>
+                  <Input
+                    v-model="form.rental"
+                    :select="Rentals"
+                    title="choose place"
+                    class="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-lightpink sm:text-md focus:ring-pink-500 focus:border-pink-500"
+                    placeholder="place" />
                 </div>
                 <!-- -活動性質 -->
                 <div class="w-full">
-                  <label for="category" class="block mb-2 text-base font-medium text-gray-900 dark:text-white">活動性質：</label>
-                  <select
-                    id="countries"
-                    class="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-lightpink sm:text-md focus:ring-pink-500 focus:border-pink-500">
-                    <option>座談會/研討會/研習/講座/論壇</option>
-                    <option>記者會/發表會</option>
-                    <option>同人/社團活動</option>
-                    <option>藝術/文化展演活動</option>
-                    <option>消費者體驗活動</option>
-                    <option>演唱會/簽名會</option>
-                    <option>個展/畢展</option>
-                    <option>影片/平面拍攝</option>
-                    <option>園遊會/家庭日/市集</option>
-                    <option>其他</option>
-                  </select>
+                  <label for="activity" class="block mb-2 text-base font-medium text-gray-900 dark:text-white">活動性質：</label>
+                  <Input
+                    v-model="form.activity"
+                    :select="activities"
+                    title="choose place"
+                    class="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-lightpink sm:text-md focus:ring-pink-500 focus:border-pink-500"
+                    placeholder="place" />
                 </div>
                 <!-- -參觀性質 -->
                 <div class="w-full">
-                  <label for="category" class="block mb-2 text-base font-medium text-gray-900 dark:text-white">參觀性質：</label>
-                  <select
-                    id="countries"
-                    class="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-lightpink sm:text-md focus:ring-pink-500 focus:border-pink-500">
-                    <option>不開放</option>
-                    <option>自由入場</option>
-                    <option>索票/邀請函</option>
-                    <option>售票</option>
-                    <option>其他</option>
-                  </select>
-                </div>
-                <div class="w-full">
-                  <label for="large-input" class="block mb-2 text-base font-medium text-gray-900 dark:text-white">活動日期（例 2023-01-03 ～ 2023-01-10)：</label>
-                  <input
-                    type="text"
-                    id="large-input"
-                    class="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-lightpink sm:text-md focus:ring-pink-500 focus:border-pink-500" />
+                  <label for="visite" class="block mb-2 text-base font-medium text-gray-900 dark:text-white">參觀性質：</label>
+                  <Input
+                    v-model="form.visite"
+                    :select="visites"
+                    title="choose place"
+                    class="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-lightpink sm:text-md focus:ring-pink-500 focus:border-pink-500"
+                    placeholder="place" />
                 </div>
               </div>
               <div class="flex justify-center py-4">
@@ -310,23 +299,98 @@
               </div>
               <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
                 <!-- -活動名稱 -->
-                <div class="sm:col-span-2">
+                <div class="w-full">
                   <label for="large-input" class="block mb-2 text-base font-medium text-gray-900 dark:text-white">活動名稱：</label>
                   <input
+                    v-model="form.mainname"
                     type="text"
                     id="large-input"
                     class="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-lightpink sm:text-md focus:ring-pink-500 focus:border-pink-500" />
                 </div>
+                <!-- -活動時間 -->
+                <div class="w-full">
+                  <label for="large-input" class="block mb-2 text-base font-medium text-gray-900 dark:text-white">活動時間(例 10:00 ~ 16:00)：</label>
+                  <input
+                    v-model="form.time"
+                    type="text"
+                    id="large-input"
+                    class="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-lightpink sm:text-md focus:ring-pink-500 focus:border-pink-500" />
+                </div>
+                <!-- -活動時間 -->
+                <div class="w-full">
+                  <label for="large-input" class="block mb-2 text-base font-medium text-gray-900 dark:text-white">活動開始：</label>
+                  <input
+                    v-model="form.dateStart"
+                    type="text"
+                    id="large-input"
+                    class="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-lightpink sm:text-md focus:ring-pink-500 focus:border-pink-500" />
+                </div>
+                <div class="w-full">
+                  <label for="large-input" class="block mb-2 text-base font-medium text-gray-900 dark:text-white">活動結束：</label>
+                  <input
+                    v-model="form.dateEnd"
+                    type="text"
+                    id="large-input"
+                    class="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-lightpink sm:text-md focus:ring-pink-500 focus:border-pink-500" />
+                </div>
+                <!-- <div class="w-full">
+                    <label for="date" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">date</label>
+                    <div date-rangepicker id="dateRangePickerId" class="flex items-center">
+                      <div class="relative">
+                        <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                          <svg
+                            aria-hidden="true"
+                            class="w-5 h-5 text-gray-500 dark:text-gray-400"
+                            fill="currentColor"
+                            viewBox="0 0 20 20"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path
+                              fill-rule="evenodd"
+                              d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+                              clip-rule="evenodd"></path>
+                          </svg>
+                        </div>
+                        <input
+                          ref="dateStartInput"
+                          name="start"
+                          type="text"
+                          class="bg-white border border-gray-800 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5"
+                          placeholder="Select date start" />
+                      </div>
+                      <span class="mx-4 text-gray-500">to</span>
+                      <div class="relative">
+                        <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                          <svg
+                            aria-hidden="true"
+                            class="w-5 h-5 text-gray-500 dark:text-gray-400"
+                            fill="currentColor"
+                            viewBox="0 0 20 20"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path
+                              fill-rule="evenodd"
+                              d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+                              clip-rule="evenodd"></path>
+                          </svg>
+                        </div>
+                        <input
+                          ref="dateEndInput"
+                          name="end"
+                          type="text"
+                          class="bg-white border border-gray-800 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5"
+                          placeholder="Select date end" />
+                      </div>
+                    </div>
+                  </div> -->
                 <!-- -活動內容 -->
                 <div class="sm:col-span-2">
                   <label for="description" class="block mb-2 text-base font-medium text-gray-900 dark:text-white">活動內容：</label>
                   <textarea
+                    v-model="form.description"
                     id="description"
                     rows="8"
-                    class="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-lightpink sm:text-md focus:ring-pink-500 focus:border-pink-500" 
+                    class="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-lightpink sm:text-md focus:ring-pink-500 focus:border-pink-500"
                     placeholder="Your description here"></textarea>
                 </div>
-                
               </div>
               <div class="flex justify-center py-4">
                 <button
@@ -369,13 +433,86 @@
   </div>
 </template>
 <script setup>
-import { reactive, ref } from 'vue'
-import { api } from '@/plugins/axios'
+import { reactive, ref, onMounted } from 'vue'
+import { apiAuth, api } from '@/plugins/axios'
 import Swal from 'sweetalert2'
-import Input from '../../components/TheInput.vue'
+import Input from '../../components/Inputpink.vue'
 
+import DateRangePicker from 'flowbite-datepicker/DateRangePicker'
 const step = ref(1)
 const rentals = reactive([])
+
+const categorys = ['一般團體', '藝文團體', '其他']
+const Rentals = ['玻璃貨櫃屋(2層樓)', 'AZ劇場', '展覽會館', '其他']
+const visites = ['不開放', '自由入場', '索票/邀請函', '售票', '其他']
+
+const activities = [
+  '座談會/研討會/研習/講座/論壇',
+  '記者會/發表會',
+  '同人/社團活動',
+  '藝術/文化展演活動',
+  '消費者體驗活動',
+  '演唱會/簽名會',
+  '個展/畢展',
+  '影片/平面拍攝',
+  '園遊會/家庭日/市集',
+  '其他'
+]
+
+
+const form = reactive({
+  _id: '',
+  name: '',
+  unit: '',
+  email: '',
+  time: '',
+  date: '',
+  phone: '',
+  adresse: '',
+  category: '',
+  rental: '',
+  visite: '',
+  activity: '',
+  uniform: '',
+  dateStart: '',
+  dateEnd: '',
+  mainname: '',
+  description: ''
+})
+
+const rentalForm = async () => {
+  try {
+    await apiAuth.post('/rentalorders', form)
+    Swal.fire({
+      icon: 'success',
+      title: '成功',
+      text: '表單已送出'
+    })
+    form.name = ''
+    form.unit = ''
+    form.email = ''
+    form.date = ''
+    form.phone = ''
+    form.adresse = ''
+    form.category = ''
+    form.rental = ''
+    form.visite = ''
+    form.activity = ''
+    form.uniform = ''
+    form.dateStart = ''
+    form.dateEnd = ''
+    form.mainname = ''
+    form.description = ''
+  } catch (error) {
+    console.log(error)
+    Swal.fire({
+      icon: 'error',
+      title: '失敗',
+      text: error?.response?.data?.message || '發生錯誤'
+    })
+  }
+}
+
 ;(async () => {
   try {
     // !資料要解構 data:新名字

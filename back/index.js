@@ -9,6 +9,7 @@ import storeRoute from './routes/stories.js'
 import contectRoute from './routes/contect.js'
 import productsRoute from './routes/products.js'
 import orderRoute from './routes/orders.js'
+import rentalordersRoute from './routes/rentalorders.js'
 
 import './passport/passport.js'
 
@@ -51,6 +52,7 @@ app.use('/rentals', rentalsRoute)
 app.use('/contect', contectRoute)
 app.use('/products', productsRoute)
 app.use('/orders', orderRoute)
+app.use('/rentalorders', rentalordersRoute)
 
 app.get('/', (req, res) => {
   res.status(200).json({ success: true, message: '' })
