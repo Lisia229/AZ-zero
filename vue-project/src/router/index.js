@@ -298,13 +298,14 @@ const router = createRouter({
 
 router.afterEach((to, from) => {
   document.title = to.meta.title
+  window.scrollTo(0, 0)
 })
 
 router.beforeEach(async (to, from, next) => {
   const user = useUserStore()
-  if(user.isLogin && (to.path === '/register' || to.path === '/login')){
+  if (user.isLogin && (to.path === '/register' || to.path === '/login')) {
     next('/')
-  } else if (to.meta.login && !user.isLogin){
+  } else if (to.meta.login && !user.isLogin) {
     next('/')
   } else {
     next()

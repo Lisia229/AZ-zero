@@ -24,7 +24,7 @@
         </div>
       </div>
     </section> -->
-    <section id="section02" class="bg-whiteF dark:bg-gray-900">
+    <section id="section02" class="bg-whiteF dark:bg-gray-900 xl:pt-5 2xl:pt-10">
       <hr class="h-px my-4 bg-gray-500 border-0 dark:bg-gray-700" />
       <div class="row-auto items-center justify-between align-middle flex max-w-screen-xl px-4 py-4 mx-auto lg:gap-8 xl:gap-0 lg:py-4 lg:cols-12">
         <div class="col">

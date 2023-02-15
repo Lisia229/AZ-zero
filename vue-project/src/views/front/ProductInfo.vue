@@ -146,8 +146,8 @@ const productinfo = reactive({
   category: ''
 })
 
-const submitCart = () => {
-  editCart({ _id: productinfo._id, quantity: quantity.value })
+const submitCart = async () => {
+  await editCart({ p_id: productinfo._id, quantity: parseInt(quantity.value) })
 }
 
 ;(async () => {

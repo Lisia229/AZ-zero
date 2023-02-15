@@ -85,11 +85,9 @@
             <td class="px-6 text-gray-700 py-4 whitespace-pre">
               <button
                 type="button"
-                class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blueB rounded-lg border-[1px] border-blueB hover:text-blueB hover:bg-white focus:ring-4 focus:outline-none focus:ring-blue-300"
-                @click="addBtn(form)">
+                class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blueB rounded-lg border-[1px] border-blueB hover:text-blueB hover:bg-white focus:ring-4 focus:outline-none focus:ring-blue-300">
                 看完整資料
               </button>
-
             </td>
             <td class="px-6 py-4">
               <div class="flex">
@@ -156,20 +154,12 @@
 import { apiAuth } from '@/plugins/axios'
 import { reactive, computed, ref, onMounted } from 'vue'
 import Swal from 'sweetalert2'
-import { Modal } from 'flowbite'
 
 const rentalforms = reactive([])
 
 // !ref 不會深層監聽
 // !reactive 會深層監聽， reactive 只接受 Object 跟 Array
 
-const addBtn = () => {
-  modal.show()
-}
-let modal = null
-onMounted(() => {
-  modal = new Modal(document.getElementById('orderform'))
-})
 // -搜尋
 const searchValue = ref('')
 

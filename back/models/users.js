@@ -3,11 +3,18 @@ import validator from 'validator'
 import bcrypt from 'bcrypt'
 
 const cartSchema = new Schema({
-  // -購物車
-  p_id: {
+  data: {
     type: ObjectId,
-    ref: 'products',
-    required: [true, '缺少商品']
+    refPath: 'dataModel',
+    required: [true, '缺少 ID']
+  },
+  dataModel: {
+    type: String,
+    required: [true, '缺少關聯'],
+    enum: {
+      values: ['products', 'exhibitions'],
+      message: '關聯錯誤'
+    }
   },
   quantity: {
     type: Number,
@@ -15,48 +22,51 @@ const cartSchema = new Schema({
   }
 })
 
-const schema = new Schema({
-  account: {
-    type: String,
-    required: [true, '缺少帳號'],
-    minlength: [3, '帳號太短'],
-    maxlength: [20, '帳號太長'],
-    unique: true,
-    match: [/^[A-Za-z0-9]+$/, '帳號格式錯誤']
-  },
-  password: {
-    type: String,
-    required: true
-  },
-  email: {
-    type: String,
-    required: [true, '缺少信箱'],
-    unique: true,
-    validate: {
-      validator (email) {
-        return validator.isEmail(email)
-      },
-      message: '信箱格式錯誤'
+const schema = new Schema(
+  {
+    account: {
+      type: String,
+      required: [true, '缺少帳號'],
+      minlength: [3, '帳號太短'],
+      maxlength: [20, '帳號太長'],
+      unique: true,
+      match: [/^[A-Za-z0-9]+$/, '帳號格式錯誤']
+    },
+    password: {
+      type: String,
+      required: true
+    },
+    email: {
+      type: String,
+      required: [true, '缺少信箱'],
+      unique: true,
+      validate: {
+        validator(email) {
+          return validator.isEmail(email)
+        },
+        message: '信箱格式錯誤'
+      }
+    },
+    tokens: {
+      type: [String],
+      default: []
+    },
+    cart: {
+      type: [cartSchema],
+      default: []
+    },
+    image: {
+      type: String
+    },
+    role: {
+      type: Number,
+      // 0 = 使用者
+      // 1 = 管理員
+      default: 0
     }
   },
-  tokens: {
-    type: [String],
-    default: []
-  },
-  cart: {
-    type: [cartSchema],
-    default: []
-  },
-  image: {
-    type: String
-  },
-  role: {
-    type: Number,
-    // 0 = 使用者
-    // 1 = 管理員
-    default: 0
-  }
-}, { versionKey: false })
+  { versionKey: false }
+)
 
 schema.pre('save', function (next) {
   const user = this

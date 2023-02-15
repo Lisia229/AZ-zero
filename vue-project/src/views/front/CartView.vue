@@ -89,7 +89,13 @@
           </p>
         </div>
         <div class="w-full py-4">
-          <button class="w-40 text-center px-3 py-2 bg-blueB border-[1px] border-blueB hover:bg-white hover:text-blueB text-white" type="button" :disable="!canCheckout" @click="onCheckoutBtnClick">結帳</button>
+          <button
+            class="w-40 text-center px-3 py-2 bg-blueB border-[1px] border-blueB hover:bg-white hover:text-blueB text-white"
+            type="button"
+            :disable="!canCheckout"
+            @click="onCheckoutBtnClick">
+            結帳
+          </button>
         </div>
       </div>
     </div>
@@ -124,7 +130,7 @@ const onCheckoutBtnClick = async () => {
 
 const totalPrice = computed(() => {
   return cart.reduce((total, current) => {
-    return total + current.p_id.price * current.quantity
+    return total + current.p_id.price * current.quantity + current.e_id.price * current.quantity
   }, 0)
 })
 
@@ -140,6 +146,7 @@ const canCheckout = computed(() => {
 ;(async () => {
   try {
     const { data } = await apiAuth.get('/users/cart')
+    console.log(data.result)
     cart.push(...data.result)
   } catch (error) {
     Swal.fire({

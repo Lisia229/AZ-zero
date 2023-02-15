@@ -21,8 +21,8 @@
             <br />
           </p>
         </div>
-        <img data-aos="fade-right" data-aos-duration="1500" data-aos-delay="1000" class="hidden z-10 absolute lg:block top-0 left-0" src="../../assets/logo/01.png" />
-        <img data-aos="fade-right" data-aos-duration="1500" data-aos-delay="1000" class="z-20 hidden absolute lg:block top-[-10%] left-[35%]" src="../../assets/logo/circle.png" />
+        <img data-aos="fade-right" data-aos-duration="1500" data-aos-delay="1000" class="hidden z-10 2xl:top-[50%] 2xl:left-[30%] absolute lg:block top-0 left-0" src="../../assets/logo/01.png" />
+        <img data-aos="fade-right" data-aos-duration="1500" data-aos-delay="1000" class="z-20 hidden 2xl:top-[3%] 2xl:left-[50%] absolute lg:block top-[-10%] left-[35%]" src="../../assets/logo/circle.png" />
       </div>
       <div class="relative w-full lg:w-1/2 lg:py-16 lg:px-16 py-8 px-4 mx-auto max-w-screen-md">
         <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-center text-black">Contact Us</h2>

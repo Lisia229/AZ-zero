@@ -37,15 +37,15 @@
     </section>
     <hr class="h-px my-4 lg:flex lg:bg-gray-500 lg:border-0 dark:bg-gray-700" />
     <section id="section03" class="bg-whiteF dark:bg-gray-900 w-full">
-      <div class="w-full grid max-w-screen-xl px-4 py-4 mx-auto md:grid-cols-6 lg:gap-8 xl:gap-0 lg:py-8 lg:grid-cols-2">
+      <div class="w-full ">
         <!-- -exhibition show -->
-        <div class="md:flex md:col-span-12 items-center mx-auto lg:mt-0 lg:col-span-12 lg:grid">
-          <div class="md:grid md:grid-cols-2 lg:grid-cols-3 items-center justify-center align-middle max-w-screen-xl px-4 py-4 mx-auto lg:gap-8 xl:gap-0 lg:py-4">
-            <div id="Pagenavigationexample" class="border-b-[1px] border-gray-300 py-5 mx-2" v-for="(exhibition_big, index) in filterData" :key="exhibition_big._id">
-              <ExhibitionCard @click="info(exhibition_big._id)" v-bind="exhibition_big"></ExhibitionCard>
-            </div>
+        <!-- <div class="md:flex md:col-span-12 items-center mx-auto lg:mt-0 lg:col-span-12 lg:grid"> -->
+        <div class="md:grid md:grid-cols-2 lg:grid-cols-3 items-center justify-center align-middle max-w-screen-xl px-4 py-4 mx-auto lg:gap-8 xl:gap-0 lg:py-4">
+          <div id="Pagenavigationexample" class="border-b-[1px] border-gray-300 py-5 mx-2" v-for="(exhibition_big, index) in filterData" :key="exhibition_big._id">
+            <ExhibitionCard @click="info(exhibition_big._id)" v-bind="exhibition_big"></ExhibitionCard>
           </div>
         </div>
+        <!-- </div> -->
       </div>
 
       <nav class="grid items-center justify-center px-4 py-4 mx-auto" aria-label="Pagenavigationexample">

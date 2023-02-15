@@ -20,14 +20,6 @@ export const useUserStore = defineStore(
     const isAdmin = computed(() => {
       return role.value === 1
     })
-    // const image = computed(() => {
-    //   if(image===''){
-    //     return `https://source.boringavatars.com/beam/256/${account.value}?colors=ffabab,ffdaab,ddffab,abe4ff,d9abff`
-    //   } else {
-    //     return 
-    //   }
-
-    // })
 
     const login = async form => {
       try {
@@ -85,13 +77,12 @@ export const useUserStore = defineStore(
         cart.value = data.result.cart
         role.value = data.result.role
         image.value = data.result.image || `https://source.boringavatars.com/beam/256/${account.value}?colors=ffabab,ffdaab,ddffab,abe4ff,d9abff`
-        console.log(data.result.image );
       } catch (error) {
         logout()
       }
     }
 
-    const editCart = async ({ _id, quantity }) => {
+    const editCart = async form => {
       if (token.value.length === 0) {
         Swal.fire({
           icon: 'error',
@@ -102,11 +93,11 @@ export const useUserStore = defineStore(
         return
       }
       try {
-        const { data } = await apiAuth.post('/users/cart', { p_id: _id, quantity: parseInt(quantity) })
+        const { data } = await apiAuth.post('/users/cart', form )
         cart.value = data.result
         Swal.fire({
           icon: 'success',
-          title: '成功',
+          title: '成功'
         })
       } catch (error) {
         Swal.fire({
