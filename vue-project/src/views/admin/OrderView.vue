@@ -1,7 +1,7 @@
 <template>
   <div id="Order" class="pt-[70px] pb-16 w-full h-full">
-    <div class="flex justify-center items-center py-8 px-8 text-2xl">
-      <svg class="w-10 h-10 pr-2" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <div class="flex justify-center items-center py-8 px-8 text-3xl">
+      <svg class="w-12 h-12 pr-2" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <path
           stroke-linecap="round"
           stroke-linejoin="round"

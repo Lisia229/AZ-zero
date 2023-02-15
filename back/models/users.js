@@ -5,7 +5,7 @@ import bcrypt from 'bcrypt'
 const cartSchema = new Schema({
   data: {
     type: ObjectId,
-    refPath: 'dataModel',
+    refPath: 'cart.dataModel',
     required: [true, '缺少 ID']
   },
   dataModel: {
@@ -41,7 +41,7 @@ const schema = new Schema(
       required: [true, '缺少信箱'],
       unique: true,
       validate: {
-        validator(email) {
+        validator (email) {
           return validator.isEmail(email)
         },
         message: '信箱格式錯誤'
@@ -63,6 +63,12 @@ const schema = new Schema(
       // 0 = 使用者
       // 1 = 管理員
       default: 0
+    },
+    love: {
+      type: [ObjectId],
+      default: [],
+      ref: 'exhibitions',
+      required: [true, '缺少ID']
     }
   },
   { versionKey: false }

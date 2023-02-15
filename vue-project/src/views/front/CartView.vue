@@ -58,22 +58,22 @@
           </tr>
         </thead>
         <tbody class="text-center">
-          <tr class="my-2" v-for="(product, idx) in cart" :key="product._id" :class="{ 'text-red-500': !product.p_id.sell }">
+          <tr class="my-2" v-for="(item, index) in cart" :key="index">
             <td>
-              <img class="w-full mx-auto" :src="product.p_id.image" />
+              <img class="w-full mx-auto" :src="item.p_id.image" />
             </td>
             <td>
-              {{ product.p_id.name }}
+              {{ item.p_id.name }}
             </td>
-            <td>NT. {{ product.p_id.price }}</td>
+            <td>NT. {{ item.p_id.price }}</td>
             <td>
               <button type="button" @click="updateCart(idx, -1)">-</button>
-              &nbsp; {{ product.quantity }} &nbsp;
+              &nbsp; {{ item.p_id.quantity }} &nbsp;
               <button type="button" @click="updateCart(idx, 1)">+</button>
             </td>
-            <td>NT. {{ product.quantity * product.p_id.price }}</td>
+            <td>NT. {{ item.p_id.price * item.quantity + item.e_id.price * item.quantity }}</td>
             <td>
-              <button type="button" @click="updateCart(idx, product.quantity * -1)">刪除</button>
+              <button type="button" @click="updateCart(idx, item.p_id.quantity * -1)">刪除</button>
             </td>
           </tr>
           <tr v-if="cart.length === 0">
@@ -92,7 +92,7 @@
           <button
             class="w-40 text-center px-3 py-2 bg-blueB border-[1px] border-blueB hover:bg-white hover:text-blueB text-white"
             type="button"
-            :disable="!canCheckout"
+            :disabled="!canCheckout"
             @click="onCheckoutBtnClick">
             結帳
           </button>
@@ -116,7 +116,7 @@ const { editCart, checkout } = user
 const cart = reactive([])
 
 const updateCart = async (idx, quantity) => {
-  await editCart({ _id: cart[idx].p_id._id, quantity })
+  await editCart(form)
   cart[idx].quantity += quantity
   if (cart[idx].quantity <= 0) {
     cart.splice(idx, 1)
@@ -146,7 +146,6 @@ const canCheckout = computed(() => {
 ;(async () => {
   try {
     const { data } = await apiAuth.get('/users/cart')
-    console.log(data.result)
     cart.push(...data.result)
   } catch (error) {
     Swal.fire({

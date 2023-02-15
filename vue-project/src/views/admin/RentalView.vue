@@ -1,5 +1,14 @@
 <template>
   <div id="admin-rental">
+    <div class="flex justify-center items-center py-8 px-8 text-3xl">
+      <svg class="w-12 h-12 pr-2" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M2.25 7.125C2.25 6.504 2.754 6 3.375 6h6c.621 0 1.125.504 1.125 1.125v3.75c0 .621-.504 1.125-1.125 1.125h-6a1.125 1.125 0 01-1.125-1.125v-3.75zM14.25 8.625c0-.621.504-1.125 1.125-1.125h5.25c.621 0 1.125.504 1.125 1.125v8.25c0 .621-.504 1.125-1.125 1.125h-5.25a1.125 1.125 0 01-1.125-1.125v-8.25zM3.75 16.125c0-.621.504-1.125 1.125-1.125h5.25c.621 0 1.125.504 1.125 1.125v2.25c0 .621-.504 1.125-1.125 1.125h-5.25a1.125 1.125 0 01-1.125-1.125v-2.25z"></path>
+      </svg>
+      <div>場地管理</div>
+    </div>
     <button
       type="button"
       class="text-white bg-blueB hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 focus:outline-none"
@@ -145,7 +154,7 @@
                       v-if="form.images.length >= 1"
                       type="button"
                       @click="form.images.pop()"
-                      class="inline-flex border shadow border-pinkP text-pinkP items-center mx-3 px-7 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center rounded-lg focus:ring-4 focus:ring-pink-200 hover:bg-pinkP hover:text-white ">
+                      class="inline-flex border shadow border-pinkP text-pinkP items-center mx-3 px-7 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center rounded-lg focus:ring-4 focus:ring-pink-200 hover:bg-pinkP hover:text-white">
                       DELETE
                     </button>
                     <button
@@ -156,10 +165,9 @@
                           image: ''
                         })
                       "
-                      class="inline-flex border shadow border-blueB text-blueB items-center mx-3 px-7 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center hover:bg-blueB hover:text-white rounded-lg focus:ring-4 focus:ring-blue-200 ">
+                      class="inline-flex border shadow border-blueB text-blueB items-center mx-3 px-7 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center hover:bg-blueB hover:text-white rounded-lg focus:ring-4 focus:ring-blue-200">
                       ADD
                     </button>
-
                   </div>
                 </div>
               </div>

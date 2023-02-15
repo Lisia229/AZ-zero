@@ -164,18 +164,7 @@ export const editCart = async (req, res) => {
 
 export const getCart = async (req, res) => {
   try {
-    const result = await users.findById(req.user._id, 'cart').populate({
-      path: 'cart.data',
-      populate: {
-        path: 'someFieldInProductOrExhibitionModel',
-        options: {
-          refPath: 'cart.dataModel'
-        },
-        model: function (doc) {
-          return doc.dataModel === 'products' ? 'products' : 'exhibitions'
-        }
-      }
-    })
+    const result = await users.findById(req.user._id, 'cart').populate('cart.data')
 
     console.log(result)
     res.status(200).json({ success: true, message: '', result: result.cart })
@@ -246,6 +235,37 @@ export const getAllUser = async (req, res) => {
       result
     })
   } catch (error) {
+    res.status(500).json({ success: false, message: '未知錯誤' })
+  }
+}
+
+export const editLove = async (req, res) => {
+  try {
+    const idx = req.user.love.findIndex(favorite => favorite.toString() === req.body.p_id)
+    if (idx > -1) {
+      if (req.body.love === false) {
+        req.user.love.splice(idx, 1)
+      }
+    } else if (req.body.love === true) {
+      req.user.love.push(req.body.p_id)
+    }
+    await req.user.save()
+    res.status(200).json({ success: true, message: '', result: req.body.love })
+  } catch (error) {
+    if (error.name === 'ValidationError') {
+      res.status(400).json({ success: false, message: error.errors[Object.keys(error.errors)[0]].message })
+    } else {
+      res.status(500).json({ success: false, message: '未知錯誤' })
+    }
+  }
+}
+
+export const getLove = async (req, res) => {
+  try {
+    const result = await users.findById(req.user._id, 'love').populate('love')
+    res.status(200).json({ success: true, message: '', result: result.love })
+  } catch (error) {
+    console.log(error)
     res.status(500).json({ success: false, message: '未知錯誤' })
   }
 }

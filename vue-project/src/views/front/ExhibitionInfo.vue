@@ -1,12 +1,50 @@
 <template>
   <div id="exhibitionInfo">
-    <section class="py-8">
+    <!-- -navbar -->
+    <nav class="px-4 py-4 lg:pb-6 lg:py-10 w-full z-10 bg-white fixed" aria-label="Breadcrumb">
+      <ol class="inline-flex items-center space-x-1 md:space-x-3">
+        <li class="inline-flex items-center">
+          <router-link to="/" class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-pinkP">
+            <svg aria-hidden="true" class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path>
+            </svg>
+            Home
+          </router-link>
+        </li>
+        <li>
+          <div class="flex items-center">
+            <svg aria-hidden="true" class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+              <path
+                fill-rule="evenodd"
+                d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                clip-rule="evenodd"></path>
+            </svg>
+            <router-link to="/exhibition" class="ml-1 text-sm font-medium text-gray-700 hover:text-pinkP md:ml-2 dark:text-gray-400 dark:hover:text-white">
+              展覽
+            </router-link>
+          </div>
+        </li>
+        <li aria-current="page">
+          <div class="flex items-center">
+            <svg aria-hidden="true" class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+              <path
+                fill-rule="evenodd"
+                d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                clip-rule="evenodd"></path>
+            </svg>
+            <span class="ml-1 text-sm font-medium text-gray-500 md:ml-2 dark:text-gray-400">展覽資訊</span>
+          </div>
+        </li>
+      </ol>
+    </nav>
+    <section class="py-20">
       <div class="px-4 flex-column justify-center items-center">
         <div class="flex flex-wrap">
           <div class="hidden mx-auto lg:block lg:w-[30%] py-4 px-8">
             <div>
               <div class="pb-4">
-                <button type="button">
+                <button @click="submitLove" type="button">
                   <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                     <path
                       stroke-linecap="round"
@@ -171,9 +209,9 @@ import router from '../../router'
 import { useUserStore } from '@/stores/users'
 
 const route = useRoute()
-
+const love = ref(false)
 const user = useUserStore()
-const { editCart } = user
+const { editCart, editLove } = user
 
 const quantity = ref(1)
 
@@ -192,6 +230,10 @@ const exhibitioninfo = reactive({
 
 const submitCart = async () => {
   await editCart({ e_id: exhibitioninfo._id, quantity: parseInt(quantity.value) })
+}
+
+const submitLove = async () => {
+  await editLove({ _id: exhibitioninfo._id })
 }
 
 ;(async () => {

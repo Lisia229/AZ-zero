@@ -130,7 +130,7 @@ AOS.init()
 const route = useRoute()
 
 const user = useUserStore()
-const { editCart, editLove } = user
+const { editCart } = user
 
 const quantity = ref(1)
 

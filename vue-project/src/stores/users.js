@@ -93,13 +93,41 @@ export const useUserStore = defineStore(
         return
       }
       try {
-        const { data } = await apiAuth.post('/users/cart', form )
+        const { data } = await apiAuth.post('/users/cart', form)
         cart.value = data.result
         Swal.fire({
           icon: 'success',
           title: '成功'
         })
       } catch (error) {
+        Swal.fire({
+          icon: 'error',
+          title: '失敗',
+          text: error?.response?.data?.message || '發生錯誤'
+        })
+      }
+    }
+
+    const editLove = async ({ _id }) => {
+      if (token.value.length === 0) {
+        Swal.fire({
+          icon: 'error',
+          title: '失敗',
+          text: '請先登入'
+        })
+        router.push('/login')
+        return
+      }
+      try {
+        const { data } = await apiAuth.post('/users/love', { p_id: _id })
+        love.value = data.result
+        Swal.fire({
+          icon: 'success',
+          title: '成功',
+          text: '加入成功'
+        })
+      } catch (error) {
+        console.log(error)
         Swal.fire({
           icon: 'error',
           title: '失敗',
@@ -139,6 +167,7 @@ export const useUserStore = defineStore(
       isAdmin,
       image,
       editCart,
+      editLove,
       checkout
     }
   },

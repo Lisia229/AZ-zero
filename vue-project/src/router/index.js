@@ -139,7 +139,7 @@ const router = createRouter({
         {
           path: '',
           name: 'admin-home',
-          component: () => import('@/views/admin/HomeView.vue'),
+          component: () => import('@/views/admin/SettingsView.vue'),
           meta: {
             title: '管理 | 首頁',
             login: true,
