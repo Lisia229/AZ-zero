@@ -1,6 +1,6 @@
 <template>
-  <div id="rentalmore">
-    <nav class="sm:px-4 py-6" aria-label="Breadcrumb">
+  <div id="rentalmore" class="pt-[100px]">
+    <nav class="px-4 py-8 lg:py-16" aria-label="Breadcrumb">
       <ol class="inline-flex items-center space-x-1 md:space-x-3">
         <li class="inline-flex items-center">
           <router-link to="/" class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-pinkP">

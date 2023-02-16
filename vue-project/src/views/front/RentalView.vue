@@ -1,6 +1,6 @@
 <template>
   <div id="rentalView" class="relative w-full h-full flex flex-wrap justify-center items-center">
-    <h1 class="text-xl lg:text-4xl">- AZ園區場地介紹 -</h1>
+    <h1 class="text-xl lg:text-4xl py-8">- AZ園區場地介紹 -</h1>
     <img class="w-full px-4 py-4" src="../../assets/image/14.jpg" />
     <a href="#" class="hidden lg:block cursor-none px-4 bottom-[200px] right-[400px] py-2 absolute bg-black text-white rounded-3xl">停車場</a>
     <a href="#" class="hidden lg:block cursor-none px-4 top-[250px] right-[100px] py-2 absolute bg-black text-white rounded-3xl">園區入口</a>

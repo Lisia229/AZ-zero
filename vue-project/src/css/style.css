@@ -81,7 +81,6 @@ body {
   padding-top: 100px;
 }
 
-#frontHome,
 #storeView,
 #ProductView {
   padding-top: 70px;
@@ -180,9 +179,14 @@ input::-webkit-inner-spin-button {
 }
 
 #swiperhome {
-  width: 100vw;
-  height: 95vh;
-  padding-top: 75px;
+  width: 100%;
+  height: 100%;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+  color: #fff;
+  z-index: 1000;
 }
 
 #addproducts,

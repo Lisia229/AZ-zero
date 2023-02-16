@@ -1,6 +1,6 @@
 <template>
   <div class="gap-8 justify-center items-center py-8 px-4 mx-auto max-w-screen-xl xl:gap-16 md:grid md:grid-cols-2 sm:py-16 lg:px-6">
-    <img class="w-full dark:hidden" :src="image" alt="image" />
+    <img class="w-full lg:w-[600px] lg:h-[450px] dark:hidden" :src="image" alt="image" />
     <div class="mt-4 md:mt-0">
       <h2 class="mb-4 text-4xl tracking-normal font-extrabold text-gray-900 dark:text-white">{{ name }}</h2>
       <p class="mb-6 text-xl text-gray-500">
@@ -8,7 +8,7 @@
       </p>
       <button
         type="button"
-        class="hover:text-white border border-gray-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-gray-600 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-800">
+        class="hover:text-white text-blueB border border-blueB hover:bg-blueB focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium text-sm px-5 py-2.5 text-center mr-2 mb-2">
         MORE
       </button>
     </div>
