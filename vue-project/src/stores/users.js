@@ -13,6 +13,7 @@ export const useUserStore = defineStore(
     const image = ref('')
     const cart = ref(0)
     const role = ref(0)
+    const love = ref([])
 
     const isLogin = computed(() => {
       return token.value.length > 0
@@ -108,7 +109,7 @@ export const useUserStore = defineStore(
       }
     }
 
-    const editLove = async ({ _id }) => {
+    const editLove = async id => {
       if (token.value.length === 0) {
         Swal.fire({
           icon: 'error',
@@ -119,13 +120,24 @@ export const useUserStore = defineStore(
         return
       }
       try {
-        const { data } = await apiAuth.post('/users/love', { p_id: _id })
-        love.value = data.result
-        Swal.fire({
-          icon: 'success',
-          title: '成功',
-          text: '加入成功'
-        })
+        const { data } = await apiAuth.post('/users/love', id)
+
+        const index = love.value.findIndex(item => item === data.result)
+        if (index === -1) {
+          love.value.push(data.result)
+          Swal.fire({
+            icon: 'success',
+            title: '加入我的最愛',
+            text: '成功'
+          })
+        } else {
+          love.value.splice(index, 1)
+          Swal.fire({
+            icon: 'success',
+            title: '移除我的最愛',
+            text: '成功'
+          })
+        }
       } catch (error) {
         console.log(error)
         Swal.fire({
@@ -166,6 +178,7 @@ export const useUserStore = defineStore(
       isLogin,
       isAdmin,
       image,
+      love,
       editCart,
       editLove,
       checkout

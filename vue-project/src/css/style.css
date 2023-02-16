@@ -26,6 +26,16 @@ body {
   margin: auto;
 }
 
+#mySwipwe .swiper-pagination-bullet-active {
+  opacity: var(--swiper-pagination-bullet-opacity, 1);
+  background: #f196a7;
+}
+
+#ExhibitionSwipwer .swiper-pagination-bullet-active {
+  opacity: var(--swiper-pagination-bullet-opacity, 1);
+  background: #f196a7;
+}
+
 #homeBigImg {
   border-radius: 10px;
 }
@@ -77,8 +87,8 @@ body {
   padding-top: 70px;
 }
 
-#CartView{
-  padding-top: 100px
+#CartView {
+  padding-top: 100px;
 }
 
 #productInfo,
@@ -98,7 +108,7 @@ input::-webkit-inner-spin-button {
 
 #exhibitionInfo,
 #storeinfo {
-  width: 100vw;
+  width: 100%;
   padding-top: 70px;
 }
 
@@ -191,6 +201,14 @@ input::-webkit-inner-spin-button {
   transform: translate(-50%);
 }
 
+#rentalformm {
+  width: 90%;
+  top: 2%;
+  left: 50%;
+  transform: translate(-50%);
+}
+
+#rentalform,
 #productsform,
 #exhibitionform,
 #rentalsform,

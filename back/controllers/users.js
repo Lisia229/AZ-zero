@@ -120,7 +120,10 @@ export const editCart = async (req, res) => {
       }
     }
     if (req.body.e_id) {
-      const eidx = req.user.cart.findIndex(cart => cart.c_id.toString() === req.body.e_id)
+      const eidx = req.user.cart.findIndex(cart => {
+        console.log(cart)
+        return cart.data.toString() === req.body.e_id
+      })
 
       if (eidx > -1) {
         // !如果有，檢查新數量是多少
@@ -241,17 +244,37 @@ export const getAllUser = async (req, res) => {
 
 export const editLove = async (req, res) => {
   try {
-    const idx = req.user.love.findIndex(favorite => favorite.toString() === req.body.p_id)
-    if (idx > -1) {
-      if (req.body.love === false) {
-        req.user.love.splice(idx, 1)
+    console.log(req.body)
+    if (req.body.e_id) {
+      const eIdx = req.user.love.findIndex(love => love.data.toString() === req.body.e_id)
+      if (eIdx === -1) {
+        req.user.love.push({
+          data: req.body.e_id,
+          dataModel: 'exhibitions'
+        })
+      } else {
+        req.user.love.splice(eIdx, 1)
       }
-    } else if (req.body.love === true) {
-      req.user.love.push(req.body.p_id)
+
+      await req.user.save()
+      res.status(200).json({ success: true, message: '', result: req.body.e_id })
     }
-    await req.user.save()
-    res.status(200).json({ success: true, message: '', result: req.body.love })
+
+    if (req.body.p_id) {
+      const Idx = req.user.love.findIndex(love => love.data.toString() === req.body.p_id)
+      if (Idx === -1) {
+        req.user.love.push({
+          data: req.body.p_id,
+          dataModel: 'products'
+        })
+      } else {
+        req.user.love.splice(Idx, 1)
+      }
+      await req.user.save()
+      res.status(200).json({ success: true, message: '', result: req.body.p_id })
+    }
   } catch (error) {
+    console.log(error)
     if (error.name === 'ValidationError') {
       res.status(400).json({ success: false, message: error.errors[Object.keys(error.errors)[0]].message })
     } else {

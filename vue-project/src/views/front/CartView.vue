@@ -60,20 +60,20 @@
         <tbody class="text-center">
           <tr class="my-2" v-for="(item, index) in cart" :key="index">
             <td>
-              <img class="w-full mx-auto" :src="item.p_id.image" />
+              <img class="w-full mx-auto" :src="item.data.image" />
             </td>
             <td>
-              {{ item.p_id.name }}
+              {{ item.data.name }}
             </td>
-            <td>NT. {{ item.p_id.price }}</td>
+            <td>NT. {{ item.data.price }}</td>
             <td>
-              <button type="button" @click="updateCart(idx, -1)">-</button>
-              &nbsp; {{ item.p_id.quantity }} &nbsp;
-              <button type="button" @click="updateCart(idx, 1)">+</button>
+              <button type="button" @click="updateCart(index, -1)">-</button>
+              &nbsp; {{ item.quantity }} &nbsp;
+              <button type="button" @click="updateCart(index, 1)">+</button>
             </td>
-            <td>NT. {{ item.p_id.price * item.quantity + item.e_id.price * item.quantity }}</td>
+            <td>NT. {{ item.data.price * item.quantity }}</td>
             <td>
-              <button type="button" @click="updateCart(idx, item.p_id.quantity * -1)">刪除</button>
+              <button type="button" @click="updateCart(index, item.quantity * -1)">刪除</button>
             </td>
           </tr>
           <tr v-if="cart.length === 0">
@@ -115,11 +115,26 @@ const { editCart, checkout } = user
 
 const cart = reactive([])
 
-const updateCart = async (idx, quantity) => {
-  await editCart(form)
-  cart[idx].quantity += quantity
-  if (cart[idx].quantity <= 0) {
-    cart.splice(idx, 1)
+const updateCart = async (index, quantity) => {
+  console.log(cart[index].dataModel)
+  //exhibitions
+  //products
+  const sumbitData = {
+    quantity
+  }
+
+  if (cart[index].dataModel === 'exhibitions') {
+    sumbitData.e_id = cart[index].data._id
+  } else if (cart[index].dataModel === 'products') {
+    sumbitData.p_id = cart[index].data._id
+  }
+
+  console.log(sumbitData)
+
+  await editCart(sumbitData)
+  cart[index].quantity += quantity
+  if (cart[index].quantity <= 0) {
+    cart.splice(index, 1)
   }
 }
 
@@ -130,15 +145,16 @@ const onCheckoutBtnClick = async () => {
 
 const totalPrice = computed(() => {
   return cart.reduce((total, current) => {
-    return total + current.p_id.price * current.quantity + current.e_id.price * current.quantity
+    return total + current.data.price * current.quantity
   }, 0)
 })
 
 const canCheckout = computed(() => {
+  console.log(data._id.sell)
   return (
     cart.length > 0 &&
-    !cart.some(product => {
-      return !product.p_id.sell
+    !cart.some(data => {
+      return !data._id.sell
     })
   )
 })

@@ -2,9 +2,9 @@
   <a class="cursor-pointer">
     <p class="mb-2 text-xl whitespace-nowrap font-bold tracking-normal text-gray-900 dark:text-white">{{ name }}</p>
     <div class="lg:w-full relative mx-auto">
-      <img class="mt-4 md:w-full md:h-48 lg:w-3/4 lg:h-48 rounded-lg mx-auto" :src="image" />
+      <img class="mt-4 object-cover md:w-full md:h-56 lg:w-full lg:h-60 mx-auto" :src="image" />
       <div class="p-5 row-auto items-center justify-between align-middle flex max-w-screen-xl px-4 py-4 mx-auto lg:gap-8 xl:gap-0 lg:py-4 lg:cols-2">
-        <span class="mb-2 whitespace-nowrap lg:text-xl text-sm font-bold tracking-tight text-gray-900 dark:text-white">
+        <span class="mb-2 whitespace-nowrap lg:text-xl text-lg font-bold tracking-tight text-gray-900 dark:text-white">
           {{ new Date(dateStart).toLocaleDateString() }} ~ {{ new Date(dateEnd).toLocaleDateString() }}
           <br />
           {{ place }}

@@ -1,31 +1,11 @@
-<script>
-import { Swiper, SwiperSlide } from 'swiper/vue'
-
-// Import Swiper styles
-import 'swiper/css'
-
-import { Autoplay } from 'swiper'
-export default {
-  components: {
-    Swiper,
-    SwiperSlide
-  },
-  setup() {
-    return {
-      modules: [Autoplay]
-    }
-  }
-}
-</script>
 <template>
   <swiper
     :spaceBetween="30"
     :centeredSlides="true"
     :autoplay="{
-      delay: 1000,
+      delay: 2500,
       disableOnInteraction: false
     }"
-    :navigation="false"
     :modules="modules"
     class="mySwiper">
     <swiper-slide v-for="image in images">
@@ -36,6 +16,11 @@ export default {
 <script setup>
 import { useUserStore } from '@/stores/users'
 // Import Swiper Vue.js components
+import { Swiper, SwiperSlide } from 'swiper/vue'
+import { Autoplay } from 'swiper'
+import 'swiper/css'
+
+const modules = [Autoplay]
 
 defineProps({
   image: {

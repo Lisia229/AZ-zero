@@ -1,5 +1,5 @@
 <template>
-  <div id="exhibitionInfo">
+  <div id="exhibitionInfo" class="overflow-x-hidden">
     <!-- -navbar -->
     <nav class="px-4 py-4 lg:pb-6 lg:py-10 w-full z-10 bg-white fixed" aria-label="Breadcrumb">
       <ol class="inline-flex items-center space-x-1 md:space-x-3">
@@ -38,18 +38,24 @@
         </li>
       </ol>
     </nav>
-    <section class="py-20">
-      <div class="px-4 flex-column justify-center items-center">
+    <section class="py-20 w-full">
+      <div class="w-full flex-column justify-center items-center">
         <div class="flex flex-wrap">
           <div class="hidden mx-auto lg:block lg:w-[30%] py-4 px-8">
             <div>
               <div class="pb-4">
-                <button @click="submitLove" type="button">
+                <button v-if="!activeLove" @click="submitLove" type="button">
                   <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                     <path
                       stroke-linecap="round"
                       stroke-linejoin="round"
                       d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"></path>
+                  </svg>
+                </button>
+                <button v-if="activeLove" @click="submitLove" type="button">
+                  <svg class="w-8 h-8" fill="#F196A7" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path
+                      d="M9.653 16.915l-.005-.003-.019-.01a20.759 20.759 0 01-1.162-.682 22.045 22.045 0 01-2.582-1.9C4.045 12.733 2 10.352 2 7.5a4.5 4.5 0 018-2.828A4.5 4.5 0 0118 7.5c0 2.852-2.044 5.233-3.885 6.82a22.049 22.049 0 01-3.744 2.582l-.019.01-.005.003h-.002a.739.739 0 01-.69.001l-.002-.001z"></path>
                   </svg>
                 </button>
               </div>
@@ -198,22 +204,35 @@
         </div>
       </div>
     </section>
+    <h1 class="px-4 py-4">其他推薦展覽</h1>
+    <swiperexhibitionmore class="w-full py-4"></swiperexhibitionmore>
   </div>
 </template>
 <script setup>
-import { reactive, ref } from 'vue'
+import { storeToRefs } from 'pinia'
+import { reactive, ref, computed, watch } from 'vue'
 import { api } from '@/plugins/axios'
 import Swal from 'sweetalert2'
 import { useRoute } from 'vue-router'
 import router from '../../router'
 import { useUserStore } from '@/stores/users'
+import swiperexhibitionmore from '../../components/swiperexhibitionmore.vue'
 
 const route = useRoute()
-const love = ref(false)
 const user = useUserStore()
 const { editCart, editLove } = user
+const { love } = storeToRefs(user)
 
 const quantity = ref(1)
+
+watch(
+  () => route.params.id,
+  value => {
+    if (value && route.path.includes('/exhibition')) {
+      getProcutData()
+    }
+  }
+)
 
 const exhibitioninfo = reactive({
   _id: '',
@@ -228,15 +247,19 @@ const exhibitioninfo = reactive({
   price: ''
 })
 
+const activeLove = computed(() => {
+  return love.value.includes(exhibitioninfo._id)
+})
+
 const submitCart = async () => {
   await editCart({ e_id: exhibitioninfo._id, quantity: parseInt(quantity.value) })
 }
 
 const submitLove = async () => {
-  await editLove({ _id: exhibitioninfo._id })
+  await editLove({ e_id: exhibitioninfo._id })
 }
 
-;(async () => {
+const getProcutData = async () => {
   try {
     const { data } = await api.get('/exhibitions/' + route.params.id)
     exhibitioninfo._id = data.result._id
@@ -259,5 +282,7 @@ const submitLove = async () => {
     })
     router.go(-1)
   }
-})()
+}
+
+getProcutData()
 </script>

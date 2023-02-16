@@ -28,7 +28,7 @@ const router = useRouter()
       title: '失敗',
       text: error?.response?.data?.message || '發生錯誤'
     })
-    console.log(error);
+    console.log(error)
   }
 })()
 

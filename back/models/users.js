@@ -22,6 +22,22 @@ const cartSchema = new Schema({
   }
 })
 
+const loveSchema = new Schema({
+  data: {
+    type: ObjectId,
+    refPath: 'love.dataModel',
+    required: [true, '缺少 ID']
+  },
+  dataModel: {
+    type: String,
+    required: [true, '缺少關聯'],
+    enum: {
+      values: ['products', 'exhibitions'],
+      message: '關聯錯誤'
+    }
+  }
+})
+
 const schema = new Schema(
   {
     account: {
@@ -41,7 +57,7 @@ const schema = new Schema(
       required: [true, '缺少信箱'],
       unique: true,
       validate: {
-        validator (email) {
+        validator(email) {
           return validator.isEmail(email)
         },
         message: '信箱格式錯誤'
@@ -65,10 +81,8 @@ const schema = new Schema(
       default: 0
     },
     love: {
-      type: [ObjectId],
-      default: [],
-      ref: 'exhibitions',
-      required: [true, '缺少ID']
+      type: [loveSchema],
+      default: []
     }
   },
   { versionKey: false }

@@ -246,7 +246,7 @@
         </li>
         <!-- -會員 收藏 -->
         <li v-if="!isAdmin">
-          <a href="#" class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+          <router-link to="/admin/love" class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
             <svg
               aria-hidden="true"
               width="25px"
@@ -265,7 +265,7 @@
               </g>
             </svg>
             <span class="flex-1 ml-3 whitespace-nowrap">favorite</span>
-          </a>
+          </router-link>
         </li>
         <!-- -管理員 聯絡清單 -->
         <li v-if="isAdmin">

@@ -1,7 +1,7 @@
 <template>
   <a class="cursor-pointer">
     <div class="lg:w-full relative mx-auto">
-      <img class="mt-4 object-cover md:w-full md:h-40 lg:w-full lg:h-72 mx-auto" :src="image" />
+      <img class="mt-4 object-cover md:w-full md:h-56 lg:w-full lg:h-72 mx-auto" :src="image" />
       <span
           class="left-0 top-3 absolute lg:flex whitespace-nowrap items-center justify-center px-3 py-1 mx-3 text-xs font-medium text-center rounded-lg bg-blueB text-white hover:bg-white hover:text-blueB hover:border-[1px] hover:border-blueB">
           {{ category }}
@@ -43,11 +43,6 @@ defineProps({
     type: String,
     default: ''
   }
-  // ,
-  // images: {
-  //   type: [String],
-  //   default: ''
-  // }
 })
 
 const user = useUserStore()

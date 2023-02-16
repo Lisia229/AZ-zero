@@ -306,7 +306,6 @@ const submit = async () => {
     members.forEach(member => {
       member.image = member.image || `https://source.boringavatars.com/beam/256/${member.account}?colors=ffabab,ffdaab,ddffab,abe4ff,d9abff`
     })
-    console.log(members)
   } catch (error) {
     Swal.fire({
       icon: 'error',

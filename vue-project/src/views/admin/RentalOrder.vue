@@ -1,11 +1,15 @@
 <template>
-  <div id="RenatlOrder" class="pt-[70px]">
+  <div id="RenatlOrder" class="relative pt-[70px]">
     <div class="flex justify-center items-center py-8 px-8 text-3xl">
-      <svg class="w-12 h-12 pr-2"  fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"></path>
-</svg>
+      <svg class="w-12 h-12 pr-2" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"></path>
+      </svg>
       <div>場地預約</div>
-    </div>    <div class="relative overflow-x-auto sm:rounded-lg">
+    </div>
+    <div class="relative overflow-x-auto sm:rounded-lg">
       <!-- !search -->
       <div class="px-4 py-4 bg-black">
         <label for="table-search" class="sr-only">Search</label>
@@ -31,7 +35,7 @@
         <thead class="text-xl text-white uppercase bg-black">
           <tr>
             <th scope="col" class="px-6 py-3">name</th>
-            <th scope="col" class="px-6 py-3">email</th>
+            <th scope="col" class="px-6 py-3">date</th>
             <th scope="col" class="px-6 py-3">rental</th>
             <th scope="col" class="px-6 py-3">more</th>
             <th scope="col" class="px-6 py-3 flex">
@@ -85,10 +89,11 @@
         <tbody>
           <tr v-for="(rentalform, index) in showPageData" :key="rentalform._id" class="bg-gray-100 border-b">
             <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">{{ rentalform.name }}</th>
-            <td class="px-6 text-gray-700 py-4">{{ rentalform.email }}</td>
+            <td class="px-6 text-gray-700 py-4">{{ rentalform.dateStart }} ~ {{ rentalform.dateEnd }}</td>
             <td class="px-6 text-gray-700 py-4 whitespace-pre">{{ rentalform.rental }}</td>
             <td class="px-6 text-gray-700 py-4 whitespace-pre">
               <button
+                @click="moreBtn(rentalform)"
                 type="button"
                 class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blueB rounded-lg border-[1px] border-blueB hover:text-blueB hover:bg-white focus:ring-4 focus:outline-none focus:ring-blue-300">
                 看完整資料
@@ -153,14 +158,155 @@
         </ul>
       </nav>
     </div>
+    <!-- -新增 -->
+    <section id="rentalformm" class="bg-white z-50 hidden rounded-xl border-2 border-black fixed">
+      <div id="rentalform" class="relative rounded-xl">
+        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+          <button
+            type="button"
+            @click="cancel(form)"
+            class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center"
+            data-modal-hide="rentalformm">
+            <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+              <path
+                fill-rule="evenodd"
+                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                clip-rule="evenodd"></path>
+            </svg>
+            <span class="sr-only">Close modal</span>
+          </button>
+          <div class="px-6 py-6 lg:px-8">
+            <h2 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">場租詳細資料</h2>
+            <form class="space-y-6">
+              <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
+                <!-- -活動名稱 -->
+                <div class="w-full">
+                  <label for="large-input" class="block mb-2 text-base font-medium text-gray-900 dark:text-white">申請人 ：</label>
+                  <input
+                    v-model="form.name"
+                    type="text"
+                    id="large-input"
+                    class="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-lightpink sm:text-md focus:ring-pink-500 focus:border-pink-500" />
+                </div>
+                <!-- -填表日期 -->
+                <div class="w-full">
+                  <label for="large-input" class="block mb-2 text-base font-medium text-gray-900 dark:text-white">填表日期（例 2023-01-03)：</label>
+                  <input
+                    v-model="form.date"
+                    type="text"
+                    id="large-input"
+                    class="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-lightpink sm:text-md focus:ring-pink-500 focus:border-pink-500" />
+                </div>
+                <div class="w-full">
+                  <label for="large-input" class="block mb-2 text-base font-medium text-gray-900 dark:text-white">申請單位：</label>
+                  <input
+                    v-model="form.unit"
+                    type="text"
+                    id="large-input"
+                    class="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-lightpink sm:text-md focus:ring-pink-500 focus:border-pink-500" />
+                </div>
+                <div class="w-full">
+                  <label for="large-input" class="block mb-2 text-base font-medium text-gray-900 dark:text-white">聯絡電話 ：</label>
+                  <input
+                    v-model="form.phone"
+                    type="text"
+                    id="large-input"
+                    class="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-lightpink sm:text-md focus:ring-pink-500 focus:border-pink-500" />
+                </div>
+                <div class="w-full">
+                  <label for="large-input" class="block mb-2 text-base font-medium text-gray-900 dark:text-white">聯絡信箱 ：</label>
+                  <input
+                    v-model="form.email"
+                    type="email"
+                    id="large-input"
+                    class="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-lightpink sm:text-md focus:ring-pink-500 focus:border-pink-500" />
+                </div>
+                <div class="w-full">
+                  <label for="category" class="block mb-2 text-base font-medium text-gray-900 dark:text-white">聯絡地址：</label>
+                  <input
+                    v-model="form.adresse"
+                    type="text"
+                    id="large-input"
+                    class="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-lightpink sm:text-md focus:ring-pink-500 focus:border-pink-500" />
+                </div>
+                <!-- -活動名稱 -->
+                <div class="w-full">
+                  <label for="large-input" class="block mb-2 text-base font-medium text-gray-900 dark:text-white">活動名稱：</label>
+                  <input
+                    v-model="form.mainname"
+                    type="text"
+                    id="large-input"
+                    class="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-lightpink sm:text-md focus:ring-pink-500 focus:border-pink-500" />
+                </div>
+                <!-- -活動時間 -->
+                <div class="w-full">
+                  <label for="large-input" class="block mb-2 text-base font-medium text-gray-900 dark:text-white">活動時間(例 10:00 ~ 16:00)：</label>
+                  <input
+                    v-model="form.time"
+                    type="text"
+                    id="large-input"
+                    class="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-lightpink sm:text-md focus:ring-pink-500 focus:border-pink-500" />
+                </div>
+                <!-- -活動時間 -->
+                <div class="w-full">
+                  <label for="large-input" class="block mb-2 text-base font-medium text-gray-900 dark:text-white">活動開始：</label>
+                  <input
+                    v-model="form.dateStart"
+                    type="text"
+                    id="large-input"
+                    class="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-lightpink sm:text-md focus:ring-pink-500 focus:border-pink-500" />
+                </div>
+                <div class="w-full">
+                  <label for="large-input" class="block mb-2 text-base font-medium text-gray-900 dark:text-white">活動結束：</label>
+                  <input
+                    v-model="form.dateEnd"
+                    type="text"
+                    id="large-input"
+                    class="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-lightpink sm:text-md focus:ring-pink-500 focus:border-pink-500" />
+                </div>
+                <!-- -活動內容 -->
+                <div class="sm:col-span-2">
+                  <label for="description" class="block mb-2 text-base font-medium text-gray-900 dark:text-white">活動內容：</label>
+                  <textarea
+                    v-model="form.description"
+                    id="description"
+                    rows="8"
+                    class="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-lightpink sm:text-md focus:ring-pink-500 focus:border-pink-500"
+                    placeholder="Your description here"></textarea>
+                </div>
+              </div>
+              <div class="flex justify-center align-middle">
+                <div class="col">
+                  <button
+                    type="button"
+                    data-modal-hide="rentalformm"
+                    @click="cancel(form)"
+                    class="inline-flex border-[1px] border-pinkP shadow bg-pinkP text-white items-center mx-3 px-7 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 hover:bg-white hover:text-pinkP hover:border-[1px] hover:border-pinkP">
+                    關閉
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
   </div>
 </template>
 <script setup>
 import { apiAuth } from '@/plugins/axios'
 import { reactive, computed, ref, onMounted } from 'vue'
 import Swal from 'sweetalert2'
+import { Modal } from 'flowbite'
+let modal = null
+onMounted(() => {
+  modal = new Modal(document.getElementById('rentalformm'))
+})
 
 const rentalforms = reactive([])
+const cancel = () => {
+  modal.hide()
+}
 
 // !ref 不會深層監聽
 // !reactive 會深層監聽， reactive 只接受 Object 跟 Array
@@ -209,6 +355,48 @@ const check = async id => {
     })
   }
 }
+
+const form = reactive({
+  _id: '',
+  name: '',
+  unit: '',
+  email: '',
+  date: '',
+  time: '',
+  phone: '',
+  adresse: '',
+  category: '',
+  rental: '',
+  visite: '',
+  uniform: '',
+  activity: '',
+  dateStart: '',
+  dateEnd: '',
+  mainname: '',
+  description: ''
+})
+
+const moreBtn = data => {
+  form._id = data._id
+  form.name = data.name
+  form.unit = data.unit
+  form.email = data.email
+  form.date = data.date
+  form.time = data.time
+  form.phone = data.phone
+  form.adresse = data.adresse
+  form.category = data.category
+  form.rental = data.rental
+  form.visite = data.visite
+  form.uniform = data.uniform
+  form.activity = data.activity
+  form.dateStart = data.dateStart
+  form.dateEnd = data.dateEnd
+  form.mainname = data.mainname
+  form.description = data.description
+  modal.show()
+}
+
 ;(async () => {
   try {
     const { data } = await apiAuth.get('/rentalorders')

@@ -255,6 +255,16 @@ const router = createRouter({
             login: false,
             admin: true
           }
+        },
+        {
+          path: 'love',
+          name: 'admin-love',
+          component: () => import('@/views/admin/LoveView.vue'),
+          meta: {
+            title: 'AZ | 我的最愛',
+            login: false,
+            admin: true
+          }
         }
       ]
     },

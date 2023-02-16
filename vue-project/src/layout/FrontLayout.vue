@@ -15,10 +15,7 @@
           data-dropdown-placement="bottom">
           <span class="sr-only">Open user menu</span>
           <img v-if="!isLogin" class="w-10 h-10 rounded-full" src="../assets/logo/avatar.jpg" alt="Rounded avatar" />
-          <img
-            v-if="isLogin"
-            class="w-10 h-10 rounded-full"
-            :src="image" />
+          <img v-if="isLogin" class="w-10 h-10 rounded-full" :src="image" />
         </button>
         <!-- Dropdown menu -->
         <div class="z-50 hidden my-4 text-base list-none bg-whiteF divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600" id="user-dropdown">
@@ -30,7 +27,21 @@
           </div>
           <ul class="py-2" aria-labelledby="user-menu-button">
             <li v-if="isLogin">
-              <router-link to="/cart" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">購物車</router-link>
+              <router-link to="/cart" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
+                購物車
+              </router-link>
+            </li>
+            <li v-if="isLogin">
+              <router-link
+                to="/admin/love"
+                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
+                我的最愛
+              </router-link>
+            </li>
+            <li v-if="isLogin && isAdmin" to="/admin">
+              <a href="/admin" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
+                後台管理
+              </a>
             </li>
             <li v-if="isLogin">
               <router-link
@@ -39,19 +50,18 @@
                 設定
               </router-link>
             </li>
-            <li v-if="isLogin && isAdmin" to="/admin">
-              <a href="/admin" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
-                後台管理
-              </a>
-            </li>
             <li v-if="isLogin" @click="logout">
               <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">登出</a>
             </li>
             <li v-if="!isLogin" to="/login">
-              <router-link to="/login" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">登入</router-link>
+              <router-link to="/login" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
+                登入
+              </router-link>
             </li>
             <li v-if="!isLogin" to="/register">
-              <router-link to="/register" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">註冊</router-link>
+              <router-link to="/register" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
+                註冊
+              </router-link>
             </li>
           </ul>
         </div>
@@ -71,14 +81,9 @@
         </button>
       </div>
       <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="mobile-menu-2">
-        <ul
-          class="flex flex-col p-4 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:text-sm font-medium md:border-0 md:bg-whiteF">
+        <ul class="flex flex-col p-4 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:text-sm font-medium md:border-0 md:bg-whiteF">
           <li class="px-3" :class="{ 'border-b-2 border-blueB text-blueB': route.path === '/' }">
-            <router-link
-              to="/"
-              class="block py-2 pl-3 pr-4 rounded hover:bg-gray-100 lg:text-md md:hover:bg-transparent md:hover:text-blueB md:p-0">
-              首頁
-            </router-link>
+            <router-link to="/" class="block py-2 pl-3 pr-4 rounded hover:bg-gray-100 lg:text-md md:hover:bg-transparent md:hover:text-blueB md:p-0">首頁</router-link>
           </li>
           <li class="px-3" :class="{ 'border-b-2 border-blueB text-blueB': route.path === '/exhibition' }">
             <router-link
@@ -282,5 +287,4 @@ onMounted(() => {
   initTabs()
   initTooltips()
 })
-
 </script>

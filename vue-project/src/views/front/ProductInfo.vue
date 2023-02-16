@@ -38,15 +38,21 @@
     </nav>
     <div class="px-4 lg:px-0 lg:w-full h-full flex py-16 lg:flex-row-reverse flex-wrap">
       <div id="productcontent" class="h-full relative w-full lg:w-1/2 py-4 flex justify-center items-start lg:items-center">
-        <div class="w-full lg:w-1/3 text-xl lg:text-2xl flex justify-between lg:items-center lg:fixed lg:top-[8.5%] h-full">
+        <div class="w-full py-4 lg:w-[80%] text-xl lg:text-2xl flex justify-between lg:items-center h-full">
           <div class="flex-wrap flex w-full">
             <div class="w-full flex justify-end pb-4">
-              <button type="button">
+              <button v-if="!activeLove" @click="submitLove" type="button">
                 <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                   <path
                     stroke-linecap="round"
                     stroke-linejoin="round"
                     d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"></path>
+                </svg>
+              </button>
+              <button v-if="activeLove" @click="submitLove" type="button">
+                <svg class="w-8 h-8" fill="#F196A7" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <path
+                    d="M9.653 16.915l-.005-.003-.019-.01a20.759 20.759 0 01-1.162-.682 22.045 22.045 0 01-2.582-1.9C4.045 12.733 2 10.352 2 7.5a4.5 4.5 0 018-2.828A4.5 4.5 0 0118 7.5c0 2.852-2.044 5.233-3.885 6.82a22.049 22.049 0 01-3.744 2.582l-.019.01-.005.003h-.002a.739.739 0 01-.69.001l-.002-.001z"></path>
                 </svg>
               </button>
             </div>
@@ -113,26 +119,49 @@
       </div>
     </div>
   </div>
+  <h1 class="px-4">其他推薦商品</h1>
+  <div>
+    <swipermoreVue></swipermoreVue>
+  </div>
 </template>
 <script setup>
-import { reactive, ref } from 'vue'
+import { storeToRefs } from 'pinia'
+import { reactive, ref, computed, watch } from 'vue'
 import { api } from '@/plugins/axios'
 import Swal from 'sweetalert2'
 import { useRoute } from 'vue-router'
 import AOS from 'aos'
 import 'aos/dist/aos.css'
 import ProductSwiper from '../../components/ProductSwipwe.vue'
+import swipermoreVue from '../../components/swipermore.vue'
 import router from '../../router'
-import validator from 'validator'
 import { useUserStore } from '@/stores/users'
 
 AOS.init()
 const route = useRoute()
 
 const user = useUserStore()
-const { editCart } = user
+const { editCart, editLove } = user
+const { love } = storeToRefs(user)
 
 const quantity = ref(1)
+
+watch(
+  () => route.params.id,
+  value => {
+    if (value && route.path.includes('/product')) {
+      getProcutData()
+    }
+  }
+)
+
+const submitLove = async () => {
+  await editLove({ p_id: productinfo._id })
+}
+
+const activeLove = computed(() => {
+  return love.value.includes(productinfo._id)
+})
 
 const productinfo = reactive({
   _id: '',
@@ -150,7 +179,7 @@ const submitCart = async () => {
   await editCart({ p_id: productinfo._id, quantity: parseInt(quantity.value) })
 }
 
-;(async () => {
+const getProcutData = async () => {
   try {
     const { data } = await api.get('/products/' + route.params.id)
     productinfo._id = data.result._id
@@ -172,5 +201,7 @@ const submitCart = async () => {
     })
     router.go(-1)
   }
-})()
+}
+
+getProcutData()
 </script>
