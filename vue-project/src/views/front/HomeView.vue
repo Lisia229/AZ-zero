@@ -1,5 +1,5 @@
 <template>
-  <div id="swiperhome" >
+  <div id="swiperhome">
     <Swiper></Swiper>
   </div>
   <div id="frontHome" class="px-10">
@@ -111,6 +111,27 @@
         <StoreCard v-bind="storie" @click="store(storie._id)"></StoreCard>
       </div>
     </section>
+    <section id="section06" class="px-4 py-4">
+      <div class="w-full flex flex-wrap justify-center items-center">
+        <div class="w-full lg:w-1/3 text-center">
+          <div class="text-4xl text-blueB font-bold">聯名商品</div>
+          <router-link
+            to="/product"
+            class="inline-flex items-center justify-center px-5 py-3 my-3 text-base font-medium text-center text-white bg-pinkP rounded-lg bg-primary-700 hover:text-pinkP hover:bg-white hover:border-[1px] hover:border-pinkP focus:ring-4 focus:ring-primary-300">
+            MORE
+            <svg class="w-5 h-5 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+              <path
+                fill-rule="evenodd"
+                d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                clip-rule="evenodd"></path>
+            </svg>
+          </router-link>
+        </div>
+        <div class="w-full lg:w-2/3">
+          <swipermoreVue></swipermoreVue>
+        </div>
+      </div>
+    </section>
   </div>
 </template>
 <script setup>
@@ -120,6 +141,7 @@ import { useRouter } from 'vue-router'
 import Swal from 'sweetalert2'
 import ExhibitionCard from '../../components/BigCard.vue'
 import ExhibitionSmallCard from '../../components/SmallCard.vue'
+import swipermoreVue from '../../components/card.vue'
 import StoreCard from '../../components/StoreHome.vue'
 import Swiper from '../../components/SwiperHome.vue'
 

@@ -75,26 +75,40 @@
         <router-link to="/rentalinfo">
           <button
             type="button"
-            class="inline-flex items-center px-5 py-3 text-sm font-medium text-center text-white bg-blueB rounded-lg hover:bg-white hover:text-blueB hover:border-[1px] hover:border-blueB focus:ring-4 focus:outline-none focus:ring-blue-300">
+            class="inline-flex items-center px-5 py-3 my-4 text-sm font-medium text-center text-white bg-blueB rounded-lg hover:bg-white hover:text-blueB hover:border-[1px] hover:border-blueB focus:ring-4 focus:outline-none focus:ring-blue-300">
             場地申請
           </button>
         </router-link>
       </div>
     </div>
+
+    <h1 class="px-4">其他場地</h1>
+    <div>
+      <rentalmore></rentalmore>
+    </div>
   </div>
 </template>
 <script setup>
-import { reactive } from 'vue'
+import { reactive, watch } from 'vue'
 import { api } from '@/plugins/axios'
 import Swal from 'sweetalert2'
 import { useRoute } from 'vue-router'
+
+import rentalmore from '../../components/rentalmore.vue'
 
 import AOS from 'aos'
 import 'aos/dist/aos.css'
 import swiperinfoVue from '../../components/swiperinfo.vue'
 AOS.init()
 const route = useRoute()
-
+watch(
+  () => route.params.id,
+  value => {
+    if (value && route.path.includes('/rental')) {
+      getProcutData()
+    }
+  }
+)
 const rentalinfo = reactive({
   name: '',
   price: '',
@@ -108,7 +122,7 @@ const rentalinfo = reactive({
   attention: ''
 })
 
-;(async () => {
+const getProcutData = async () => {
   try {
     const { data } = await api.get('/rentals/' + route.params.id)
     rentalinfo.name = data.result.name
@@ -128,5 +142,7 @@ const rentalinfo = reactive({
       text: error?.response?.data?.message || '發生錯誤'
     })
   }
-})()
+}
+
+getProcutData()
 </script>

@@ -3,7 +3,7 @@
   <nav id="navbar" class="bg-whiteF border-b z-40 shadow w-full fixed border-gray-500 px-2 sm:px-4 py-2.5 dark:bg-gray-900">
     <div class="container flex flex-wrap items-center justify-between mx-auto">
       <router-link to="/" class="flex items-center">
-        <img src="../assets/logo/zero.1.gif" class="mr-3 h-9 lg:h-[60px]" alt="Flowbite Logo" />
+        <img src="../assets/logo/zero.1.gif" class="mr-3 h-9 lg:h-[50px]" alt="Flowbite Logo" />
       </router-link>
       <div class="flex items-center md:order-2">
         <button
@@ -82,31 +82,31 @@
       </div>
       <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="mobile-menu-2">
         <ul class="flex flex-col p-4 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:text-sm font-medium md:border-0 md:bg-whiteF">
-          <li class="px-3" :class="{ 'border-b-2 border-blueB text-blueB': route.path === '/' }">
+          <li class="px-3" :class="{ 'text-blueB': route.path === '/' }">
             <router-link to="/" class="block py-2 pl-3 pr-4 rounded hover:bg-gray-100 lg:text-md md:hover:bg-transparent md:hover:text-blueB md:p-0">首頁</router-link>
           </li>
-          <li class="px-3" :class="{ 'border-b-2 border-blueB text-blueB': route.path === '/exhibition' }">
+          <li class="px-3" :class="{ 'text-blueB': route.path === '/exhibition' }">
             <router-link
               to="/exhibition"
               class="block lg:text-md py-2 pl-3 pr-4 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blueB md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">
               展覽介紹
             </router-link>
           </li>
-          <li class="px-3" :class="{ 'border-b-2 border-blueB text-blueB': route.path === '/store' }">
+          <li class="px-3" :class="{ 'text-blueB': route.path === '/store' }">
             <router-link
               to="/store"
               class="block lg:text-md py-2 pl-3 pr-4 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blueB md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">
               進駐店家
             </router-link>
           </li>
-          <li class="px-3" :class="{ 'border-b-2 border-blueB text-blueB': route.path === '/product' }">
+          <li class="px-3" :class="{ 'text-blueB': route.path === '/product' }">
             <router-link
               to="/product"
               class="block lg:text-md py-2 pl-3 pr-4 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blueB md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">
               聯名商品
             </router-link>
           </li>
-          <li class="px-3" :class="{ 'border-b-2 border-blueB text-blueB': route.path === '/rental' }">
+          <li class="px-3" :class="{ 'text-blueB': route.path === '/rental' }">
             <div
               id="dropdownHoverButton"
               data-dropdown-toggle="dropdownHover"
@@ -133,7 +133,7 @@
               </ul>
             </div>
           </li>
-          <li class="px-3" :class="{ 'border-b-2 border-blueB text-blueB': route.path === '/content' }">
+          <li class="px-3" :class="{ ' text-blueB': route.path === '/content' }">
             <router-link
               to="/content"
               class="block lg:text-md py-2 pl-3 pr-4 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blueB md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">
