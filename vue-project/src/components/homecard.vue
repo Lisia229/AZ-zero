@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full h-full bg-whiteF shadow-lg">
+  <div id="homeExhibit" class="w-[90%] md:w-full h-full bg-whiteF shadow-lg">
     <img class="cursor-pointer object-cover w-full h-[300px]" :src="image" />
     <div class="text-center">
       <div class="text-[24px] py-3">{{ name }}</div>

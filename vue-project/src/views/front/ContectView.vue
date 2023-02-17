@@ -2,7 +2,7 @@
   <div class="py-16 lg:py-4 px-4 w-full h-[100vh]">
     <div class="w-full h-full px-4 py-4 flex flex-wrap mx-auto justify-center items-center rounded-lg md:flex-row">
       <div class="relative w-full lg:h-full lg:w-1/2 flex-col items-center justify-center p-4 leading-normal">
-        <div data-aos="fade-right" data-aos-duration="1500" data-aos-delay="1000" class="lg:absolute z-30 lg:top-[20%] lg:right-[2%]">
+        <div data-aos="fade-up" data-aos-duration="1500" data-aos-delay="3000" class="lg:absolute z-30 lg:top-[20%] lg:right-[2%]">
           <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white text-center">聯絡AZ.ゼロ</h5>
           <p class="mb-3 text-center font-normal text-gray-700 dark:text-gray-400">
             若有任何問題，請隨時與我們聯繫。
@@ -21,8 +21,18 @@
             <br />
           </p>
         </div>
-        <img data-aos="fade-right" data-aos-duration="1500" data-aos-delay="1000" class="hidden z-10 2xl:top-[50%] 2xl:left-[30%] absolute lg:block top-0 left-0" src="../../assets/logo/01.png" />
-        <img data-aos="fade-right" data-aos-duration="1500" data-aos-delay="1000" class="z-20 hidden 2xl:top-[3%] 2xl:left-[50%] absolute lg:block top-[-10%] left-[35%]" src="../../assets/logo/circle.png" />
+        <img
+          data-aos="fade-right"
+          data-aos-duration="1500"
+          data-aos-delay="1000"
+          class="hidden z-10 2xl:top-[50%] 2xl:left-[30%] absolute lg:block top-0 left-0"
+          src="../../assets/logo/01.png" />
+        <img
+          data-aos="fade-right"
+          data-aos-duration="1500"
+          data-aos-delay="2000"
+          class="z-20 hidden 2xl:top-[3%] 2xl:left-[50%] absolute lg:block top-[-10%] left-[35%]"
+          src="../../assets/logo/circle.png" />
       </div>
       <div class="relative w-full lg:w-1/2 lg:py-16 lg:px-16 py-8 px-4 mx-auto max-w-screen-md">
         <h2 class="mb-4 text-4xl py-4 px-4 tracking-tight font-extrabold text-center text-black">Contact Us</h2>

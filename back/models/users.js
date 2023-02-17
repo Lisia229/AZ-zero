@@ -57,7 +57,7 @@ const schema = new Schema(
       required: [true, '缺少信箱'],
       unique: true,
       validate: {
-        validator(email) {
+        validator (email) {
           return validator.isEmail(email)
         },
         message: '信箱格式錯誤'

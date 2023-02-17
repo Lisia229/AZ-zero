@@ -43,11 +43,6 @@
       </div>
       <div class="h-full relative w-full py-4 flex justify-center items-start lg:items-center">
         <div class="w-full py-4 lg:w-[80%] text-xl lg:text-2xl flex flex-wrap justify-between lg:items-center h-full">
-          <div class="flex-wrap flex w-full">
-            <div class="w-full py-4 justify-between items-start lg:items-center">
-              <div class="w-full pb-4 text-base lg:text-lg whitespace-pre-wrap">{{ storeinfo.description }}</div>
-            </div>
-          </div>
           <div class="w-full flex flex-wrap justify-center items-center">
             <div class="w-full lg:w-1/2">
               <img :src="storeinfo.image" />
@@ -64,6 +59,13 @@
               <div class="w-full pb-4 text-base lg:text-lg whitespace-pre-wrap">
                 <div>特色：</div>
                 <div>{{ storeinfo.special }}</div>
+              </div>
+            </div>
+          </div>
+          <div class="flex-wrap flex w-full mt-4">
+            <div class="w-full py-4 justify-center items-center lg:items-center">
+              <div class="w-2/3 mx-auto pb-4 text-base lg:text-lg whitespace-pre-wrap">
+                <div id="storeinfo">{{ storeinfo.description }}</div>
               </div>
             </div>
           </div>

@@ -14,18 +14,26 @@
         <tr>
           <th scope="col" class="px-6 py-3">照片</th>
           <th scope="col" class="px-6 py-3">名稱</th>
-          <th scope="col" class="px-6 py-3">連結</th>
+          <th scope="col" class="px-6 py-3">價格</th>
+          <th scope="col" class="px-6 py-3">動作</th>
         </tr>
       </thead>
       <tbody class="text-center">
         <tr class="my-2" v-for="(item, index) in love" :key="index">
           <td>
-            <img class="w-full mx-auto" :src="item.data.image" />
+            <div class="w-full h-full">
+              <img class="w-full h-44 object-cover" :src="item.data.image" />
+            </div>
           </td>
           <td>
             {{ item.data.name }}
           </td>
-          <td>連結</td>
+          <td>
+            <div>NT. {{ item.data.price }}</div>
+          </td>
+          <td>
+            <button type="button" @click="!submitLove">remove</button>
+          </td>
         </tr>
         <tr v-if="love.length === 0">
           <td colspan="6">沒有東西</td>
@@ -44,6 +52,7 @@ const love = reactive([])
 ;(async () => {
   try {
     const { data } = await apiAuth.get('/users/love')
+    console.log(data.result)
     love.push(...data.result)
   } catch (error) {
     Swal.fire({

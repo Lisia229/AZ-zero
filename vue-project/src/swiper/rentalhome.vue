@@ -36,7 +36,7 @@ const rentals = reactive([])
 ;(async () => {
   try {
     const { data } = await api.get('/rentals')
-    rentals.push(...data.result.splice(1, 8))
+    rentals.push(...data.result)
   } catch (error) {
     Swal.fire({
       icon: 'error',

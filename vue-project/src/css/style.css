@@ -125,14 +125,14 @@ input::-webkit-inner-spin-button {
 }
 
 #rentalintro {
-  width: 98vw;
-  height: auto;
+  width: 100%;
+  height: 100%;
   margin: auto;
 }
 
 #rentalform {
-  width: 98vw;
-  height: auto;
+  width: 100%;
+  height: 100%;
   margin: auto;
 }
 
@@ -240,6 +240,18 @@ input::-webkit-inner-spin-button {
   display: none;
 }
 
+#homeExhibit::before {
+  content: '';
+  border: 2px solid #f196a7;
+  background: #f196a7;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 5%;
+  left: 5%;
+  z-index: -1;
+}
+
 #section02 img {
   width: 65px;
 }
@@ -248,4 +260,13 @@ input::-webkit-inner-spin-button {
   #section02 {
     display: block;
   }
+}
+
+#followUs {
+  background: url(../assets/logo/img-mv-background_pc.png) no-repeat, #fdfbf5;
+  background-position: bottom center;
+}
+
+#storeinfo {
+  line-height: 2.5rem;
 }

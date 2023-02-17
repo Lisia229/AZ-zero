@@ -166,7 +166,7 @@ const updateCart = async (index, quantity) => {
 
 const onCheckoutBtnClick = async () => {
   await checkout()
-  router.push('/admin/usersOrder')
+  router.push('/orders')
 }
 
 const totalPrice = computed(() => {

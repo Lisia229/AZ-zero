@@ -174,10 +174,8 @@ export const getCart = async (req, res) => {
   try {
     const result = await users.findById(req.user._id, 'cart').populate('cart.data')
 
-    console.log(result)
     res.status(200).json({ success: true, message: '', result: result.cart })
   } catch (error) {
-    console.log(error)
     res.status(500).json({ success: false, message: '未知錯誤' })
   }
 }
@@ -290,10 +288,9 @@ export const editLove = async (req, res) => {
 
 export const getLove = async (req, res) => {
   try {
-    const result = await users.findById(req.user._id, 'love').populate('love')
+    const result = await users.findById(req.user._id, 'love').populate('love.data')
     res.status(200).json({ success: true, message: '', result: result.love })
   } catch (error) {
-    console.log(error)
     res.status(500).json({ success: false, message: '未知錯誤' })
   }
 }
