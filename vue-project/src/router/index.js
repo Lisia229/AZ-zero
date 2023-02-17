@@ -207,16 +207,6 @@ const router = createRouter({
           }
         },
         {
-          path: 'usersRental',
-          name: 'admin-usersRental',
-          component: () => import('@/views/admin/RentalUserOrder.vue'),
-          meta: {
-            title: 'AZ | 場地預約',
-            login: true,
-            admin: true
-          }
-        },
-        {
           path: 'RentalOrder',
           name: 'admin-RentalOrder',
           component: () => import('@/views/admin/RentalOrder.vue'),

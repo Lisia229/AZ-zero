@@ -9,7 +9,7 @@
       <div class="text-pinkP font-medium uppercase text-center tracking-widest">WHAT’S GOING ON</div>
     </div>
     <div class="w-full pb-4 lg:pb-8">
-      <div class="text-black text-2xl lg:text-[40px] font-medium uppercase text-center tracking-normal font-serif">Upcoming Exhibitions</div>
+      <div class="text-black text-2xl lg:text-[40px] font-medium uppercase text-center tracking-normal font-serif">In Progress Exhibitions</div>
     </div>
     <div class="w-full flex flex-wrap pb-8 justify-center items-center">
       <homeswiper></homeswiper>
@@ -54,16 +54,16 @@
       </div>
     </div>
   </div>
-  <!-- -商品 -->
+  <!-- -商店 -->
   <div class="h-full 2xl:h-full flex flex-wrap justify-center items-center w-full py-4 px-4 md:py-8 md:px-8 lg:px-[100px] lg:py-16">
     <div class="w-full pb-4 lg:pb-8">
-      <div class="text-pinkP font-medium uppercase text-center tracking-widest">products</div>
+      <div class="text-pinkP font-medium uppercase text-center tracking-widest">SHOP</div>
     </div>
     <div class="w-full pb-4 lg:pb-8">
-      <div class="text-black text-2xl lg:text-[40px] font-medium text-center tracking-normal font-serif">Explore our Products</div>
+      <div class="text-black text-2xl lg:text-[40px] font-medium uppercase text-center tracking-normal font-serif">園區店家</div>
     </div>
-    <div class="w-full flex flex-wrap pb-8 justify-center items-center">
-      <swipermoreVue></swipermoreVue>
+    <div class="w-full h-full flex flex-wrap pb-8 justify-center items-center">
+      <shopswiper></shopswiper>
     </div>
   </div>
   <!-- -場地介紹 -->
@@ -84,16 +84,16 @@
       <rentalhome></rentalhome>
     </div>
   </div>
-  <!-- -商店 -->
+  <!-- -商品 -->
   <div class="h-full 2xl:h-full flex flex-wrap justify-center items-center w-full py-4 px-4 md:py-8 md:px-8 lg:px-[100px] lg:py-16">
     <div class="w-full pb-4 lg:pb-8">
-      <div class="text-pinkP font-medium uppercase text-center tracking-widest">SHOP</div>
+      <div class="text-pinkP font-medium uppercase text-center tracking-widest">products</div>
     </div>
     <div class="w-full pb-4 lg:pb-8">
-      <div class="text-black text-2xl lg:text-[40px] font-medium uppercase text-center tracking-normal font-serif">園區店家</div>
+      <div class="text-black text-2xl lg:text-[40px] font-medium text-center tracking-normal font-serif">Explore our Products</div>
     </div>
-    <div class="w-full h-full flex flex-wrap pb-8 justify-center items-center">
-      <shopswiper></shopswiper>
+    <div class="w-full flex flex-wrap pb-8 justify-center items-center">
+      <swipermoreVue></swipermoreVue>
     </div>
   </div>
 </template>

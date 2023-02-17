@@ -35,6 +35,14 @@
                 <p class="text-sm font-medium text-gray-900 truncate dark:text-gray-300" role="none">{{ email }}</p>
               </div>
               <ul class="py-1" role="none">
+                <li v-if="isAdmin">
+                  <router-link
+                    to="/cart"
+                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
+                    role="menuitem">
+                    cart
+                  </router-link>
+                </li>
                 <li>
                   <router-link
                     to="/admin/usersettings"
@@ -43,21 +51,13 @@
                     Settings
                   </router-link>
                 </li>
-                <li v-if="isAdmin">
-                  <a
-                    href="#"
-                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
-                    role="menuitem">
-                    pages
-                  </a>
-                </li>
                 <li v-if="!isAdmin">
-                  <a
-                    href="#"
+                  <router-link
+                    to="/admin/usersOrder"
                     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
                     role="menuitem">
                     orders
-                  </a>
+                  </router-link>
                 </li>
                 <li>
                   <button
@@ -186,11 +186,9 @@
 
         <!-- -會員 訂單 -->
         <li v-if="!isAdmin">
-          <button
-            type="button"
-            class="flex items-center p-2 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
-            aria-controls="dropdown-orders2"
-            data-collapse-toggle="dropdown-orders2">
+          <router-link
+            to="/admin/usersOrder"
+            class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
             <svg
               aria-hidden="true"
               class="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
@@ -202,30 +200,8 @@
                 d="M10 2a4 4 0 00-4 4v1H5a1 1 0 00-.994.89l-1 9A1 1 0 004 18h12a1 1 0 00.994-1.11l-1-9A1 1 0 0015 7h-1V6a4 4 0 00-4-4zm2 5V6a2 2 0 10-4 0v1h4zm-6 3a1 1 0 112 0 1 1 0 01-2 0zm7-1a1 1 0 100 2 1 1 0 000-2z"
                 clip-rule="evenodd"></path>
             </svg>
-            <span class="flex-1 ml-3 text-left whitespace-nowrap">Order</span>
-            <svg aria-hidden="true" class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-              <path
-                fill-rule="evenodd"
-                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                clip-rule="evenodd"></path>
-            </svg>
-          </button>
-          <ul id="dropdown-orders2" class="hidden py-2 space-y-2">
-            <li>
-              <router-link
-                to="/admin/usersRental"
-                class="flex items-center p-2 pl-11 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
-                Rental Order
-              </router-link>
-            </li>
-            <li>
-              <router-link
-                to="/admin/usersOrder"
-                class="flex items-center p-2 pl-11 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
-                Product Order
-              </router-link>
-            </li>
-          </ul>
+            <span class="flex-1 ml-3 whitespace-nowrap">訂單記錄</span>
+          </router-link>
         </li>
 
         <!-- -管理員 使用者管理 -->
@@ -246,7 +222,9 @@
         </li>
         <!-- -會員 收藏 -->
         <li v-if="!isAdmin">
-          <router-link to="/admin/love" class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+          <router-link
+            to="/admin/love"
+            class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
             <svg
               aria-hidden="true"
               width="25px"
@@ -264,7 +242,7 @@
                   stroke-width="2"></path>
               </g>
             </svg>
-            <span class="flex-1 ml-3 whitespace-nowrap">favorite</span>
+            <span class="flex-1 ml-3 whitespace-nowrap">我的最愛</span>
           </router-link>
         </li>
         <!-- -管理員 聯絡清單 -->

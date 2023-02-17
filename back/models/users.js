@@ -5,7 +5,7 @@ import bcrypt from 'bcrypt'
 const cartSchema = new Schema({
   data: {
     type: ObjectId,
-    refPath: 'cart.dataModel',
+    refPath: 'users',
     required: [true, '缺少 ID']
   },
   dataModel: {

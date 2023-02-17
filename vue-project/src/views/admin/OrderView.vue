@@ -28,7 +28,7 @@
           <td>
             <ul>
               <li v-for="product in order.products" :key="product._id">
-                {{ product.quantity + '個' + product.p_id.name }}
+                {{ product.quantity + '個' + product._id.name }}
               </li>
             </ul>
           </td>
@@ -47,13 +47,15 @@ const orders = reactive([])
 ;(async () => {
   try {
     const { data } = await apiAuth.get('/orders/all')
+    console.log(data.result)
     orders.push(
       ...data.result.map(order => {
-        order.totalPrice = order.products.reduce((total, current) => total + current.p_id.price * current.quantity, 0)
+        order.totalPrice = order.products.reduce((total, current) => total + current.data._id.price * current.quantity, 0)
         return order
       })
     )
   } catch (error) {
+    console.log(error);
     Swal.fire({
       icon: 'error',
       title: '失敗',

@@ -31,6 +31,7 @@ export const useUserStore = defineStore(
         cart.value = data.result.cart
         role.value = data.result.role
         image.value = data.result.image || `https://source.boringavatars.com/beam/256/${account.value}?colors=ffabab,ffdaab,ddffab,abe4ff,d9abff`
+        love.value = data.result.love
         Swal.fire({
           icon: 'success',
           title: '成功',
@@ -78,6 +79,7 @@ export const useUserStore = defineStore(
         cart.value = data.result.cart
         role.value = data.result.role
         image.value = data.result.image || `https://source.boringavatars.com/beam/256/${account.value}?colors=ffabab,ffdaab,ddffab,abe4ff,d9abff`
+        love.value = data.result.love
       } catch (error) {
         logout()
       }
@@ -121,7 +123,6 @@ export const useUserStore = defineStore(
       }
       try {
         const { data } = await apiAuth.post('/users/love', id)
-
         const index = love.value.findIndex(item => item === data.result)
         if (index === -1) {
           love.value.push(data.result)

@@ -1,11 +1,13 @@
 <template>
-    <div class="lg:w-full mx-auto border-b-2 border-black">
-      <img class="cursor-pointer rounded-lg mx-auto" :src="image" />
-      <div class="p-5 row-auto items-center justify-between align-middle flex max-w-screen-xl px-4 py-4 mx-auto lg:gap-8 xl:gap-0 lg:py-4 lg:cols-12">
-        <span class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white">{{ name }}</span>
-        <span class="mb-2 text-xl font-bold text-right tracking-tight text-gray-900 dark:text-white">{{ new Date(dateStart).toLocaleDateString() }} ~ {{ new Date(dateEnd).toLocaleDateString()  }}</span>
-      </div>
+  <div class="lg:w-full mx-auto border-b-2 border-black">
+    <img class="cursor-pointer rounded-lg mx-auto" :src="image" />
+    <div class="p-5 row-auto items-center justify-between align-middle flex max-w-screen-xl px-4 py-4 mx-auto lg:gap-8 xl:gap-0 lg:py-4 lg:cols-12">
+      <span class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white">{{ name }}</span>
+      <span class="mb-2 text-xl font-bold text-right tracking-tight text-gray-900 dark:text-white">
+        {{ new Date(dateStart).toLocaleDateString() }} ~ {{ new Date(dateEnd).toLocaleDateString() }}
+      </span>
     </div>
+  </div>
 </template>
 
 <script setup>
@@ -23,11 +25,11 @@ defineProps({
     default: ''
   },
   dateStart: {
-    type: Date,
+    type: String,
     default: ''
   },
   dateEnd: {
-    type: Date,
+    type: String,
     default: ''
   },
   price: {

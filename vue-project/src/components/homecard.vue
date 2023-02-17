@@ -23,11 +23,11 @@ defineProps({
     default: ''
   },
   dateStart: {
-    type: Date,
+    type: String,
     default: ''
   },
   dateEnd: {
-    type: Date,
+    type: String,
     default: ''
   },
   price: {

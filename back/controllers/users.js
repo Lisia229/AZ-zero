@@ -28,6 +28,7 @@ export const login = async (req, res) => {
     const token = jwt.sign({ _id: req.user._id }, process.env.JWT_SECRET, { expiresIn: '7 days' })
     req.user.tokens.push(token)
     await req.user.save()
+    const loves = req.user.love.map(item => item.data)
     res.status(200).json({
       success: true,
       message: '',
@@ -37,7 +38,8 @@ export const login = async (req, res) => {
         email: req.user.email,
         cart: req.user.cart.reduce((total, current) => total + current.quantity, 0),
         role: req.user.role,
-        image: req.user.image
+        image: req.user.image,
+        love: loves
       }
     })
   } catch (error) {
@@ -70,6 +72,8 @@ export const extend = async (req, res) => {
 
 export const getUser = (req, res) => {
   try {
+    const loves = req.user.love.map(item => item.data)
+
     res.status(200).json({
       success: true,
       message: '',
@@ -78,7 +82,8 @@ export const getUser = (req, res) => {
         email: req.user.email,
         cart: req.user.cart.reduce((total, current) => total + current.quantity, 0),
         role: req.user.role,
-        image: req.user.image
+        image: req.user.image,
+        love: loves
       }
     })
   } catch (error) {

@@ -36,66 +36,95 @@
         </li>
       </ol>
     </nav>
-    <div class="px-4 pt-16">
-      <div class="flex justify-center items-center py-8 px-8 text-2xl">
-        <svg class="w-10 h-10 pr-2" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"></path>
-        </svg>
-        <div>購物車</div>
-      </div>
-      <table class="w-full border-b-[1px] border-gray-500 table-fixed text-left text-gray-500 py-8">
-        <thead class="text-base text-center text-white uppercase bg-black">
-          <tr>
-            <th scope="col" class="px-6 py-3">商品照片</th>
-            <th scope="col" class="px-6 py-3">商品名稱</th>
-            <th scope="col" class="px-6 py-3">商品價格</th>
-            <th scope="col" class="px-6 py-3">商品數量</th>
-            <th scope="col" class="px-6 py-3">商品小計</th>
-            <th scope="col" class="px-6 py-3">操作</th>
-          </tr>
-        </thead>
-        <tbody class="text-center">
-          <tr class="my-2" v-for="(item, index) in cart" :key="index">
-            <td>
-              <img class="w-full mx-auto" :src="item.data.image" />
-            </td>
-            <td>
-              {{ item.data.name }}
-            </td>
-            <td>NT. {{ item.data.price }}</td>
-            <td>
-              <button type="button" @click="updateCart(index, -1)">-</button>
-              &nbsp; {{ item.quantity }} &nbsp;
-              <button type="button" @click="updateCart(index, 1)">+</button>
-            </td>
-            <td>NT. {{ item.data.price * item.quantity }}</td>
-            <td>
-              <button type="button" @click="updateCart(index, item.quantity * -1)">刪除</button>
-            </td>
-          </tr>
-          <tr v-if="cart.length === 0">
-            <td colspan="6">沒有商品</td>
-          </tr>
-        </tbody>
-      </table>
-      <div class="flex flex-wrap px-4 py-4 justify-start text-right items-center">
-        <div class="w-full">
-          <p class="text-base">
-            總金額 &nbsp;
-            <span class="text-2xl text-red-700">NT. {{ totalPrice }}</span>
-          </p>
+    <div class="container px-4 py-4 mx-auto mt-10">
+      <div class="flex flex-wrap shadow-md my-10">
+        <div class="w-full md:w-3/4 bg-white px-10 py-10">
+          <div class="flex justify-between border-b pb-8">
+            <h1 class="font-semibold text-2xl">Shopping Cart</h1>
+            <h2 class="font-semibold text-2xl">{{ totalquantity }} Items</h2>
+          </div>
+          <div class="flex mt-10 mb-5">
+            <h3 class="font-semibold text-gray-600 text-xs uppercase w-2/5">Product Details</h3>
+            <h3 class="font-semibold text-center text-gray-600 text-xs uppercase w-1/5">Quantity</h3>
+            <h3 class="font-semibold text-gray-600 text-xs uppercase w-1/5 text-center">Price</h3>
+            <h3 class="font-semibold text-gray-600 text-xs uppercase w-1/5 text-center">Total</h3>
+          </div>
+          <div v-if="cart.length === 0" class="flex items-center hover:bg-gray-100 -mx-8 px-6 py-5">沒有商品</div>
+          <div class="flex items-center hover:bg-gray-100 -mx-8 px-6 py-5" v-for="(item, index) in cart" :key="index">
+            <div class="flex w-2/5">
+              <!-- product -->
+              <div class="w-2/3 h-full">
+                <div>
+                  <img class="w-44 h-44 object-cover" :src="item.data.image" />
+                </div>
+              </div>
+              <div class="w-1/3 flex flex-col justify-between ml-4 flex-grow">
+                <span class="font-bold text-sm">{{ item.data.name }}</span>
+                <span class="text-red-500 text-xs">{{ item.data.colors }}</span>
+                <button type="button" @click="updateCart(index, item.quantity * -1)" class="font-semibold text-left hover:text-red-500 text-gray-500 text-xs">
+                  Remove
+                </button>
+              </div>
+            </div>
+            <div class="flex justify-center w-1/5">
+              <button type="button" class="fill-current" @click="updateCart(index, -1)">
+                <svg class="fill-current text-gray-600 w-3" viewBox="0 0 448 512">
+                  <path d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z" />
+                </svg>
+              </button>
+
+              <span class="mx-2 border text-center w-8">{{ item.quantity }}</span>
+
+              <button type="button" class="fill-current text-gray-600 w-3" @click="updateCart(index, 1)">
+                <svg class="fill-current text-gray-600 w-3" viewBox="0 0 448 512">
+                  <path
+                    d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z" />
+                </svg>
+              </button>
+            </div>
+
+            <span class="text-center w-1/5 font-semibold text-sm">NT. {{ item.data.price }}</span>
+            <span class="text-center w-1/5 font-semibold text-sm">NT. {{ item.data.price * item.quantity }}</span>
+          </div>
+
+          <router-link to="product" class="flex font-semibold text-indigo-600 text-sm mt-10">
+            <svg class="fill-current mr-2 text-indigo-600 w-4" viewBox="0 0 448 512">
+              <path
+                d="M134.059 296H436c6.627 0 12-5.373 12-12v-56c0-6.627-5.373-12-12-12H134.059v-46.059c0-21.382-25.851-32.09-40.971-16.971L7.029 239.029c-9.373 9.373-9.373 24.569 0 33.941l86.059 86.059c15.119 15.119 40.971 4.411 40.971-16.971V296z" />
+            </svg>
+            Continue Shopping
+          </router-link>
         </div>
-        <div class="w-full py-4">
-          <button
-            class="w-40 text-center px-3 py-2 bg-blueB border-[1px] border-blueB hover:bg-white hover:text-blueB text-white"
-            type="button"
-            :disabled="!canCheckout"
-            @click="onCheckoutBtnClick">
-            結帳
-          </button>
+        <div id="summary" class="w-full md:w-1/4 px-8 py-10">
+          <h1 class="font-semibold text-2xl border-b pb-8">Order Summary</h1>
+          <div class="flex justify-between mt-10 mb-5">
+            <span class="font-semibold text-sm">NT. {{ totalPrice }}</span>
+          </div>
+          <div>
+            <label class="font-medium inline-block mb-3 text-sm uppercase">Shipping</label>
+            <select class="block p-2 text-gray-600 w-full text-sm">
+              <option>Standard shipping - $10.00</option>
+            </select>
+          </div>
+          <div class="py-10">
+            <label for="promo" class="font-semibold inline-block mb-3 text-sm uppercase">Promo Code</label>
+            <input type="text" id="promo" placeholder="Enter your code" class="p-2 text-sm w-full" />
+          </div>
+          <button class="bg-red-500 hover:bg-red-600 px-5 py-2 text-sm text-white uppercase">Apply</button>
+          <div class="border-t mt-8">
+            <div class="flex font-semibold justify-between py-6 text-sm uppercase">
+              <span>Total cost</span>
+              <span>NT. {{ totalPrice }}</span>
+            </div>
+            <button
+              type="button"
+              :class="{ 'bg-red-600': canCheckout }"
+              :disabled="canCheckout"
+              @click="onCheckoutBtnClick"
+              class="bg-blueB font-semibold hover:bg-indigo-600 py-3 text-sm text-white uppercase w-full">
+              Checkout
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -116,7 +145,6 @@ const { editCart, checkout } = user
 const cart = reactive([])
 
 const updateCart = async (index, quantity) => {
-  console.log(cart[index].dataModel)
   //exhibitions
   //products
   const sumbitData = {
@@ -128,8 +156,6 @@ const updateCart = async (index, quantity) => {
   } else if (cart[index].dataModel === 'products') {
     sumbitData.p_id = cart[index].data._id
   }
-
-  console.log(sumbitData)
 
   await editCart(sumbitData)
   cart[index].quantity += quantity
@@ -150,13 +176,8 @@ const totalPrice = computed(() => {
 })
 
 const canCheckout = computed(() => {
-  console.log(data._id.sell)
-  return (
-    cart.length > 0 &&
-    !cart.some(data => {
-      return !data._id.sell
-    })
-  )
+  const isSell = cart.some(item => !item.data.sell)
+  return cart.length > 0 && isSell
 })
 
 ;(async () => {

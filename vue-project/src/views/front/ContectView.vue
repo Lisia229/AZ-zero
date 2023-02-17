@@ -1,5 +1,5 @@
 <template>
-  <div class="py-16 lg:py-4 px-4 w-[100vw] h-[100vh]">
+  <div class="py-16 lg:py-4 px-4 w-full h-[100vh]">
     <div class="w-full h-full px-4 py-4 flex flex-wrap mx-auto justify-center items-center rounded-lg md:flex-row">
       <div class="relative w-full lg:h-full lg:w-1/2 flex-col items-center justify-center p-4 leading-normal">
         <div data-aos="fade-right" data-aos-duration="1500" data-aos-delay="1000" class="lg:absolute z-30 lg:top-[20%] lg:right-[2%]">
@@ -25,7 +25,7 @@
         <img data-aos="fade-right" data-aos-duration="1500" data-aos-delay="1000" class="z-20 hidden 2xl:top-[3%] 2xl:left-[50%] absolute lg:block top-[-10%] left-[35%]" src="../../assets/logo/circle.png" />
       </div>
       <div class="relative w-full lg:w-1/2 lg:py-16 lg:px-16 py-8 px-4 mx-auto max-w-screen-md">
-        <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-center text-black">Contact Us</h2>
+        <h2 class="mb-4 text-4xl py-4 px-4 tracking-tight font-extrabold text-center text-black">Contact Us</h2>
         <form @submit.prevent="contectForm" class="space-y-8">
           <div>
             <label for="email" class="block mb-2 text-xl font-medium text-gray-900">Your email</label>

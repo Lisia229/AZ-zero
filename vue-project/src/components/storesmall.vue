@@ -38,7 +38,7 @@ defineProps({
     default: ''
   },
   images: {
-    type: [String],
+    type: Array,
     default: ''
   },
   special: {
